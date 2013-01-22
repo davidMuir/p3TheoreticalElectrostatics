@@ -2,23 +2,23 @@
 
 using namespace std;
 
-struct Iteration {
-
-	matrix it;
-	double error;
-
-	};
-
 class Finite_Difference {
 
 	private:
+
+	//Just some stuff used later on. Precision and maxit determine the
+	//conditions of the solution
+
 	Grid grid;
 	Grid solution;
 	double beta;
-	double precision = 1;
-	unsigned int maxit = 1000;
+	double precision;
+	unsigned int maxit;
+	unsigned int its;
+
+	//Internal function for updating to the next iteration
+
 	Iteration iteration(Iteration old) {
-		cout << "it" << endl;
 		matrix mo = old.it;
 		matrix newm = old.it;
 		unsigned int n = mo.size();
@@ -42,33 +42,45 @@ class Finite_Difference {
 		}
 	
 	public:
+
+	//Takes the grid to be solved
+
 	void to_solve(Grid entry) {
 		grid = entry;
-		beta = (grid.get_coordinates()[0][0].get_x() - grid.get_coordinates()[1][0].get_x())/
-				(grid.get_coordinates()[0][0].get_y() - grid.get_coordinates()[0][1].get_y());
+		beta = abs(grid.get_coordinates()[0][0].get_x() - grid.get_coordinates()[1][0].get_x())/
+				abs(grid.get_coordinates()[0][0].get_y() - grid.get_coordinates()[0][1].get_y());
+		maxit = 5000;
+		precision = 1;
 		}
 
+	//Change convergence conditions. Precision decides how much the solution
+	//must converge to be accepted, maxit the maximum number of iterations
+
 	void set_precision(double prec) {precision = prec;}
+	void set_maxit(unsigned int max) {maxit = max;}
+
+	//Solve for given precision and maxit
 
 	void solve() {
 		matrix first = grid.get_values();
 		double err = 1000;
-		unsigned int k = 0;
+		unsigned int k = 1;
 		Iteration o;
 		Iteration n;
 		o.it = first;
 		o.error = err;
-		while(err > precision) {
+		while(err > precision && k < maxit) {
 			n = iteration(o);
 			err = n.error;
 			o = n;
 			k++;
-			if(k > maxit)break;
 			}
 		solution.set_values(n.it);
 		solution.set_coordinates(grid.get_coordinates());
+		its = k;
 		}
 
 	Grid get_solution() {return solution;}
+	unsigned int number_of_iterations() {return its;}
 
 	};

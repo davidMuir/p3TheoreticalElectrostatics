@@ -263,7 +263,7 @@ class Grid {
 	void print_values() {
 		cout << fixed;
 		cout << endl;
-		for ( int y = values[0].size() - 1; y >= 0; y--) {
+		for ( int y = 0; y <= values[0].size() - 1; y++) {
 			cout << "[	";
 			for ( int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
@@ -274,13 +274,13 @@ class Grid {
 		}
 	
 	//Print table with gnuplot matrix formatting. Plot in gnuplot by saving this to
-	//a file (let's call it data.dat) and calling this in gnuplot:
+	//a file (let's call it data.dat) and calling in gnuplot:
 
 	//	plot 'data.dat' matrix with image
 
 	void gnuplot_values() {
 		cout << fixed;
-		for ( int y = values[0].size() - 1; y >= 0; y--) {
+		for ( int y = 0; y <= values[0].size() - 1; y++) {
 			for ( int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
 				}
@@ -291,7 +291,7 @@ class Grid {
 	void print_points() {
 		cout << fixed;
 		cout << endl;
-		for ( int y = points[0].size() - 1; y >= 0; y--) {
+		for ( int y = 0; y <= points[0].size() - 1; y++) {
 			cout << "[	";
 			for ( int x = 0; x < points.size(); x++) {
 				cout << setprecision (0) << points[x][y].get_x() << "," << points[x][y].get_y() << "	";

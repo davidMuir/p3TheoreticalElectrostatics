@@ -12,7 +12,7 @@ struct Value {
 	double value;
 	bool boundary;
 
-	};
+};
 
 class Coordinate {
 
@@ -29,14 +29,14 @@ class Coordinate {
 
 	double distance(Coordinate two) {
 		return sqrt( (xcoor - two.get_x()) * (xcoor - two.get_x()) + (ycoor - two.get_y()) * (ycoor - two.get_y()) );
-		}
+	}
 
-	};
+};
 
 	//Use convention grid[x][y] for coordinate system
 
-typedef vector<vector<Value> > matrix;
-typedef vector<vector<Coordinate> > coordinate_matrix;
+typedef vector<vector<Value>> matrix;
+typedef vector<vector<Coordinate>> coordinate_matrix;
 
 	//Silly round function so that I can control exactly how it works
 	
@@ -49,7 +49,7 @@ struct Iteration {
 	matrix it;
 	double error;
 
-	};
+};
 
 	//Save each grid as two separate matrices, one with values and one with coordinates
 
@@ -66,21 +66,33 @@ class Grid {
 	//system (at least to me)
 
 	void load_grid(unsigned int x, unsigned int y) {
-		unsigned int it = x+1;
-		unsigned int itt = y+1;
-		vector<Value> dummy;
-		Value dummy1;
-		while(itt > 0){dummy1.value = 1; dummy1.boundary = false; dummy.push_back(dummy1); itt--;}
-		while(it > 0){values.push_back(dummy); it--;}
-		Coordinate coordinate;
-		vector<Coordinate> dummy2;
-		while(it <= x){
-			for (int z = 0; z <= y; z++) {coordinate.set_x((double)it); coordinate.set_y(z); dummy2.push_back(coordinate);}
-			points.push_back(dummy2);
-			dummy2.clear();
-			it++;
-			}
+		unsigned int ix = x+1;
+		unsigned int iy = y+1;
+		vector<Value> dummy_vec_val;
+		Value dummy_val;
+		dummy_val.value = 1;
+		dummy_val.boundary = false;
+		while(iy > 0){
+			dummy_vec_val.push_back(dummy_val);
+			iy--;
 		}
+		while(ix > 0){
+			values.push_back(dummy);
+			ix--;
+		}
+		Coordinate coordinate;
+		vector<Coordinate> dummy_vec_coord;
+		while(ix <= x){
+			for (int z = 0; z <= y; z++) {
+				coordinate.set_x((double)ix);
+				coordinate.set_y(z);
+				dummy_vec_coord.push_back(coordinate);
+			}
+			points.push_back(dummy_vec_coord);
+			dummy_vec_coord.clear();
+			ix++;
+		}
+	}
 
 	//Set range (so that it's possible to use a different increment than 1). Not really used at the moment
 
@@ -95,31 +107,33 @@ class Grid {
 				double y_val = points[it1][it2].get_y();
 				if(x_val != 0)points[it1][it2].set_x(x_val * x_mult);
 				if(y_val != 0)points[it1][it2].set_y(y_val * y_mult);
-				}
 			}
 		}
+	}
 
 	//Set value of individual cell without making it a boundary point
 
 	void set_value(unsigned int x, unsigned int y, double val) {
 		if(x < values.size() && y < values[0].size())values[x][y].value = val;
 		else cout << "Outside of range." << endl;
-		}
+	}
 
 	//Make a cell a boundary point without changing its value
 
 	void set_boundary(unsigned int x, unsigned int y, bool bound) {
 		if(x < values.size() && y < values[0].size())values[x][y].boundary = bound;
 		else cout << "Outside of range." << endl;
-		}
+	}
 
 	//Set both value and make boundary point (most commonly used I imagine)
 
 	void set_boundary_value(unsigned int x, unsigned int y, double val) {
-		if(x < values.size() && y < values[0].size())
-			{values[x][y].boundary = true; values[x][y].value = val;}
-		else cout << "Outside of range." << endl;
+		if (x < values.size() && y < values[0].size()){
+			values[x][y].boundary = true;
+			values[x][y].value = val;
 		}
+		else cout << "Outside of range." << endl;
+	}
 
 	//Same as above but accepts doubles (so if you for some reason want to define
 	//a boundary shape in your own code you won't have to round floats all the time)
@@ -127,10 +141,12 @@ class Grid {
 	void set_boundary_value_float(double xd, double yd, double val) {
 		unsigned int x = round_own(abs(xd));
 		unsigned int y = round_own(abs(yd));
-		if(x < values.size() && y < values[0].size())
-			{values[x][y].boundary = true; values[x][y].value = val;}
-		else cout << "Outside of range." << endl;
+		if(x < values.size() && y < values[0].size()){
+			values[x][y].boundary = true;
+			values[x][y].value = val;
 		}
+		else cout << "Outside of range." << endl;
+	}
 
 		//////
 		//////
@@ -152,14 +168,14 @@ class Grid {
 			values[0][y].boundary = true;
 			values[values.size() - 1][y].value = right;
 			values[values.size() - 1][y].boundary = true;
-			}
+		}
 		for (int x = 0; x < values.size(); x++) {
 			values[x][0].value = left + x * gradient;
 			values[x][0].boundary = true;
 			values[x][values[0].size() - 1].value = left + x * gradient;
 			values[x][values[0].size() - 1].boundary = true;
-			}
 		}
+	}
 
 	//Create a circle with a constant value
 
@@ -167,16 +183,16 @@ class Grid {
 		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
 			for (int xs = x-r; xs<=x+r; xs++) {
-				for(int ys = y-r; ys<=y+r; ys++) {
+				for (int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
 					mid.set_xy(x,y);
 					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].boundary = true;}
-					}
 				}
 			}
 		}
+	}
 
 	//Same as above but semicircle pointed up etc.
 
@@ -190,10 +206,10 @@ class Grid {
 					Coordinate mid;
 					mid.set_xy(x,y);
 					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].boundary = true;}
-					}
 				}
 			}
 		}
+	}
 
 	void set_halfcircle_south(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
@@ -205,10 +221,10 @@ class Grid {
 					Coordinate mid;
 					mid.set_xy(x,y);
 					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].boundary = true;}
-					}
 				}
 			}
 		}
+	}
 
 	void set_halfcircle_east(int x, int y, unsigned int r, double val) {
 		if(x < 0 || x + r > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
@@ -220,10 +236,10 @@ class Grid {
 					Coordinate mid;
 					mid.set_xy(x,y);
 					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].boundary = true;}
-					}
 				}
 			}
 		}
+	}
 
 	void set_halfcircle_west(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
@@ -235,10 +251,10 @@ class Grid {
 					Coordinate mid;
 					mid.set_xy(x,y);
 					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].boundary = true;}
-					}
 				}
 			}
 		}
+	}
 
 		//////
 		//////
@@ -267,11 +283,11 @@ class Grid {
 			cout << "[	";
 			for ( int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
-				}
-			cout << "	]" << endl;
 			}
-		cout << endl;
+			cout << "	]" << endl;
 		}
+		cout << endl;
+	}
 	
 	//Print table with gnuplot matrix formatting. Plot in gnuplot by saving this to
 	//a file (let's call it data.dat) and calling in gnuplot:
@@ -283,10 +299,10 @@ class Grid {
 		for ( int y = 0; y <= values[0].size() - 1; y++) {
 			for ( int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
-				}
-			cout << endl;
 			}
+			cout << endl;
 		}
+	}
 
 	void print_points() {
 		cout << fixed;
@@ -295,9 +311,9 @@ class Grid {
 			cout << "[	";
 			for ( int x = 0; x < points.size(); x++) {
 				cout << setprecision (0) << points[x][y].get_x() << "," << points[x][y].get_y() << "	";
-				}
-			cout << "	]" << endl;
 			}
-		cout << endl;
+			cout << "	]" << endl;
 		}
-	};
+		cout << endl;
+	}
+};

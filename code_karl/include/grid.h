@@ -254,8 +254,58 @@ class Grid {
 				}
 			}
 		}
+
+	//Sets a rectangle with lines at x1,x2,y1&y2
+	void set_rectangle(int x1, int y1, int x2, int y2, double val){
+	  if(x1 > values.size()-1 || x2 > values.size()-1 || y1 > values.size()-1 || y2 > values.size()-1) cout << "Out of range." << endl;
+	  else{
+	    for(int xs=min(x1,x2); xs<=max(x1,x2); xs++){
+	      for(int ys=min(y1,y2); ys<=max(y1,y2); ys++){
+		values[xs][ys].value = val;
+		values[xs][ys].boundary = true;
+	      }
+	    }
+	  }
+	}
+	//Sets an isosceles triangle pointing up or down.
+	// x1 & x2 are the x-coords of the corners on the horizontal base
+	//y_base and y_tip y coords of base and tip
+	void set_isosceles(int x1, int x2, int y_base, int y_tip, double val){
+	  if(x1 > values.size()-1 || x2 > values.size()-1 || y_base > values.size()-1 || y_tip > values.size()-1) cout << "Out of range." << endl;
+	  else{
+	    double slope = (double)(y_tip - y_base)/(0.5*abs(x1-x2)); 
+	    int xc=(x1+x2)/2;
+	    for(int xs=min(x1,x2); xs<=max(x1,x2); xs++){
+	      for(int ys=min(y_tip,y_base); ys<=max(y_tip,y_base); ys++){
+		if(y_tip > y_base && ys<=y_tip+slope*(xs-xc) && ys <= y_tip-slope*(xs-xc)){
+		  values[xs][ys].value = val;
+		  values[xs][ys].boundary = true;
+		}	
+		if(y_tip < y_base && ys>=y_tip+slope*(xs-xc) && ys >= y_tip-slope*(xs-xc){
+		    values[xs][ys].value=val; 
+		    values[xs][ys].boundary = true;
+		  }
+		}
+	      }
+	    }
+	  }
 	}
 
+	  
+       		  
+	//sets an ellipse with centre at x and y and rx and ry are distance
+	//from centre to min & max x values and y values respectively	    
+     	void set_ellipse(int x, int y, unsigned int rx, unsigned int ry, double val){
+	  if(x-rx<0 || y-ry<0 || x+rx>values.size()-1 || y+ry>values.size()-1 )cout << "Out of range." << endl;
+	  for(int xs=x-rx; xs<=x+rx; xs++){
+	    for(int ys=y-ry; ys<=y+ry; ys++){
+	      if(pow(((double)(xs-x)/rx),2)+pow(((double)(ys-y)/ry),2) <= 1){
+		values[xs][ys].value=val;
+		values[xs][ys].boundary = true;
+	      }
+	    }
+	  }
+	}
 		//////
 		//////
 		//////

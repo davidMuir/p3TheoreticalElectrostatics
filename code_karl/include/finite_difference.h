@@ -40,7 +40,7 @@ class Finite_Difference {
 		next.error = change;
 		return next;
 		}
-	
+
 	public:
 
 	//Takes the grid to be solved
@@ -79,6 +79,23 @@ class Finite_Difference {
 		solution.set_coordinates(grid.get_coordinates());
 		its = k;
 		}
+
+	// works out -d(phi)/dx and -d(phi)/dy. Allows us to plot electric field in gnuplot with vector.
+	// Assumes h=1, will need to be altered if we change increment size.
+	void efield(){
+	  matrix dxdy = solution.get_values();
+	  for(int x=0; x<dxdy[0].size()-1; x++){
+	    for(int y=0; y<dxdy[0].size()-1; y++){
+	      dxdy[x][y].dx=dxdy[x][y].value-dxdy[x+1][y].value;
+	      dxdy[x][y].dy=dxdy[x][y].value-dxdy[x][y+1].value;
+	    }
+	  }
+	  solution.set_values(dxdy);
+	}
+
+
+
+
 
 	//Return solution / number of iterations required to get it
 

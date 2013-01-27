@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -11,6 +12,8 @@ struct Value {
 
 	double value;
 	bool boundary;
+  double dx;
+  double dy;
 
 	};
 
@@ -70,7 +73,7 @@ class Grid {
 		unsigned int itt = y+1;
 		vector<Value> dummy;
 		Value dummy1;
-		while(itt > 0){dummy1.value = 1; dummy1.boundary = false; dummy.push_back(dummy1); itt--;}
+		while(itt > 0){dummy1.value = 1; dummy1.dx = 0; dummy1.dy =0; dummy1.boundary = false; dummy.push_back(dummy1); itt--;}
 		while(it > 0){values.push_back(dummy); it--;}
 		Coordinate coordinate;
 		vector<Coordinate> dummy2;
@@ -101,8 +104,11 @@ class Grid {
 
 	//Set value of individual cell without making it a boundary point
 
+	//	void set_dx(unsigned int x, unsigned int y, double grad_x){
+	//	  if(x<values.size() && y<values[0].size()) values[x][y].
+
 	void set_value(unsigned int x, unsigned int y, double val) {
-		if(x < values.size() && y < values[0].size())values[x][y].value = val;
+	  if(x < values.size() && y < values[0].size()) values[x][y].value = val;
 		else cout << "Outside of range." << endl;
 		}
 
@@ -265,7 +271,7 @@ class Grid {
 		  values[xs][ys].value = val;
 		  values[xs][ys].boundary = true;
 		}	
-		if(y_tip < y_base && ys>=y_tip+slope*(xs-xc) && ys >= y_tip-slope*(xs-xc){
+		if(y_tip < y_base && ys>=y_tip+slope*(xs-xc) && ys >= y_tip-slope*(xs-xc)){
 		    values[xs][ys].value=val; 
 		    values[xs][ys].boundary = true;
 		  }
@@ -273,7 +279,7 @@ class Grid {
 	      }
 	    }
 	  }
-	}
+	
 
 	  
        		  
@@ -286,6 +292,21 @@ class Grid {
 	      if(pow(((double)(xs-x)/rx),2)+pow(((double)(ys-y)/ry),2) <= 1){
 		values[xs][ys].value=val;
 		values[xs][ys].boundary = true;
+	      }
+	    }
+	  }
+	}
+
+
+	void set_crescent(int x1, int y1, unsigned int r1, int x2, int y2, unsigned int r2, double val){
+	  if(x1-r1<0 || y1-r1<0 || x2-r2<0 || y2-r1<0 || x1+r1>values.size()-1 || y1+r1>values.size()-1 || x2+r2>values.size()-1 || y2+r2>values.size()-1){
+	    cout << "Out of range." << endl;
+	  }
+	  for(int xs=min(x1-r1,x2-r2); xs<=max(x1+r1,x2+r2); xs++){
+	    for(int ys=min(y1-r1,y2-r2); ys<=max(y1+r1,y2+r2); ys++){
+	      if(pow(xs-x1,2)+pow(ys-y1,2)<=r1*r1 && pow(xs-x2,2)+pow(ys-y2,2)>=r2*r2){
+		values[xs][ys].value=val;
+		values[xs][ys].boundary=true;
 	      }
 	    }
 	  }
@@ -304,7 +325,6 @@ class Grid {
 
 	coordinate_matrix get_coordinates() {return points;}
 	matrix get_values() {return values;}
-
 	void set_coordinates(coordinate_matrix coords) {points = coords;}
 	void set_values(matrix vals) {values = vals;}
 
@@ -322,6 +342,22 @@ class Grid {
 			}
 		cout << endl;
 		}
+
+	// prints to a file 5 columns. x,y. potential value and -d(phi)/dx and -d(phi)/dy. 
+	void print_dxdy(){
+	  ofstream outdata;
+	  outdata.open("results.dat");
+	  if(!outdata) cout<< "Error; file could not be opened" << endl;
+	  else {
+	  for(int y=0; y<=values[0].size()-1; y++){
+	    for(int x=0; x<=values[0].size()-1; x++){
+	      outdata << x << "\t" << y << "\t"<< values[x][y].value << "\t" << values[x][y].dx << "\t" << values[x][y].dy << endl;}
+	    }
+	  }
+	  outdata.close();
+	}
+
+
 	
 	//Print table with gnuplot matrix formatting. Plot in gnuplot by saving this to
 	//a file (let's call it data.dat) and calling in gnuplot:

@@ -35,8 +35,8 @@ class Coordinate {
 
 	//Use convention grid[x][y] for coordinate system
 
-typedef vector<vector<Value>> matrix;
-typedef vector<vector<Coordinate>> coordinate_matrix;
+typedef vector<vector<Value> > matrix;
+typedef vector<vector<Coordinate> > coordinate_matrix;
 
 	//Silly round function so that I can control exactly how it works
 	

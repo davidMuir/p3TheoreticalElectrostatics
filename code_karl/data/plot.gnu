@@ -9,13 +9,13 @@ splot 'data.dat' matrix
 unset table
 
 reset
-set xrange [0:100]
-set yrange [0:100]
+set xrange [0:50]
+set yrange [0:50]
 unset key
-set cbrange [-100:100]
+set cbrange [-50:50]
 set palette color
 set palette defined
 set term postscript
-set output '../plots/halfcircle.ps'
+set output '../plots/asym.ps'
 set view equal xy
-p 'data.dat' matrix with image #, 'contour.dat' w l lt -1 lw 0.5
+p 'volume.dat' matrix with image #, 'contour.dat' w l lt -1 lw 0.5

@@ -11,9 +11,10 @@ struct Value {
 
 	double value;
 	bool boundary;
+	bool accessible;
 
 };
-
+		
 class Coordinate {
 
 	private:
@@ -35,12 +36,44 @@ class Coordinate {
 
 	//Use convention grid[x][y] for coordinate system
 
-typedef vector<vector<Value>> matrix;
-typedef vector<vector<Coordinate>> coordinate_matrix;
+typedef vector<vector<Value> > matrix;
+typedef vector<vector<Coordinate> > coordinate_matrix;
 
 	//Silly round function so that I can control exactly how it works
 	
 int round_own(double a) {return int(a + 0.5);}
+
+double Average_value(vector<Value> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i].value;
+	}
+	return total/vec.size();
+}
+
+double Total_value(vector<Value> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i].value;
+	}
+	return total;
+}
+
+double Total_value(vector<double> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i];
+	}
+	return total;
+}
+
+double Average_value(vector<double> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i];
+	}
+	return total/vec.size();
+}
 
 	//Used for the Finite_Difference class. Might also be used for other methods later
 
@@ -72,6 +105,7 @@ class Grid {
 		Value dummy_val;
 		dummy_val.value = 1;
 		dummy_val.boundary = false;
+		dummy_val.accessible = true;
 		while(iy > 0){
 			dummy_vec_val.push_back(dummy_val);
 			iy--;
@@ -174,6 +208,23 @@ class Grid {
 			values[x][0].boundary = true;
 			values[x][values[0].size() - 1].value = left + x * gradient;
 			values[x][values[0].size() - 1].boundary = true;
+		}
+	}
+
+	//Create an inaccessible circle
+
+	void set_circle_noflow(int x, int y, unsigned int r, double val) {
+		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
+		else {
+			for (int xs = x-r; xs<=x+r; xs++) {
+				for (int ys = y-r; ys<=y+r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs,ys);
+					Coordinate mid;
+					mid.set_xy(x,y);
+					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].accessible = false;}
+				}
+			}
 		}
 	}
 

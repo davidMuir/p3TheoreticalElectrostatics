@@ -1,20 +1,21 @@
-#include "include/finite_difference.h"
+#include "include/asymmetric_finite_volume.h"
 
 using namespace std;
 
 int main() {
 
-	int n = 100;
-	int m = 100;
+	int n = 50;
+	int m = 50;
 
 	Grid first_grid;
 	first_grid.load_grid(n,m);
 	first_grid.set_flow(50, -50);
-	first_grid.set_halfcircle_north(50,50,20,0);
+	first_grid.set_circle_noflow(25,25,10,100);
 
-	Finite_Difference fd;
+	Asymmetric_Finite_Volume fd;
 	fd.to_solve(first_grid);
-	fd.set_precision(0);
+	fd.set_precision(0.2);
+	fd.set_maxit(10000);
 	fd.solve();
 	Grid sol = fd.get_solution();
 	//cout << fd.number_of_iterations() << endl;

@@ -1,8 +1,26 @@
 #include "grid.h"
 
+/*
+
+	This is a solution I came up with myself. It's based on the principles of
+	the finite volume method but is a bit peculiar since it is asymmetric:
+	the order in which you loop over the grid actually makes a difference,
+	although the limit when its -> inf is the same. Essentially we keep a limited
+	number of total "volume" (value) in the grid, except at the boundary points
+	which work as sources or sinks. Due to some "clever" techniques
+	it also takes into account whether or not a certain cell is accessible or not,
+	and normalises for this. Hence we can define a new special type of
+	boundary that is inaccessible. This can be thought of as an area that is
+	as if submerged in flowing water: the water acknowledges it and flows around it,
+	but it does not work as a source or sink.
+
+	//Karl
+
+*/
+
 using namespace std;
 
-class Finite_Difference {
+class Asymmetric_Finite_Volume {
 
 	private:
 
@@ -11,7 +29,6 @@ class Finite_Difference {
 
 	Grid grid;
 	Grid solution;
-	double beta;
 	double precision;
 	unsigned int maxit;
 	unsigned int its;
@@ -19,27 +36,58 @@ class Finite_Difference {
 	//Internal function for updating to the next iteration
 
 	Iteration iteration(Iteration old) {
-		matrix mo = old.it;
-		matrix newm = old.it;
-		unsigned int n = mo.size();
-		unsigned int m = mo[0].size();
+		matrix m = old.it;
+		unsigned int no = m.size();
+		unsigned int mo = m[0].size();
 		double change = 0;
-		for(int x = 1; x < n-1; x++) {
-			for(int y = 1; y < m-1; y++) {
-				if(mo[x][y].boundary == false)
-					{
-					newm[x][y].value = 
-					(mo[x-1][y].value + mo[x+1][y].value + beta*beta*(mo[x][y-1].value + mo[x][y+1].value))/
-					(2*(1+beta*beta));
-					if(abs(newm[x][y].value - mo[x][y].value) > change)change = abs(newm[x][y].value - mo[x][y].value);
-					}
+		vector<Value> cells;
+		vector<double> dv;
+		double old_value;
+		double DV;
+		double coefficient;
+		double total_difference;
+		unsigned int count;
+		for(int x = 1; x < no-1; x++) {
+			for(int y = 1; y < mo-1; y++) {
+				old_value = m[x][y].value;
+				if(m[x-1][y].accessible == true){
+				cells.push_back(m[x-1][y]);
+				dv.push_back(m[x][y].value - m[x-1][y].value);
 				}
+				if(m[x+1][y].accessible == true){
+				cells.push_back(m[x+1][y]);
+				dv.push_back(m[x][y].value - m[x+1][y].value);
+				}
+				if(m[x][y-1].accessible == true){
+				cells.push_back(m[x][y-1]);
+				dv.push_back(m[x][y].value - m[x][y-1].value);
+				}
+				if(m[x][y+1].accessible == true){
+				cells.push_back(m[x][y+1]);
+				dv.push_back(m[x][y].value - m[x][y+1].value);
+				}
+				cells.push_back(m[x][y]);
+				double average = Average_value(cells);
+				if(m[x][y].boundary == false)m[x][y].value = average;
+				DV = average - old_value;
+				if(abs(DV) > change)change = abs(DV);
+				total_difference = Total_value(dv);
+				if(total_difference == 0 || DV == 0)continue; //Bad luck!
+				coefficient = -DV/total_difference;
+				count = 0;
+				if(m[x-1][y].accessible == true){if(m[x-1][y].boundary == false){m[x-1][y].value = m[x-1][y].value + coefficient * dv[count];} count++;}
+				if(m[x+1][y].accessible == true){if(m[x+1][y].boundary == false){m[x+1][y].value = m[x+1][y].value + coefficient * dv[count];} count++;}
+				if(m[x][y-1].accessible == true){if(m[x][y-1].boundary == false){m[x][y-1].value = m[x][y-1].value + coefficient * dv[count];} count++;}
+				if(m[x][y+1].accessible == true){if(m[x][y+1].boundary == false){m[x][y+1].value = m[x][y+1].value + coefficient * dv[count];} count++;}
+				cells.clear();
+				dv.clear();
 			}
+		}
 		Iteration next;
-		next.it = newm;
+		next.it = m;
 		next.error = change;
 		return next;
-		}
+	}
 	
 	public:
 
@@ -47,9 +95,7 @@ class Finite_Difference {
 
 	void to_solve(Grid entry) {
 		grid = entry;
-		beta = abs(grid.get_coordinates()[0][0].get_x() - grid.get_coordinates()[1][0].get_x())/
-				abs(grid.get_coordinates()[0][0].get_y() - grid.get_coordinates()[0][1].get_y());
-		maxit = 5000;
+		maxit = 10000;
 		precision = 1;
 		}
 
@@ -74,11 +120,11 @@ class Finite_Difference {
 			err = n.error;
 			o = n;
 			k++;
-			}
+		}
 		solution.set_values(n.it);
 		solution.set_coordinates(grid.get_coordinates());
 		its = k;
-		}
+	}
 
 	//Return solution / number of iterations required to get it
 

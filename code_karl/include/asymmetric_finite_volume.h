@@ -123,6 +123,7 @@ class Asymmetric_Finite_Volume {
 		}
 		solution.set_values(n.it);
 		solution.set_coordinates(grid.get_coordinates());
+		solution.set_gradients(grid.get_gradients());
 		its = k;
 	}
 

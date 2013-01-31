@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -13,6 +14,11 @@ struct Value {
 	bool boundary;
 	bool accessible;
 
+};
+
+struct Grad {
+  double dx;
+  double dy;
 };
 		
 class Coordinate {
@@ -38,6 +44,7 @@ class Coordinate {
 
 typedef vector<vector<Value> > matrix;
 typedef vector<vector<Coordinate> > coordinate_matrix;
+typedef vector<vector<Grad> > grad_matrix;
 
 	//Silly round function so that I can control exactly how it works
 	
@@ -90,6 +97,7 @@ class Grid {
 
 	private:
 	coordinate_matrix points;
+	grad_matrix gradients;
 	matrix values;
 
 	public:
@@ -125,6 +133,20 @@ class Grid {
 			points.push_back(dummy_vec_coord);
 			dummy_vec_coord.clear();
 			ix++;
+		}
+		Grad dummy_grad;
+		vector<Grad> dummy_vec_grad;
+		dummy_grad.dx=0;
+		dummy_grad.dy=0;
+		ix=x+1;
+		iy=y+1;
+		while(iy > 0){
+	      	  dummy_vec_grad.push_back(dummy_grad);
+       		  iy--;
+		}
+		while(ix > 0){
+		  gradients.push_back(dummy_vec_grad);
+		  ix--;
 		}
 	}
 
@@ -370,9 +392,24 @@ class Grid {
 
 	coordinate_matrix get_coordinates() {return points;}
 	matrix get_values() {return values;}
+	grad_matrix get_gradients(){return gradients;}
 
 	void set_coordinates(coordinate_matrix coords) {points = coords;}
 	void set_values(matrix vals) {values = vals;}
+	void set_gradients(grad_matrix grads){gradients = grads;}
+
+
+	//finds -ve gradient of each point in x and y direction. Equivalent to E_x and E_y. assumes increment =1.
+	void efield(){
+	  double dx,dy;
+	  for (int x=0; x<gradients.size()-1; x++){
+	    for(int y=0; y<gradients.size()-1; y++){
+	      gradients[x][y].dx = values[x][y].value - values[x+1][y].value;
+	      gradients[x][y].dy = values[x][y].value - values[x][y+1].value;
+	    }
+	  }
+	}
+
 
 	//Print ASCII table with MINIMAL formatting
 
@@ -402,6 +439,24 @@ class Grid {
 			}
 			cout << endl;
 		}
+	}
+
+	//prints to file sprecified in finite_difference.cc - lets us plot vector field
+	void print_all(string filename){
+	  ofstream outdata;
+	  outdata.open(filename.c_str());
+	  if( outdata.is_open() ){
+	    for(int x=0; x<values.size(); x++){
+	      for(int y=0; y<values[0].size();y++){
+
+		outdata << x << "\t" << y << "\t" << gradients[x][y].dx << "\t" << gradients[x][y].dy << "\t" << values[x][y].value << endl;
+	      }
+	    }
+	    outdata.close();
+	  }
+	  
+	  else cout << "unable to open file" << endl;
+     
 	}
 
 	void print_points() {

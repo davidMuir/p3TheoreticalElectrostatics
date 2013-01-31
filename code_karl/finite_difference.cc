@@ -19,7 +19,9 @@ int main() {
 	fd.solve();
 	Grid sol = fd.get_solution();
 	//cout << fd.number_of_iterations() << endl;
-	sol.gnuplot_values();
+	//	sol.gnuplot_values();
+	sol.efield();
+	sol.print_all("results.dat");
 	
 
 	return 0;

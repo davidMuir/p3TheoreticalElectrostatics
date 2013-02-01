@@ -1,4 +1,4 @@
-#include "include/finite_difference.h"
+#include "Algorithms/Finite_Difference.h"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ int main() {
 
 	Grid first_grid;
 	first_grid.load_grid(n,m);
-	first_grid.set_flow(100, -100);
+	first_grid.set_flow(50, -50);
 	first_grid.set_halfcircle_north(50,50,20,0);
 
 	Finite_Difference fd;

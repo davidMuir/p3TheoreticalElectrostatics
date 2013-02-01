@@ -35,8 +35,8 @@ class Coordinate {
 
 	//Use convention grid[x][y] for coordinate system
 
-typedef vector<vector<Value>> matrix;
-typedef vector<vector<Coordinate>> coordinate_matrix;
+typedef vector<vector<Value> > matrix;
+typedef vector<vector<Coordinate> > coordinate_matrix;
 
 	//Silly round function so that I can control exactly how it works
 	
@@ -83,7 +83,7 @@ class Grid {
 		Coordinate coordinate;
 		vector<Coordinate> dummy_vec_coord;
 		while(ix <= x){
-			for (int z = 0; z <= y; z++) {
+			for (unsigned int z = 0; z <= y; z++) {
 				coordinate.set_x((double)ix);
 				coordinate.set_y(z);
 				dummy_vec_coord.push_back(coordinate);
@@ -101,8 +101,8 @@ class Grid {
 		unsigned int y_size = points[0].size() - 1;
 		double x_mult = x/x_size;
 		double y_mult = y/y_size;
-		for(int it1 = 0; it1 < x_size + 1; it1++) {
-			for(int it2 = 0; it2 < y_size + 1; it2++) {
+		for(unsigned int it1 = 0; it1 < x_size + 1; it1++) {
+			for(unsigned int it2 = 0; it2 < y_size + 1; it2++) {
 				double x_val = points[it1][it2].get_x();
 				double y_val = points[it1][it2].get_y();
 				if(x_val != 0)points[it1][it2].set_x(x_val * x_mult);
@@ -163,13 +163,13 @@ class Grid {
 
 	void set_flow(double left, double right) {
 		double gradient = (right - left) / (values.size() - 1);
-		for (int y = 0; y < values[0].size(); y++) {
+		for (unsigned int y = 0; y < values[0].size(); y++) {
 			values[0][y].value = left;
 			values[0][y].boundary = true;
 			values[values.size() - 1][y].value = right;
 			values[values.size() - 1][y].boundary = true;
 		}
-		for (int x = 0; x < values.size(); x++) {
+		for (unsigned int x = 0; x < values.size(); x++) {
 			values[x][0].value = left + x * gradient;
 			values[x][0].boundary = true;
 			values[x][values[0].size() - 1].value = left + x * gradient;
@@ -182,8 +182,8 @@ class Grid {
 	void set_circle(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (int xs = x-r; xs<=x+r; xs++) {
-				for (int ys = y-r; ys<=y+r; ys++) {
+			for (unsigned int xs = x-r; xs<=x+r; xs++) {
+				for (unsigned int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -199,8 +199,8 @@ class Grid {
 	void set_halfcircle_north(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (int xs = x-r; xs<=x+r; xs++) {
-				for(int ys = y; ys<=y+r; ys++) {
+			for (unsigned int xs = x-r; xs<=x+r; xs++) {
+				for(unsigned int ys = y; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -214,8 +214,8 @@ class Grid {
 	void set_halfcircle_south(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (int xs = x-r; xs<=x+r; xs++) {
-				for(int ys = y-r; ys<=y; ys++) {
+			for (unsigned int xs = x-r; xs<=x+r; xs++) {
+				for(unsigned int ys = y-r; ys<=y; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -229,8 +229,8 @@ class Grid {
 	void set_halfcircle_east(int x, int y, unsigned int r, double val) {
 		if(x < 0 || x + r > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (int xs = x; xs<=x+r; xs++) {
-				for(int ys = y-r; ys<=y+r; ys++) {
+			for (unsigned int xs = x; xs<=x+r; xs++) {
+				for(unsigned int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -244,8 +244,8 @@ class Grid {
 	void set_halfcircle_west(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (int xs = x-r; xs<=x; xs++) {
-				for(int ys = y-r; ys<=y+r; ys++) {
+			for (unsigned int xs = x-r; xs<=x; xs++) {
+				for(unsigned int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -260,8 +260,8 @@ class Grid {
 	void set_rectangle(int x1, int y1, int x2, int y2, double val){
 	  if(x1 > values.size()-1 || x2 > values.size()-1 || y1 > values.size()-1 || y2 > values.size()-1) cout << "Out of range." << endl;
 	  else{
-	    for(int xs=min(x1,x2); xs<=max(x1,x2); xs++){
-	      for(int ys=min(y1,y2); ys<=max(y1,y2); ys++){
+	    for(unsigned int xs=min(x1,x2); xs<=max(x1,x2); xs++){
+	      for(unsigned int ys=min(y1,y2); ys<=max(y1,y2); ys++){
 		values[xs][ys].value = val;
 		values[xs][ys].boundary = true;
 	      }
@@ -276,8 +276,8 @@ class Grid {
 	  else{
 	    double slope = (double)(y_tip - y_base)/(0.5*abs(x1-x2)); 
 	    int xc=(x1+x2)/2;
-	    for(int xs=min(x1,x2); xs<=max(x1,x2); xs++){
-	      for(int ys=min(y_tip,y_base); ys<=max(y_tip,y_base); ys++){
+	    for(unsigned int xs=min(x1,x2); xs<=max(x1,x2); xs++){
+	      for(unsigned int ys=min(y_tip,y_base); ys<=max(y_tip,y_base); ys++){
 		if(y_tip > y_base && ys<=y_tip+slope*(xs-xc) && ys <= y_tip-slope*(xs-xc)){
 		  values[xs][ys].value = val;
 		  values[xs][ys].boundary = true;
@@ -296,8 +296,8 @@ class Grid {
 	//from centre to min & max x values and y values respectively	    
      	void set_ellipse(int x, int y, unsigned int rx, unsigned int ry, double val){
 	  if(x-rx<0 || y-ry<0 || x+rx>values.size()-1 || y+ry>values.size()-1 )cout << "Out of range." << endl;
-	  for(int xs=x-rx; xs<=x+rx; xs++){
-	    for(int ys=y-ry; ys<=y+ry; ys++){
+	  for(unsigned int xs=x-rx; xs<=x+rx; xs++){
+	    for(unsigned int ys=y-ry; ys<=y+ry; ys++){
 	      if(pow(((double)(xs-x)/rx),2)+pow(((double)(ys-y)/ry),2) <= 1){
 		values[xs][ys].value=val;
 		values[xs][ys].boundary = true;
@@ -328,9 +328,9 @@ class Grid {
 	void print_values() {
 		cout << fixed;
 		cout << endl;
-		for ( int y = 0; y <= values[0].size() - 1; y++) {
+		for (unsigned  int y = 0; y <= values[0].size() - 1; y++) {
 			cout << "[	";
-			for ( int x = 0; x < values.size(); x++) {
+			for (unsigned int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
 			}
 			cout << "	]" << endl;
@@ -345,8 +345,8 @@ class Grid {
 
 	void gnuplot_values() {
 		cout << fixed;
-		for ( int y = 0; y <= values[0].size() - 1; y++) {
-			for ( int x = 0; x < values.size(); x++) {
+		for (unsigned int y = 0; y <= values[0].size() - 1; y++) {
+			for (unsigned int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
 			}
 			cout << endl;

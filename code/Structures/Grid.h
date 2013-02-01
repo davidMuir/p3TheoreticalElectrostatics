@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -11,9 +12,15 @@ struct Value {
 
 	double value;
 	bool boundary;
+	bool accessible;
 
 };
 
+struct Grad {
+  double dx;
+  double dy;
+};
+		
 class Coordinate {
 
 	private:
@@ -37,10 +44,43 @@ class Coordinate {
 
 typedef vector<vector<Value> > matrix;
 typedef vector<vector<Coordinate> > coordinate_matrix;
+typedef vector<vector<Grad> > grad_matrix;
 
 	//Silly round function so that I can control exactly how it works
 	
 int round_own(double a) {return int(a + 0.5);}
+
+double Average_value(vector<Value> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i].value;
+	}
+	return total/vec.size();
+}
+
+double Total_value(vector<Value> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i].value;
+	}
+	return total;
+}
+
+double Total_value(vector<double> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i];
+	}
+	return total;
+}
+
+double Average_value(vector<double> vec) {
+	double total = 0;
+	for(int i = 0; i < vec.size(); i++){
+		total += vec[i];
+	}
+	return total/vec.size();
+}
 
 	//Used for the Finite_Difference class. Might also be used for other methods later
 
@@ -57,6 +97,7 @@ class Grid {
 
 	private:
 	coordinate_matrix points;
+	grad_matrix gradients;
 	matrix values;
 
 	public:
@@ -72,6 +113,7 @@ class Grid {
 		Value dummy_val;
 		dummy_val.value = 1;
 		dummy_val.boundary = false;
+		dummy_val.accessible = true;
 		while(iy > 0){
 			dummy_vec_val.push_back(dummy_val);
 			iy--;
@@ -83,7 +125,7 @@ class Grid {
 		Coordinate coordinate;
 		vector<Coordinate> dummy_vec_coord;
 		while(ix <= x){
-			for (unsigned int z = 0; z <= y; z++) {
+			for (int z = 0; z <= y; z++) {
 				coordinate.set_x((double)ix);
 				coordinate.set_y(z);
 				dummy_vec_coord.push_back(coordinate);
@@ -91,6 +133,20 @@ class Grid {
 			points.push_back(dummy_vec_coord);
 			dummy_vec_coord.clear();
 			ix++;
+		}
+		Grad dummy_grad;
+		vector<Grad> dummy_vec_grad;
+		dummy_grad.dx=0;
+		dummy_grad.dy=0;
+		ix=x+1;
+		iy=y+1;
+		while(iy > 0){
+	      	  dummy_vec_grad.push_back(dummy_grad);
+       		  iy--;
+		}
+		while(ix > 0){
+		  gradients.push_back(dummy_vec_grad);
+		  ix--;
 		}
 	}
 
@@ -101,8 +157,8 @@ class Grid {
 		unsigned int y_size = points[0].size() - 1;
 		double x_mult = x/x_size;
 		double y_mult = y/y_size;
-		for(unsigned int it1 = 0; it1 < x_size + 1; it1++) {
-			for(unsigned int it2 = 0; it2 < y_size + 1; it2++) {
+		for(int it1 = 0; it1 < x_size + 1; it1++) {
+			for(int it2 = 0; it2 < y_size + 1; it2++) {
 				double x_val = points[it1][it2].get_x();
 				double y_val = points[it1][it2].get_y();
 				if(x_val != 0)points[it1][it2].set_x(x_val * x_mult);
@@ -163,17 +219,34 @@ class Grid {
 
 	void set_flow(double left, double right) {
 		double gradient = (right - left) / (values.size() - 1);
-		for (unsigned int y = 0; y < values[0].size(); y++) {
+		for (int y = 0; y < values[0].size(); y++) {
 			values[0][y].value = left;
 			values[0][y].boundary = true;
 			values[values.size() - 1][y].value = right;
 			values[values.size() - 1][y].boundary = true;
 		}
-		for (unsigned int x = 0; x < values.size(); x++) {
+		for (int x = 0; x < values.size(); x++) {
 			values[x][0].value = left + x * gradient;
 			values[x][0].boundary = true;
 			values[x][values[0].size() - 1].value = left + x * gradient;
 			values[x][values[0].size() - 1].boundary = true;
+		}
+	}
+
+	//Create an inaccessible circle
+
+	void set_circle_noflow(int x, int y, unsigned int r, double val) {
+		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
+		else {
+			for (int xs = x-r; xs<=x+r; xs++) {
+				for (int ys = y-r; ys<=y+r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs,ys);
+					Coordinate mid;
+					mid.set_xy(x,y);
+					if( mid.distance(xy) < r ){values[xs][ys].value = val; values[xs][ys].accessible = false;}
+				}
+			}
 		}
 	}
 
@@ -182,8 +255,8 @@ class Grid {
 	void set_circle(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (unsigned int xs = x-r; xs<=x+r; xs++) {
-				for (unsigned int ys = y-r; ys<=y+r; ys++) {
+			for (int xs = x-r; xs<=x+r; xs++) {
+				for (int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -199,8 +272,8 @@ class Grid {
 	void set_halfcircle_north(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y < 0 || y + r > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (unsigned int xs = x-r; xs<=x+r; xs++) {
-				for(unsigned int ys = y; ys<=y+r; ys++) {
+			for (int xs = x-r; xs<=x+r; xs++) {
+				for(int ys = y; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -214,8 +287,8 @@ class Grid {
 	void set_halfcircle_south(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x + r > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (unsigned int xs = x-r; xs<=x+r; xs++) {
-				for(unsigned int ys = y-r; ys<=y; ys++) {
+			for (int xs = x-r; xs<=x+r; xs++) {
+				for(int ys = y-r; ys<=y; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -229,8 +302,8 @@ class Grid {
 	void set_halfcircle_east(int x, int y, unsigned int r, double val) {
 		if(x < 0 || x + r > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (unsigned int xs = x; xs<=x+r; xs++) {
-				for(unsigned int ys = y-r; ys<=y+r; ys++) {
+			for (int xs = x; xs<=x+r; xs++) {
+				for(int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -244,8 +317,8 @@ class Grid {
 	void set_halfcircle_west(int x, int y, unsigned int r, double val) {
 		if(x - r < 0 || x > values.size() - 1 || y - r < 0 || y > values[0].size() - 1)cout << "Out of range." << endl;
 		else {
-			for (unsigned int xs = x-r; xs<=x; xs++) {
-				for(unsigned int ys = y-r; ys<=y+r; ys++) {
+			for (int xs = x-r; xs<=x; xs++) {
+				for(int ys = y-r; ys<=y+r; ys++) {
 					Coordinate xy;
 					xy.set_xy(xs,ys);
 					Coordinate mid;
@@ -260,8 +333,8 @@ class Grid {
 	void set_rectangle(int x1, int y1, int x2, int y2, double val){
 	  if(x1 > values.size()-1 || x2 > values.size()-1 || y1 > values.size()-1 || y2 > values.size()-1) cout << "Out of range." << endl;
 	  else{
-	    for(unsigned int xs=min(x1,x2); xs<=max(x1,x2); xs++){
-	      for(unsigned int ys=min(y1,y2); ys<=max(y1,y2); ys++){
+	    for(int xs=min(x1,x2); xs<=max(x1,x2); xs++){
+	      for(int ys=min(y1,y2); ys<=max(y1,y2); ys++){
 		values[xs][ys].value = val;
 		values[xs][ys].boundary = true;
 	      }
@@ -276,8 +349,8 @@ class Grid {
 	  else{
 	    double slope = (double)(y_tip - y_base)/(0.5*abs(x1-x2)); 
 	    int xc=(x1+x2)/2;
-	    for(unsigned int xs=min(x1,x2); xs<=max(x1,x2); xs++){
-	      for(unsigned int ys=min(y_tip,y_base); ys<=max(y_tip,y_base); ys++){
+	    for(int xs=min(x1,x2); xs<=max(x1,x2); xs++){
+	      for(int ys=min(y_tip,y_base); ys<=max(y_tip,y_base); ys++){
 		if(y_tip > y_base && ys<=y_tip+slope*(xs-xc) && ys <= y_tip-slope*(xs-xc)){
 		  values[xs][ys].value = val;
 		  values[xs][ys].boundary = true;
@@ -296,8 +369,8 @@ class Grid {
 	//from centre to min & max x values and y values respectively	    
      	void set_ellipse(int x, int y, unsigned int rx, unsigned int ry, double val){
 	  if(x-rx<0 || y-ry<0 || x+rx>values.size()-1 || y+ry>values.size()-1 )cout << "Out of range." << endl;
-	  for(unsigned int xs=x-rx; xs<=x+rx; xs++){
-	    for(unsigned int ys=y-ry; ys<=y+ry; ys++){
+	  for(int xs=x-rx; xs<=x+rx; xs++){
+	    for(int ys=y-ry; ys<=y+ry; ys++){
 	      if(pow(((double)(xs-x)/rx),2)+pow(((double)(ys-y)/ry),2) <= 1){
 		values[xs][ys].value=val;
 		values[xs][ys].boundary = true;
@@ -319,18 +392,33 @@ class Grid {
 
 	coordinate_matrix get_coordinates() {return points;}
 	matrix get_values() {return values;}
+	grad_matrix get_gradients(){return gradients;}
 
 	void set_coordinates(coordinate_matrix coords) {points = coords;}
 	void set_values(matrix vals) {values = vals;}
+	void set_gradients(grad_matrix grads){gradients = grads;}
+
+
+	//finds -ve gradient of each point in x and y direction. Equivalent to E_x and E_y. assumes increment =1.
+	void efield(){
+	  double dx,dy;
+	  for (int x=0; x<gradients.size()-1; x++){
+	    for(int y=0; y<gradients.size()-1; y++){
+	      gradients[x][y].dx = values[x][y].value - values[x+1][y].value;
+	      gradients[x][y].dy = values[x][y].value - values[x][y+1].value;
+	    }
+	  }
+	}
+
 
 	//Print ASCII table with MINIMAL formatting
 
 	void print_values() {
 		cout << fixed;
 		cout << endl;
-		for (unsigned  int y = 0; y <= values[0].size() - 1; y++) {
+		for ( int y = 0; y <= values[0].size() - 1; y++) {
 			cout << "[	";
-			for (unsigned int x = 0; x < values.size(); x++) {
+			for ( int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
 			}
 			cout << "	]" << endl;
@@ -345,12 +433,30 @@ class Grid {
 
 	void gnuplot_values() {
 		cout << fixed;
-		for (unsigned int y = 0; y <= values[0].size() - 1; y++) {
-			for (unsigned int x = 0; x < values.size(); x++) {
+		for ( int y = 0; y <= values[0].size() - 1; y++) {
+			for ( int x = 0; x < values.size(); x++) {
 				cout << setprecision (2) << values[x][y].value << "	";
 			}
 			cout << endl;
 		}
+	}
+
+	//prints to file sprecified in finite_difference.cc - lets us plot vector field
+	void print_all(string filename){
+	  ofstream outdata;
+	  outdata.open(filename.c_str());
+	  if( outdata.is_open() ){
+	    for(int x=0; x<values.size(); x++){
+	      for(int y=0; y<values[0].size();y++){
+
+		outdata << x << "\t" << y << "\t" << gradients[x][y].dx << "\t" << gradients[x][y].dy << "\t" << values[x][y].value << endl;
+	      }
+	    }
+	    outdata.close();
+	  }
+	  
+	  else cout << "unable to open file" << endl;
+     
 	}
 
 	void print_points() {

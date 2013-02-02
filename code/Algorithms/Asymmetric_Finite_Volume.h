@@ -67,7 +67,7 @@ class Asymmetric_Finite_Volume {
 				dv.push_back(m[x][y].value - m[x][y+1].value);
 				}
 				cells.push_back(m[x][y]);
-				double average = Average_value(cells);
+				double average = average_value(cells);
 				if(m[x][y].boundary == false)m[x][y].value = average;
 				DV = average - old_value;
 				if(abs(DV) > change)change = abs(DV);

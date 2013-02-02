@@ -50,7 +50,7 @@ typedef vector<vector<Grad> > grad_matrix;
 	
 int round_own(double a) {return int(a + 0.5);}
 
-double Average_value(vector<Value> vec) {
+double average_value(vector<Value> vec) {
 	double total = 0;
 	for(int i = 0; i < vec.size(); i++){
 		total += vec[i].value;
@@ -58,7 +58,7 @@ double Average_value(vector<Value> vec) {
 	return total/vec.size();
 }
 
-double Total_value(vector<Value> vec) {
+double total_value(vector<Value> vec) {
 	double total = 0;
 	for(int i = 0; i < vec.size(); i++){
 		total += vec[i].value;
@@ -66,7 +66,7 @@ double Total_value(vector<Value> vec) {
 	return total;
 }
 
-double Total_value(vector<double> vec) {
+double total_value(vector<double> vec) {
 	double total = 0;
 	for(int i = 0; i < vec.size(); i++){
 		total += vec[i];
@@ -74,7 +74,7 @@ double Total_value(vector<double> vec) {
 	return total;
 }
 
-double Average_value(vector<double> vec) {
+double average_value(vector<double> vec) {
 	double total = 0;
 	for(int i = 0; i < vec.size(); i++){
 		total += vec[i];

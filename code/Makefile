@@ -8,4 +8,4 @@ finite_difference.o: finite_difference.cc include/finite_difference.h
 	g++ -std=c++11 -c ./include/grid.h
 	
 clean:
-	rm finite_difference.o
+	rm finite_difference.o ./Structures/*.o ./Algorithms/*.o

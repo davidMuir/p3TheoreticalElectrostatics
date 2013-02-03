@@ -7,8 +7,7 @@ int main() {
 	int n = 50;
 	int m = 50;
 
-	Grid first_grid;
-	first_grid.load_grid(n,m);
+	Grid first_grid(n,m);
 	first_grid.set_flow(50, -50);
 	first_grid.set_circle_noflow(25,25,10,100);
 
@@ -21,7 +20,7 @@ int main() {
 	//cout << fd.number_of_iterations() << endl;
 	//	sol.gnuplot_values();
 	sol.efield();
-	sol.print_all("results.dat");
+	sol.print_all_to("results.dat");
 	
 
 	return 0;

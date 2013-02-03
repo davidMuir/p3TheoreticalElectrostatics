@@ -20,6 +20,46 @@
 
 using namespace std;
 
+//This is duplicated for now until I can find a reasonably sensible place for this
+struct Iteration {
+
+	matrix it;
+	double error;
+
+};
+
+double average_value(vector<Value> vec) {
+	double total = 0;
+	for (int i = 0; i < vec.size(); i++) {
+		total += vec[i].value;
+	}
+	return total / vec.size();
+}
+
+double total_value(vector<Value> vec) {
+	double total = 0;
+	for (int i = 0; i < vec.size(); i++) {
+		total += vec[i].value;
+	}
+	return total;
+}
+
+double total_value(vector<double> vec) {
+	double total = 0;
+	for (int i = 0; i < vec.size(); i++) {
+		total += vec[i];
+	}
+	return total;
+}
+
+double average_value(vector<double> vec) {
+	double total = 0;
+	for (int i = 0; i < vec.size(); i++) {
+		total += vec[i];
+	}
+	return total / vec.size();
+}
+
 class Asymmetric_Finite_Volume {
 
 	private:
@@ -71,7 +111,7 @@ class Asymmetric_Finite_Volume {
 				if(m[x][y].boundary == false)m[x][y].value = average;
 				DV = average - old_value;
 				if(abs(DV) > change)change = abs(DV);
-				total_difference = Total_value(dv);
+				total_difference = total_value(dv);
 				if(total_difference == 0 || DV == 0)continue; //Bad luck!
 				coefficient = -DV/total_difference;
 				count = 0;
@@ -97,7 +137,7 @@ class Asymmetric_Finite_Volume {
 		grid = entry;
 		maxit = 10000;
 		precision = 1;
-		}
+	}
 
 	//Change convergence conditions. Precision decides how much the solution
 	//must converge to be accepted, maxit the maximum number of iterations

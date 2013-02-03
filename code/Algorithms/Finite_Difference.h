@@ -2,6 +2,13 @@
 
 using namespace std;
 
+struct Iteration {
+
+	matrix it;
+	double error;
+
+};
+
 class Finite_Difference {
 
 	private:

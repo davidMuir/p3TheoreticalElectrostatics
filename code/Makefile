@@ -1,11 +1,20 @@
-finite_difference: finite_difference.o ./include/grid.h
-	g++ -std=c++11 -o finite_difference finite_difference.o
+objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Algorithm.o
+CC = g++ -std=c++11
+					
+foo : $(objects)
+	$(CC) -o foo $(objects)
 	
-finite_difference.o: finite_difference.cc include/finite_difference.h
-	g++ -std=c++11 -c finite_difference.cc
+main.o : main.cc ./Algorithms/Finite_Difference.h
+	$(CC) -c main.cc
 	
-./include/grid.o: ./include/grid.h
-	g++ -std=c++11 -c ./include/grid.h
+./Algorithms/Finite_Difference.o : ./Algorithms/Finite_Difference.cc ./Algorithms/Finite_Difference.h
+	cd ./Algorithms; $(CC) -c Finite_Difference.cc
 	
-clean:
-	rm finite_difference.o ./Structures/*.o ./Algorithms/*.o
+./Algorithms/Algorithm.o : ./Algorithms/Algorithm.h ./Algorithms/Algorithm.cc
+	cd ./Algorithms;$(CC) -c Algorithm.cc
+	
+./Structures/Grid.o : ./Structures/Grid.h ./Structures/Grid.cc
+	cd ./Structures; $(CC) -c Grid.cc
+	
+clean :
+	rm foo $(objects)

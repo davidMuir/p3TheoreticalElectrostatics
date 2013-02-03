@@ -8,16 +8,25 @@
 #ifndef ALGORITHM_H_
 #define ALGORITHM_H_
 
+#include "../Structures/Grid.h"
+
+struct Iteration {
+
+	matrix it;
+	double error;
+
+};
+
 class Algorithm {
 public:
+	Algorithm();
 	Algorithm(Grid entry);
 	virtual ~Algorithm();
-	void to_solve(Grid entry)
+	void to_solve(Grid entry);
 	void set_precision(double prec);
 	void set_maxit(unsigned int max);
-	void solve();
 	Grid get_solution();
-	unsigned int number_of_iterations();
+	unsigned int get_iterations();
 protected:
 	Grid grid;
 	Grid solution;
@@ -26,6 +35,7 @@ protected:
 	unsigned int maxit;
 	unsigned int its;
 	Iteration iteration(Iteration old);
+	void solve();
 };
 
 #endif /* ALGORITHM_H_ */

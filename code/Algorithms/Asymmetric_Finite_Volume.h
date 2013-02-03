@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "../Structures/Grid.h"
 
 /*
 
@@ -67,7 +67,7 @@ class Asymmetric_Finite_Volume {
 				dv.push_back(m[x][y].value - m[x][y+1].value);
 				}
 				cells.push_back(m[x][y]);
-				double average = Average_value(cells);
+				double average = average_value(cells);
 				if(m[x][y].boundary == false)m[x][y].value = average;
 				DV = average - old_value;
 				if(abs(DV) > change)change = abs(DV);
@@ -123,6 +123,7 @@ class Asymmetric_Finite_Volume {
 		}
 		solution.set_values(n.it);
 		solution.set_coordinates(grid.get_coordinates());
+		solution.set_gradients(grid.get_gradients());
 		its = k;
 	}
 

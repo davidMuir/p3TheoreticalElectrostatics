@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "../Structures/Grid.h"
 
 using namespace std;
 
@@ -24,8 +24,8 @@ class Finite_Difference {
 		unsigned int n = mo.size();
 		unsigned int m = mo[0].size();
 		double change = 0;
-		for(int x = 1; x < n-1; x++) {
-			for(int y = 1; y < m-1; y++) {
+		for(unsigned int x = 1; x < n-1; x++) {
+			for(unsigned int y = 1; y < m-1; y++) {
 				if(mo[x][y].boundary == false)
 					{
 					newm[x][y].value = 

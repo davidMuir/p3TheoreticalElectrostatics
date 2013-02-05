@@ -11,16 +11,13 @@ int main() {
 	first_grid.set_flow(50, -50);
 	first_grid.set_circle_noflow(25,25,10,100);
 
-	Asymmetric_Finite_Volume fd;
-	fd.to_solve(first_grid);
+	Asymmetric_Finite_Volume fd (first_grid);
 	fd.set_precision(0.2);
 	fd.set_maxit(10000);
-	fd.solve();
 	Grid sol = fd.get_solution();
-	//cout << fd.number_of_iterations() << endl;
-	//	sol.gnuplot_values();
-	sol.efield();
-	sol.print_all_to("results.dat");
+	//cout << fd.get_iterations() << endl;
+	sol.print_gnuplot_values();
+	//sol.print_all_to("results.dat");
 	
 
 	return 0;

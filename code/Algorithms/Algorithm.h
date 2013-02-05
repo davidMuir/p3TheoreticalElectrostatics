@@ -9,6 +9,7 @@
 #define ALGORITHM_H_
 
 #include "../Structures/Grid.h"
+#include "../Utils/Utils.h"
 
 struct Iteration {
 

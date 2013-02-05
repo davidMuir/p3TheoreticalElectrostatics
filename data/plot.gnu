@@ -16,6 +16,6 @@ set cbrange [-50:50]
 set palette color
 set palette defined
 set term postscript
-set output '../plots/asym.ps'
+set output '../plots/newtest.ps'
 set view equal xy
-p 'volume.dat' matrix with image #, 'contour.dat' w l lt -1 lw 0.5
+p 'results_new.dat' matrix with image #, 'contour.dat' w l lt -1 lw 0.5

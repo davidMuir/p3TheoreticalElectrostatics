@@ -1,12 +1,12 @@
+#ifndef GRID_H_
+#define GRID_H_
+
 /*
  * Grid.h
  *
  *  Created on: 2 Feb 2013
  *      Author: david
  */
-
-#ifndef GRID_H_
-#define GRID_H_
 
 #include <cmath>
 #include <iostream>

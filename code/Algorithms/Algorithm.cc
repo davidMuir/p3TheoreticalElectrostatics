@@ -1,11 +1,11 @@
+#include "Algorithm.h"
+
 /*
  * Algorithm.cpp
  *
  *  Created on: 3 Feb 2013
  *      Author: david
  */
-
-#include "Algorithm.h"
 
 Algorithm::Algorithm(Grid entry) {
 	grid = entry;

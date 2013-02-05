@@ -1,0 +1,57 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+
+\begin{document}
+\thispagestyle{empty}
+\section*{Solving Laplace's Equation in two dimensions}
+We'll solve Laplace's Equation in polar coordinates for the scalar field $\Phi(r, \theta)$:
+\[ \left( r \Phi_r \right)_r + \frac{1}{r} \left(\Phi_\theta \right)_\theta = 0 \]
+Assuming we can separate variables such that $\Phi(r, \theta) = R(r)\Theta(\theta)$:
+\[ \Phi_r = R'\Theta, \Phi_\theta = R\Theta' \Rightarrow \]
+\[ (rR'\Theta)_r + \frac{1}{r}(R\Theta')_\theta = 0 \Leftrightarrow \]
+\[ R'\Theta + rR''\Theta + \frac{1}{r}R\Theta'' = 0 \Leftrightarrow \]
+\[ \frac{rR' + r^2 R''}{R} = \frac{- \Theta''}{\Theta} \Leftrightarrow \]
+\[ \frac{r(rR')'}{R} = \frac{- \Theta''}{\Theta} \]
+Set both sides equal to $\lambda^2$:
+\[ (1) \hspace{0.5cm} \frac{r(rR')'}{R} = \lambda^2, \hspace{1cm} (2) \hspace{0.5cm} \frac{- \Theta''}{\Theta} = \lambda^2 \]
+Solve the two differential equations separately, assuming at first that $\lambda \neq 0$. 
+For (1), use a solution of the form $R(r) = \gamma r^\alpha$:
+\[ R' = \gamma \alpha r^{\alpha - 1} \Rightarrow \]
+\[ \frac{r(r\gamma \alpha r^{\alpha - 1})'}{\gamma r^\alpha} = \lambda^2 \Leftrightarrow \]
+\[ \alpha^2 \frac{\gamma r r^{\alpha - 1}}{\gamma r^\alpha} = \lambda^2 \Leftrightarrow \]
+\[ \alpha^2 = \lambda^2 \Rightarrow \alpha = \pm \lambda \]
+For (2), we have $\Theta'' + \lambda^2 \Theta = 0$, so the general form of the solution is:
+\[ \Theta(\theta) = A \cos(\lambda \theta) + B \sin(\lambda \theta) \]
+Since $\Theta(0) = \Theta(2\pi)$ we know that $\lambda \in \mathbb{N}$ (or, more generally,
+that $\lambda \in \mathbb{Z}$ but due to the symmetry in $\cos$ and $\sin$ that information can be encoded into $A$ and $B$).
+When $\lambda = 0$ we can in both cases integrate to find the solutions:
+\[ (1) \hspace{0.5cm} R(r) = c_1 \ln r + c_2,\hspace{1cm} (2)\hspace{0.5cm} \Theta(\theta) = c_3 \theta + c_4 \]
+Since Laplace's Equation is linear, we can add the solutions together to get the general solution set:
+\[ \Phi(r, \theta) = R(r)\Theta(\theta)_{\lambda = 0} + R(r)\Theta(\theta)_{\lambda \in \mathbb{N}} = \]
+\[ (c_1 \ln r + c_2)(c_3 \theta + c_4) + \sum_{n \in \mathbb{N}} (\gamma_{1n} r^n + \gamma_{2n} r^{-n}) 
+\big[A \cos(n \theta) + B \sin(n \theta) \big] \]
+\newpage
+\thispagestyle{empty}
+\section*{Particular solution for infinite cylinder in \underline{E} field}
+We will add two different solutions together to find the total potential. Let the \underline{E} field be uniform in the x direction
+such that $\underline{E} = E_0 \hat{x}$. Since $\underline{E} = - \nabla \Phi$, $\Phi = -E_0 x = -E_0 r \cos\theta$, which is
+in the general solution set we defined above.
+Our first
+boundary condition is then:
+\[ \lim_{r \rightarrow \pm \infty} \Phi(r,\theta)_{total} = -E_0 r \cos\theta \]
+Next we want to find the field from the cylinder. Let the radius of the cylinder be $R$.
+The second boundary condition is that the potential on the surface of the cylinder must be constant,
+say $V_0$, so:
+\[ (3) \hspace{0.5cm} \Phi(R,\theta)_{total} = -E_0 R \cos\theta + \Phi(R,\theta)_{cylinder} = V_0 \]
+$\Phi(r,\theta)_{cylinder}$ must also be in the general solution set defined above. We need a constant so take $c_2 c_4$ from the first
+part of the general solution, but discard the
+$\ln r$ and $\theta$ terms to keep within the first boundary condition.
+From the second part we need to get an expression which lets us fulfill (3), so it is logical to take the $n = 1$ term which has $\cos\theta$:
+\[ \Phi(R,\theta)_{total} = -E_0 R \cos\theta +  c_2 c_4 + (\gamma_{11} R + \gamma_{21} R^{-1}) (A\cos\theta + B \sin\theta) = V_0 \]
+Now $B$ must be zero since the sin term would violate the symmetry about the x axis, and all that is left is to solve the following equation:
+\[ \Phi(R,\theta)_{total} = -E_0 R \cos\theta + c_2 c_4 + (\gamma_{11} R + \gamma_{21} R^{-1}) A\cos\theta = V_0 \Leftrightarrow \]
+\[ c_2 c_4 - V_0 + R \cos\theta \left( A\gamma_{11} - E_0 + \frac{A\gamma_{21}}{R^2} \right) = 0 \]
+Hence set $c_2 c_4 = V_0$, $\gamma_{11} = 0$, and $A\gamma_{21} = E_0 R^2$ to fulfill (3) and get the final solution:
+\[ \Phi(r,\theta)_{total} = V_0 + E_0 cos\theta \left( \frac{R^2}{r} - r \right) \]
+\end{document}

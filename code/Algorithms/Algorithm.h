@@ -1,10 +1,3 @@
-/*
- * Algorithm.h
- *
- *  Created on: 3 Feb 2013
- *      Author: david
- */
-
 #ifndef ALGORITHM_H_
 #define ALGORITHM_H_
 

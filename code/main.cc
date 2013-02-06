@@ -1,4 +1,5 @@
 #include "Algorithms/Asymmetric_Finite_Volume.h"
+//#include "Utils/gnuplot-iostream.h"
 
 using namespace std;
 
@@ -15,8 +16,9 @@ int main() {
 	fd.set_precision(0.2);
 	fd.set_maxit(10000);
 	Grid sol = fd.get_solution();
+	popen("gnuplot ../data/asym.gnu","r");
 	//cout << fd.get_iterations() << endl;
-	sol.print_gnuplot_values();
+//	sol.print_gnuplot_values();
 	//sol.print_all_to("results.dat");
 	
 

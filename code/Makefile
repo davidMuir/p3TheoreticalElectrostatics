@@ -1,11 +1,7 @@
 objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o
 CC = g++ -std=c++11
-					
-<<<<<<< HEAD
+
 all : $(objects)
-=======
-foo : $(objects)
->>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 	$(CC) -o foo $(objects)
 	
 main.o : main.cc ./Algorithms/Finite_Difference.h

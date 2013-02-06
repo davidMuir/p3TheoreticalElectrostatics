@@ -154,7 +154,6 @@ void Grid::set_gradients(grad_matrix grads) {
 
 //finds -ve gradient of each point in x and y direction. Equivalent to E_x and E_y. assumes increment =1.
 void Grid::efield() {
-<<<<<<< HEAD
 	double dx, dy;
 	for (int x = 0; x < gradients.size() - 1; x++) {
 		for (int y = 0; y < gradients.size() - 1; y++) {
@@ -162,7 +161,8 @@ void Grid::efield() {
 					- values[x + 1][y].value;
 			gradients[x][y].dy = values[x][y].value
 					- values[x][y + 1].value;
-=======
+		}
+	}
 	double dx1, dy1;
 	for (int x = 0; x < gradients.size() - 1; x++) {
 		for (int y = 0; y < gradients.size() - 1; y++) {
@@ -174,7 +174,6 @@ void Grid::efield() {
 			gradients[x][y].e_size=sqrt(dx1*dx1+dy1*dy1);
 			gradients[x][y].dx=dx1/gradients[x][y].e_size;
 			gradients[x][y].dy=dy1/gradients[x][y].e_size;
->>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 		}
 	}
 }
@@ -431,18 +430,11 @@ void Grid::print_all_to(string filename) {
 
 				outdata << x << "\t" << y << "\t" << gradients[x][y].dx
 						<< "\t" << gradients[x][y].dy << "\t"
-<<<<<<< HEAD
-=======
 					        << gradients[x][y].e_size << "\t" 
->>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 						<< values[x][y].value << endl;
 			}
 		}
 		outdata.close();
-<<<<<<< HEAD
-=======
-		
->>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 	}
 
 	else
@@ -450,8 +442,6 @@ void Grid::print_all_to(string filename) {
 
 }
 
-<<<<<<< HEAD
-=======
 void Grid::print_matrix_to(string filename) {
 	ofstream outdata;
 	outdata.open(filename.c_str());
@@ -473,7 +463,6 @@ void Grid::print_matrix_to(string filename) {
 
 
 
->>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 void Grid::print_points() {
 	cout << fixed;
 	cout << endl;

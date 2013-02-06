@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+/*
+ * Algorithm.h
+ *
+ *  Created on: 3 Feb 2013
+ *      Author: david
+ */
+
+>>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 #ifndef ALGORITHM_H_
 #define ALGORITHM_H_
 

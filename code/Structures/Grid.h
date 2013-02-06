@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 #ifndef GRID_H_
 #define GRID_H_
 
+=======
+>>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 /*
  * Grid.h
  *
@@ -8,6 +11,12 @@
  *      Author: david
  */
 
+<<<<<<< HEAD
+=======
+#ifndef GRID_H_
+#define GRID_H_
+
+>>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -25,6 +34,10 @@ struct Value {
 struct Grad {
 	double dx;
 	double dy;
+<<<<<<< HEAD
+=======
+        double e_size;
+>>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 };
 
 typedef std::vector<std::vector<Value> > matrix;
@@ -56,6 +69,10 @@ public:
 	void print_points();
 	void print_gnuplot_values();
 	void print_all_to(std::string filename);
+<<<<<<< HEAD
+=======
+	void print_matrix_to(std::string filename);
+>>>>>>> cd38be1918a97e584f159577f49088c2cf0819c7
 	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_circle(int x, int y, unsigned int r, double val);

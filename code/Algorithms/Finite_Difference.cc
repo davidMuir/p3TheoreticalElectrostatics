@@ -1,12 +1,6 @@
 #include "Finite_Difference.h"
 
-Finite_Difference::Finite_Difference(Grid entry) : Algorithm(entry)  {
-	grid = entry;
-	beta = std::abs(grid.get_coordinates()[0][0].get_x() - grid.get_coordinates()[1][0].get_x())/
-			std::abs(grid.get_coordinates()[0][0].get_y() - grid.get_coordinates()[0][1].get_y());
-	maxit = 5000;
-	precision = 1;
-}
+Finite_Difference::Finite_Difference(Grid entry) : Algorithm(entry)  {}
 
 Finite_Difference::~Finite_Difference() {}
 

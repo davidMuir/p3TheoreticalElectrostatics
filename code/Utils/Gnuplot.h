@@ -23,11 +23,14 @@ public:
 	void save_string(std::string output);
 	void sendString();
 	void read_file(std::string input);
+	void add_plot();
 
 private:
 	FILE *fp;
 	std::string str;
+	std::string data;
 	std::stringstream strStream;
+	std::stringstream datStream;
 
 };
 

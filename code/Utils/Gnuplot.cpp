@@ -8,8 +8,16 @@
 #include "Gnuplot.h"
 
 Gnuplot::Gnuplot(Grid entry) {
+	matrix vals = entry.get_values();
 	fp = popen(GNUPLOT, "w");
 	str = strStream.str();
+	for (unsigned int y = 0; y <= vals.size() - 1; y++) {
+		for (unsigned int x = 0; x < vals.size(); x++) {
+			 datStream << vals[x][y].value << "	";
+		}
+		datStream << "\n";
+	}
+	data = datStream.str();
 }
 
 Gnuplot::~Gnuplot() {
@@ -42,4 +50,8 @@ void Gnuplot::read_file(std::string input) {
 		add_command(line);
 	}
 	inStream.close();
+}
+
+void Gnuplot::add_plot() {
+	strStream << "\np '-' matrix with image #\n" << data;
 }

@@ -18,15 +18,15 @@ int main() {
 	Grid sol = fd.get_solution();
 	//cout << fd.get_iterations() << endl;
 	sol.efield();
-	sol.print_gnuplot_values();
-	sol.print_matrix_to("matrix_circle_fd.dat");
+//	sol.print_gnuplot_values();
+//	sol.print_matrix_to("matrix_circle_fd.dat");
 	sol.print_all_to("all_circle_fd.dat");
 
 	Gnuplot gp(sol);
 	gp.add_comment("testing comment");
 	gp.add_command("set term jpeg");
 	gp.add_command("set output 'test.jpg'");
-	gp.add_command("p 'matrix_circle_fd.dat' w l");
+	gp.add_plot();
 	gp.save_string("foo.gnu");
 	gp.sendString();
 

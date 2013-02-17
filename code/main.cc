@@ -1,5 +1,5 @@
 #include "Algorithms/Asymmetric_Finite_Volume.h"
-//#include "Utils/gnuplot-iostream.h"
+#include "Utils/Gnuplot.h"
 #include "Algorithms/Finite_Difference.h"
 
 using namespace std;
@@ -21,6 +21,18 @@ int main() {
 	sol.print_gnuplot_values();
 	sol.print_matrix_to("matrix_circle_fd.dat");
 	sol.print_all_to("all_circle_fd.dat");
+
+	Gnuplot gp(sol);
+	gp.add_comment("testing comment");
+	gp.add_command("set term jpeg");
+	gp.add_command("set output 'test.jpg'");
+	gp.add_command("p 'matrix_circle_fd.dat' w l");
+	gp.save_string("foo.gnu");
+	gp.sendString();
+
+	Gnuplot rf(sol);
+	rf.read_file("foo.gnu");
+	rf.save_string("bar.gnu");
 
 	return 0;
 

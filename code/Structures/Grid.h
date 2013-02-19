@@ -1,12 +1,12 @@
-#ifndef GRID_H_
-#define GRID_H_
-
 /*
  * Grid.h
  *
  *  Created on: 2 Feb 2013
  *      Author: david
  */
+
+#ifndef GRID_H_
+#define GRID_H_
 
 #include <cmath>
 #include <iostream>
@@ -28,6 +28,7 @@ struct Value {
 struct Grad {
 	double dx;
 	double dy;
+        double e_size;
 };
 
 typedef std::vector<std::vector<Value> > matrix;
@@ -59,6 +60,7 @@ public:
 	void print_points();
 	void print_gnuplot_values();
 	void print_all_to(std::string filename);
+	void print_matrix_to(std::string filename);
 	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_boundary_shape(int x, int y, int r, int z, double val, Shape shape);

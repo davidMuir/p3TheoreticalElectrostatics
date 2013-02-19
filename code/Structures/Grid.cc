@@ -167,6 +167,19 @@ void Grid::efield() {
 			gradients[x][y].dy=dy1/gradients[x][y].e_size;
 		}
 	}
+	double dx1, dy1;
+	for (int x = 0; x < gradients.size() - 1; x++) {
+		for (int y = 0; y < gradients.size() - 1; y++) {
+
+			dx1 = values[x][y].value
+					- values[x + 1][y].value;
+			dy1 = values[x][y].value
+					- values[x][y + 1].value;
+			gradients[x][y].e_size=sqrt(dx1*dx1+dy1*dy1);
+			gradients[x][y].dx=dx1/gradients[x][y].e_size;
+			gradients[x][y].dy=dy1/gradients[x][y].e_size;
+		}
+	}
 }
 
 

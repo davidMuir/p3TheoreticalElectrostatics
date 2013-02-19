@@ -1,7 +1,7 @@
-objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o
+objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
 CC = g++ -std=c++11
-					
-foo : $(objects)
+
+all : $(objects)
 	$(CC) -o foo $(objects)
 	
 main.o : main.cc ./Algorithms/Finite_Difference.h
@@ -18,6 +18,9 @@ main.o : main.cc ./Algorithms/Finite_Difference.h
 	
 ./Structures/Grid.o : ./Structures/Grid.h ./Structures/Grid.cc
 	cd ./Structures; $(CC) -c Grid.cc
+	
+./Utils/Gnuplot.o : ./Utils/Gnuplot.h ./Utils/Gnuplot.cpp
+	cd ./Utils/; $(CC) -c Gnuplot.cpp
 	
 clean :
 	rm foo $(objects)

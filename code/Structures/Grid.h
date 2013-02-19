@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * Grid.h
  *
@@ -6,8 +5,6 @@
  *      Author: david
  */
 
-=======
->>>>>>> 78b591d74860275455bd0cf338ba35d685a6175d
 #ifndef GRID_H_
 #define GRID_H_
 
@@ -31,11 +28,7 @@ struct Value {
 struct Grad {
 	double dx;
 	double dy;
-<<<<<<< HEAD
         double e_size;
-=======
-	double e_size;
->>>>>>> 78b591d74860275455bd0cf338ba35d685a6175d
 };
 
 typedef std::vector<std::vector<Value> > matrix;

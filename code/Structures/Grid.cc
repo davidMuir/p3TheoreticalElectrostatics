@@ -167,19 +167,6 @@ void Grid::efield() {
 			gradients[x][y].dy=dy1/gradients[x][y].e_size;
 		}
 	}
-	double dx1, dy1;
-	for (int x = 0; x < gradients.size() - 1; x++) {
-		for (int y = 0; y < gradients.size() - 1; y++) {
-
-			dx1 = values[x][y].value
-					- values[x + 1][y].value;
-			dy1 = values[x][y].value
-					- values[x][y + 1].value;
-			gradients[x][y].e_size=sqrt(dx1*dx1+dy1*dy1);
-			gradients[x][y].dx=dx1/gradients[x][y].e_size;
-			gradients[x][y].dy=dy1/gradients[x][y].e_size;
-		}
-	}
 }
 
 
@@ -422,8 +409,8 @@ void Grid::set_boundary_shape(int x, int y, int r, int z, double val, Shape shap
 //////
 //////
 
-Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
-	Grid grid(size_x,size_y);
+//Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
+//	Grid grid(size_x,size_y);
 	
 
 //void Grid::set_conductor(

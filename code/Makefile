@@ -1,5 +1,5 @@
-objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
-CC = g++ -std=c++11
+objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
+CC = g++ -std=c++11 -g 
 
 all : $(objects)
 	$(CC) -o foo $(objects)
@@ -10,9 +10,12 @@ main.o : main.cc ./Algorithms/Finite_Difference.h
 ./Algorithms/Finite_Difference.o : ./Algorithms/Finite_Difference.h ./Algorithms/Finite_Difference.cc
 	cd ./Algorithms; $(CC) -c Finite_Difference.cc
 
+./Algorithms/Fast_Finite_Difference.o : ./Algorithms/Fast_Finite_Difference.h ./Algorithms/Fast_Finite_Difference.cpp
+	cd ./Algorithms; $(CC) -c Fast_Finite_Difference.cpp
+
 ./Algorithms/Asymmetric_Finite_Volume.o : ./Algorithms/Asymmetric_Finite_Volume.h ./Algorithms/Asymmetric_Finite_Volume.cc
 	cd ./Algorithms; $(CC) -c Asymmetric_Finite_Volume.cc
-	
+
 ./Algorithms/Algorithm.o : ./Algorithms/Algorithm.h ./Algorithms/Algorithm.cc
 	cd ./Algorithms; $(CC) -c Algorithm.cc
 	

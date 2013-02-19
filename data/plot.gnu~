@@ -18,4 +18,4 @@ set palette defined
 set term postscript
 set output '../plots/newtest.ps'
 set view equal xy
-p 'newtest1.dat' matrix with image #, 'contour.dat' w l lt -1 lw 0.5
+p 'results_new.dat' matrix with image #, 'contour.dat' w l lt -1 lw 0.5

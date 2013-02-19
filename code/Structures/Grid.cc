@@ -86,7 +86,7 @@ void Grid::set_value(unsigned int x, unsigned int y, double val) {
 
 //Make a cell a boundary point without changing its value
 
-void Grid::set_boundary(unsigned int x, unsigned int y, bool bound) {
+void Grid::set_boundary_point(unsigned int x, unsigned int y, bool bound) {
 	if (x < values.size() && y < values[0].size())
 		values[x][y].boundary = bound;
 	else
@@ -179,7 +179,6 @@ void Grid::efield() {
 //Think of this as a simple way to create a uniform electric field (or liquid flow)
 //from left to right or the other way around
 
-
 //Create an inaccessible circle
 
 void Grid::set_circle_noflow(int x, int y, unsigned int r, double val) {
@@ -204,7 +203,14 @@ void Grid::set_circle_noflow(int x, int y, unsigned int r, double val) {
 
 //Create a circle with a constant value
 
-void Grid::set_circle(int x, int y, unsigned int r, double val) {
+void Grid::set_boundary_shape(int x, int y, int r, int z, double val, Shape shape) {
+
+	switch(shape) 
+	{
+
+	///CIRCLE
+	case circle:
+	{
 	if (x - r < 0 || x + r > values.size() - 1 || y - r < 0
 			|| y + r > values[0].size() - 1)
 		cout << "Out of range." << endl;
@@ -222,11 +228,12 @@ void Grid::set_circle(int x, int y, unsigned int r, double val) {
 			}
 		}
 	}
-}
+	break;
+	}
 
-//Same as above but semicircle pointed up etc.
-
-void Grid::set_halfcircle_north(int x, int y, unsigned int r, double val) {
+	//SEMICIRCLES
+	case semicircle_north:
+	{
 	if (x - r < 0 || x + r > values.size() - 1 || y < 0
 			|| y + r > values[0].size() - 1)
 		cout << "Out of range." << endl;
@@ -244,9 +251,11 @@ void Grid::set_halfcircle_north(int x, int y, unsigned int r, double val) {
 			}
 		}
 	}
-}
+	break;
+	}
 
-void Grid::set_halfcircle_south(int x, int y, unsigned int r, double val) {
+	case semicircle_south:
+	{
 	if (x - r < 0 || x + r > values.size() - 1 || y - r < 0
 			|| y > values[0].size() - 1)
 		cout << "Out of range." << endl;
@@ -264,9 +273,11 @@ void Grid::set_halfcircle_south(int x, int y, unsigned int r, double val) {
 			}
 		}
 	}
-}
+	break;
+	}
 
-void Grid::set_halfcircle_east(int x, int y, unsigned int r, double val) {
+	case semicircle_east:
+	{
 	if (x < 0 || x + r > values.size() - 1 || y - r < 0
 			|| y > values[0].size() - 1)
 		cout << "Out of range." << endl;
@@ -284,9 +295,11 @@ void Grid::set_halfcircle_east(int x, int y, unsigned int r, double val) {
 			}
 		}
 	}
-}
+	break;
+	}
 
-void Grid::set_halfcircle_west(int x, int y, unsigned int r, double val) {
+	case semicircle_west:
+	{
 	if (x - r < 0 || x > values.size() - 1 || y - r < 0
 			|| y > values[0].size() - 1)
 		cout << "Out of range." << endl;
@@ -304,10 +317,16 @@ void Grid::set_halfcircle_west(int x, int y, unsigned int r, double val) {
 			}
 		}
 	}
-}
+	break;
+	}
 
-//Sets a rectangle with lines at x1,x2,y1&y2
-void Grid::set_rectangle(int x1, int y1, int x2, int y2, double val) {
+	///RECTANGLE
+	case rectangle:
+	{
+	int x1 = x;
+	int x2 = y;
+	int y1 = r;
+	int y2 = z;
 	if (x1 > values.size() - 1 || x2 > values.size() - 1
 			|| y1 > values.size() - 1 || y2 > values.size() - 1)
 		cout << "Out of range." << endl;
@@ -319,11 +338,16 @@ void Grid::set_rectangle(int x1, int y1, int x2, int y2, double val) {
 			}
 		}
 	}
-}
-//Sets an isosceles triangle pointing up or down.
-// x1 & x2 are the x-coords of the corners on the horizontal base
-//y_base and y_tip y coords of base and tip
-void Grid::set_isosceles(int x1, int x2, int y_base, int y_tip, double val) {
+	break;
+	}
+
+	///TRIANGLE
+	case triangle:
+	{
+	int x1 = x;
+	int x2 = y;
+	int y_base = r;
+	int y_tip = z;
 	if (x1 > values.size() - 1 || x2 > values.size() - 1
 			|| y_base > values.size() - 1 || y_tip > values.size() - 1)
 		cout << "Out of range." << endl;
@@ -346,12 +370,14 @@ void Grid::set_isosceles(int x1, int x2, int y_base, int y_tip, double val) {
 			}
 		}
 	}
-}
+	break;
+	}
 
-//sets an ellipse with centre at x and y and rx and ry are distance
-//from centre to min & max x values and y values respectively
-void Grid::set_ellipse(int x, int y, unsigned int rx, unsigned int ry,
-		double val) {
+	///ELLIPSE
+	case ellipse:
+	{
+	int rx = r;
+	int ry = z;
 	if (x - rx < 0 || y - ry < 0 || x + rx > values.size() - 1
 			|| y + ry > values.size() - 1)
 		cout << "Out of range." << endl;
@@ -364,7 +390,11 @@ void Grid::set_ellipse(int x, int y, unsigned int rx, unsigned int ry,
 			}
 		}
 	}
+	break;
+	}
+	}///end of switch
 }
+
 //////
 //////
 //////
@@ -375,7 +405,11 @@ void Grid::set_ellipse(int x, int y, unsigned int rx, unsigned int ry,
 //////
 //////
 
+Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
+	Grid grid(size_x,size_y);
+	
 
+//void Grid::set_conductor(
 
 //Print ASCII table with MINIMAL formatting
 

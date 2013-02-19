@@ -15,6 +15,9 @@
 #include <fstream>
 #include "Coordinate.h"
 
+enum Shape {circle, semicircle_north, semicircle_south, semicircle_east,
+	semicircle_west, rectangle, triangle, ellipse, random_shape};
+
 //Data structures to be used for grid
 struct Value {
 	double value;
@@ -41,7 +44,7 @@ public:
 	//Getters and setters
 	void set_range(double x, double y);
 	void set_value(unsigned int x, unsigned int y, double val);
-	void set_boundary(unsigned int x, unsigned int y, bool bound);
+	void set_boundary_point(unsigned int x, unsigned int y, bool bound);
 	void set_boundary_value(unsigned int x, unsigned int y, double val);
 	void set_boundary_value_float(double xd, double yd, double val);
 	void set_flow(double left, double right);
@@ -58,14 +61,8 @@ public:
 	void print_all_to(std::string filename);
 	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
-	void set_circle(int x, int y, unsigned int r, double val);
-	void set_halfcircle_north(int x, int y, unsigned int r, double val);
-	void set_halfcircle_south(int x, int y, unsigned int r, double val);
-	void set_halfcircle_east(int x, int y, unsigned int r, double val);
-	void set_halfcircle_west(int x, int y, unsigned int r, double val);
-	void set_rectangle(int x1, int y1, int x2, int y2, double val);
-	void set_isosceles(int x1, int x2, int y_base, int y_tip, double val);
-	void set_ellipse(int x, int y, unsigned int rx, unsigned int ry,double val);
+	void set_boundary_shape(int x, int y, int r, int z, double val, Shape shape);
+
 	//Solving
 	void efield();
 private:

@@ -1,6 +1,7 @@
 #include "Algorithms/Asymmetric_Finite_Volume.h"
 #include "Utils/Gnuplot.h"
 #include "Algorithms/Finite_Difference.h"
+#include "Errors/Compare.h"
 
 using namespace std;
 
@@ -22,13 +23,17 @@ int main() {
 	//cout << fd.get_iterations() << endl;
 	sol.efield();
 
-	sol.print_gnuplot_values();
+	Grid comp = find_err(sol , first_grid);
+
+	comp.print_gnuplot_values();
+
+	//	sol.print_gnuplot_values();
 	sol.print_matrix_to("matrix_circle_fd.dat");
 	sol.print_all_to("all_circle_fd.dat");
 	
 //	sol.print_gnuplot_values();
 //	sol.print_matrix_to("matrix_circle_fd.dat");
-	sol.print_all_to("all_circle_fd.dat");
+//	sol.print_all_to("all_circle_fd.dat");
 
 	Gnuplot gp(sol);
 	gp.add_comment("testing comment");

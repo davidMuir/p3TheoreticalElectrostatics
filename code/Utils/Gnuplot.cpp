@@ -25,6 +25,7 @@ Gnuplot::~Gnuplot() {
 }
 
 void Gnuplot::sendString() {
+	str = strStream.str();
 	fprintf(fp,"%s",str.c_str());
 }
 

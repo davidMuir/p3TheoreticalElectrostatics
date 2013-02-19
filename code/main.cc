@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "Algorithms/Asymmetric_Finite_Volume.h"
 #include "Utils/Gnuplot.h"
 #include "Algorithms/Finite_Difference.h"
@@ -17,15 +16,6 @@ int main() {
 
 	Finite_Difference fd (first_grid);
 	fd.set_precision(0.00001);
-
-	first_grid.set_flow(100, -100);
-	first_grid.set_circle(50,50,20,0);
-
-	Finite_Difference fd (first_grid);
-	fd.set_precision(0.01);
-	first_grid.set_flow(50, -50);
-	first_grid.set_boundary_shape(25,25,10,0,0,circle);
-
 	fd.set_maxit(10000);
 
 	Grid sol = fd.get_solution();

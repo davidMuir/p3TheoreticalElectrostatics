@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Grid.h
  *
@@ -5,6 +6,8 @@
  *      Author: david
  */
 
+=======
+>>>>>>> 501855f1dfc3edfb83112f4a6e6b25a70badad85
 #ifndef GRID_H_
 #define GRID_H_
 

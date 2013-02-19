@@ -84,7 +84,7 @@ void Grid::set_value(unsigned int x, unsigned int y, double val) {
 
 //Make a cell a boundary point without changing its value
 
-void Grid::set_boundary_point(unsigned int x, unsigned int y, bool bound) {
+void Grid::set_boundary_value(unsigned int x, unsigned int y, bool bound) {
 	assert(x < values.size() && y < values[0].size() && "Outside of range");
 	values[x][y].boundary = bound;
 }

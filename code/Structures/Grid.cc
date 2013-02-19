@@ -78,29 +78,23 @@ void Grid::set_range(double x, double y) {
 //Set value of individual cell without making it a boundary point
 
 void Grid::set_value(unsigned int x, unsigned int y, double val) {
-	if (x < values.size() && y < values[0].size())
-		values[x][y].value = val;
-	else
-		cout << "Outside of range." << endl;
+	assert(x < values.size() && y < values[0].size() && "Outside of range");
+	values[x][y].value = val;
 }
 
 //Make a cell a boundary point without changing its value
 
 void Grid::set_boundary(unsigned int x, unsigned int y, bool bound) {
-	if (x < values.size() && y < values[0].size())
-		values[x][y].boundary = bound;
-	else
-		cout << "Outside of range." << endl;
+	assert(x < values.size() && y < values[0].size() && "Outside of range");
+	values[x][y].boundary = bound;
 }
 
 //Set both value and make boundary point (most commonly used I imagine)
 
 void Grid::set_boundary_value(unsigned int x, unsigned int y, double val) {
-	if (x < values.size() && y < values[0].size()) {
-		values[x][y].boundary = true;
-		values[x][y].value = val;
-	} else
-		cout << "Outside of range." << endl;
+	assert(x < values.size() && y < values[0].size() && "Outside of range");
+	values[x][y].boundary = true;
+	values[x][y].value = val;
 }
 
 //Same as above but accepts doubles (so if you for some reason want to define
@@ -109,11 +103,9 @@ void Grid::set_boundary_value(unsigned int x, unsigned int y, double val) {
 void Grid::set_boundary_value_float(double xd, double yd, double val) {
 	unsigned int x = round_own(abs(xd));
 	unsigned int y = round_own(abs(yd));
-	if (x < values.size() && y < values[0].size()) {
-		values[x][y].boundary = true;
-		values[x][y].value = val;
-	} else
-		cout << "Outside of range." << endl;
+	assert(x < values.size() && y < values[0].size() && "Outside of range");
+	values[x][y].boundary = true;
+	values[x][y].value = val;
 }
 
 void Grid::set_flow(double left, double right) {
@@ -430,7 +422,7 @@ void Grid::print_all_to(string filename) {
 
 				outdata << x << "\t" << y << "\t" << gradients[x][y].dx
 						<< "\t" << gradients[x][y].dy << "\t"
-					        << gradients[x][y].e_size << "\t" 
+						<< gradients[x][y].e_size << "\t"
 						<< values[x][y].value << endl;
 			}
 		}

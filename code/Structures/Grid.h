@@ -6,6 +6,7 @@
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include <assert.h>
 #include "Coordinate.h"
 
 //Data structures to be used for grid

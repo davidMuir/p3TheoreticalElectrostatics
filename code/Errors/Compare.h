@@ -63,7 +63,7 @@ Grid find_err(Grid grid1, Grid grid2){
 	for(int ys=0; ys<m1[0].size(); ys++){
 	  double val_1 = m1[xs][ys].value;
 	  double val_2 = m2[xs][ys].value;
-	  err_grid.set_value(xs,ys,val_1-val_2);
+	  err_grid.set_value(xs,ys,abs(val_1-val_2));
 	}
       }
        

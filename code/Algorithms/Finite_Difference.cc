@@ -47,6 +47,10 @@ void Finite_Difference::solve() {
 	its = k;
 }
 
+unsigned int Finite_Difference::get_iterations() {
+	return its;
+}
+
 Grid Finite_Difference::get_solution() {
 	Finite_Difference::solve();
 	return solution;

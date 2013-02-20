@@ -125,6 +125,11 @@ void Grid::set_flow(double left, double right) {
 		values[x][values[0].size() - 1].value = left + x * gradient;
 		values[x][values[0].size() - 1].boundary = true;
 	}
+	for (int y = 1; y < values[0].size() - 1; y++) {
+		for (int x = 1; x < values.size() - 1; x++) {
+			values[x][y].value = left + x * gradient;
+		}
+	}
 }
 
 coordinate_matrix Grid::get_coordinates() {
@@ -534,8 +539,6 @@ void Grid::set_circle_noflow(int x, int y, unsigned int r, double val) {
 	}
 }
 
-//Create a circle with a constant value
-
 void Grid::set_boundary_shape(int x, int y, int r, int z, double val,
 		Shape shape) {
 
@@ -730,8 +733,11 @@ void Grid::set_boundary_shape(int x, int y, int r, int z, double val,
 //////
 //////
 
-//Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
-//	Grid grid(size_x,size_y);
+Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
+	Grid grid(size_x,size_y);
+	grid.set_boundary_shape(x,y,dx,dy, 100, shape);
+	return grid;
+}
 
 //void Grid::set_conductor(
 

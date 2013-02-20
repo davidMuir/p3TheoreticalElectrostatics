@@ -33,6 +33,25 @@ int main() {
 	fd2.set_precision(0.00001);
 	fd2.set_maxit(10000);
 
+	//Grid shape = first_grid.get_boundary_grid(50,50,25,25,10,0,circle);
+	
+//	sol.print_gnuplot_values();
+//	sol.print_matrix_to("matrix_circle_fd.dat");
+
+	/*
+	Gnuplot gp(first_grid);
+	gp.add_comment("testing comment");
+	gp.add_command("set term jpeg");
+	gp.add_command("set output 'test.jpg'");
+	gp.add_command("set xrange [0:100]");
+	gp.add_command("set yrange [0:100]");
+	gp.add_command("unset key");
+	gp.add_command("set cbrange [-50:50]");
+	gp.add_command("set palette color");
+	gp.add_command("set palette defined");
+	gp.add_plot();
+	gp.sendString();
+	*/
 
 	std::cout << "Alg 1\n";
 	std::clock_t a = std::clock();
@@ -42,23 +61,24 @@ int main() {
 	Grid sol_fd2 = fd2.get_solution();
 	std::clock_t c = std::clock();
 	std::cout << "Old: " << (b-a) << " New: " << (c-b) << std::endl;
-	std::cout << fd2.get_iterations() << std::endl;
+	std::cout << fd.get_iterations() << " vs " << fd2.get_iterations() << std::endl;
 //	sol_fd.efield();
 
 //	Asymmetric_Finite_Volume fv(first_grid);
 //	Grid sol_fv = fv.get_solution();
 
 	Grid comp_fd = find_err(analytic , sol_fd);
-	comp_fd.print_matrix_to("fd_err.dat");
+	//comp_fd.print_matrix_to("fd_err.dat");
 	cout << "average error in finite diff " << average_grid(comp_fd) << endl;
 	Fast_Finite_Difference ffd(first_grid);
 	ffd.set_precision(0.00001);
 	ffd.set_maxit(10000);
 	Grid sol_ffd = ffd.get_solution();
 	Grid comp_ffd = find_err(analytic, sol_ffd);
-	comp_ffd.print_matrix_to("ffd_err.dat");
+	//comp_ffd.print_matrix_to("ffd_err.dat");
 	cout << "average error fast fd " << average_grid(comp_ffd) << endl;
 
+	/*
 	Asymmetric_Finite_Volume fv(first_grid);
 	fv.set_precision(0.00001);
 	fv.set_maxit(10000);
@@ -68,6 +88,7 @@ int main() {
 
 
 	cout << "average error finite vol " << average_grid(comp_fv) << endl;
+	*/
 	
 	return 0;
 

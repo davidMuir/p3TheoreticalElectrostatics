@@ -18,33 +18,24 @@ int main() {
 	fd.set_precision(0.00001);
 	fd.set_maxit(10000);
 
-	Grid sol = fd.get_solution();
-	//cout << fd.get_iterations() << endl;
-	sol.efield();
-
-	sol.print_gnuplot_values();
-	sol.print_matrix_to("matrix_circle_fd.dat");
-	sol.print_all_to("all_circle_fd.dat");
+	Grid shape = first_grid.get_boundary_grid(50,50,25,25,10,0,circle);
 	
 //	sol.print_gnuplot_values();
 //	sol.print_matrix_to("matrix_circle_fd.dat");
-	sol.print_all_to("all_circle_fd.dat");
 
-	Gnuplot gp(sol);
+	Gnuplot gp(shape);
 	gp.add_comment("testing comment");
 	gp.add_command("set term jpeg");
 	gp.add_command("set output 'test.jpg'");
+	gp.add_command("set xrange [0:50]");
+	gp.add_command("set yrange [0:50]");
+	gp.add_command("unset key");
+	gp.add_command("set cbrange [-50:50]");
+	gp.add_command("set palette color");
+	gp.add_command("set palette defined");
 	gp.add_plot();
 	gp.save_string("foo.gnu");
 	gp.sendString();
-
-	Gnuplot rf(sol);
-	rf.read_file("foo.gnu");
-	rf.save_string("bar.gnu");
-
-	sol.print_gnuplot_values();
-	sol.print_matrix_to("matrix_circle_fd.dat");
-	sol.print_all_to("all_circle_fd.dat");
 	
 	return 0;
 

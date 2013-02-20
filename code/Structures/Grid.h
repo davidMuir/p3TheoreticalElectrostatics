@@ -65,7 +65,7 @@ public:
 	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_boundary_shape(int x, int y, int r, int z, double val, Shape shape);
-
+	Grid get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape);
 	//Solving
 	void efield();
 private:

@@ -17,12 +17,12 @@ void Fast_Finite_Difference::solve(){
 	matrix *current, *alternate, *temp;
 	current = &one;
 	alternate = &two;
-	double error = 1000;
+	bool error = 1;
 	double betaSq = beta*beta;
 	double divisor = 2*(1+betaSq);
 	int n = current->size()-1;
 	int m = (*current)[0].size()-1;
-	for (its = 0;error > precision && its < maxit;its++) {
+	for (its = 0;error && its < maxit;its++) {
 		error = 0;
 		temp = current;
 		current = alternate;
@@ -33,8 +33,8 @@ void Fast_Finite_Difference::solve(){
 					(*alternate)[x][y].value = (
 							(*current)[x-1][y].value + (*current)[x+1][y].value +
 							betaSq*((*current)[x][y-1].value + (*current)[x][y+1].value))/divisor;
-					if (std::abs((*alternate)[x][y].value - (*current)[x][y].value) > error)
-						error = std::abs((*alternate)[x][y].value-(*current)[x][y].value);
+					if (!error)
+						error = std::abs((*alternate)[x][y].value - (*current)[x][y].value) > precision;
 				}
 			}
 		}

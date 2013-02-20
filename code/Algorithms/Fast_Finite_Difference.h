@@ -9,8 +9,6 @@
 #define FAST_FINITE_DIFFERENCE_H_
 
 #include "Algorithm.h"
-#include <thread>
-#include <atomic>
 
 #define THREADS std::thread::hardware_concurrency()
 
@@ -20,7 +18,7 @@ public:
 	Fast_Finite_Difference(Grid entry);
 	virtual ~Fast_Finite_Difference();
 	Grid get_solution();
-	int get_iterations();
+//	int get_iterations();
 private:
 	void solve();
 };

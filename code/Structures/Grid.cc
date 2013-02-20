@@ -8,7 +8,8 @@ int Grid::round_own(double a) {
 	return int(a + 0.5);
 }
 
-Grid::Grid() : Grid::Grid(50, 50) {
+Grid::Grid() :
+		Grid::Grid(50, 50) {
 }
 
 Grid::Grid(unsigned int x, unsigned int y) {
@@ -164,9 +165,11 @@ void Grid::efield() {
 // small function that compares two Value type variables (.value and .flag). returns 1 if they are equal
 
 bool Grid::compare(Value nn, Value mm) {
-	if (nn.value==mm.value && nn.flag==mm.flag )  { return 1;}
-	else return 0;
-		}
+	if (nn.value == mm.value && nn.flag == mm.flag) {
+		return 1;
+	} else
+		return 0;
+}
 
 // calculates equip.lines. n - number of eq.lines you need. xmax, ymax, Emax - obvious. line_width: for ex, if line-width
 // is set to 2, it means it will have width of 2 points. ( if line_width = 1 and grid is 50x50, the lines will be very wide,
@@ -176,14 +179,15 @@ bool Grid::compare(Value nn, Value mm) {
 // 3 - plots eq.lines with different values, and an object of 2*Emax value
 // 4 - plots only eq.lines with different values
 
-void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu) {
+void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
+		int menu) {
 
-	double dx=(double) xmax/(n-1);
+	double dx = (double) xmax / (n - 1);
 
-	for (double ii=0; ii<=xmax; ii=ii+dx) {
+	for (double ii = 0; ii <= xmax; ii = ii + dx) {
 		int i = round_own(ii);
-		int xi=i;
-		int yi=0;
+		int xi = i;
+		int yi = 0;
 		Value prev_prev;
 		prev_prev.value = 999.999;
 		prev_prev.flag = 1;
@@ -193,127 +197,200 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width, 
 		Value current = values[xi][yi];
 		double eq_val = values[xi][yi].value;
 		double diff_left = 100;
-		if (xi != 0) { diff_left = abs( values[xi-1][yi].value - eq_val);}
+		if (xi != 0) {
+			diff_left = abs(values[xi - 1][yi].value - eq_val);
+		}
 		double diff_right = 100;
-		if (xi != xmax) {diff_right = abs( values[xi+1][yi].value - eq_val);}
-		double diff_up = abs( values[xi][yi+1].value - eq_val);
+		if (xi != xmax) {
+			diff_right = abs(values[xi + 1][yi].value - eq_val);
+		}
+		double diff_up = abs(values[xi][yi + 1].value - eq_val);
 		values[xi][yi].flag = 1;
 
-		if (diff_up <= diff_right && diff_up <= diff_left) { check_and_mark_cells(xi,yi,0,1,prev_prev,prev,current);}
-		else if (diff_right <= diff_left) { check_and_mark_cells(xi,yi,1,0,prev_prev,prev,current);}
-		else { check_and_mark_cells(xi,yi,-1,0,prev_prev,prev,current);}
+		if (diff_up <= diff_right && diff_up <= diff_left) {
+			check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev, current);
+		} else if (diff_right <= diff_left) {
+			check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev, current);
+		} else {
+			check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev, current);
+		}
 
-		for(;;) {
+		for (;;) {
 
-			if ( xi==xmax || (compare(prev, values[xi+1][yi]) || (compare(prev,values[xi][yi-1]) && compare(prev_prev,values[xi+1][yi-1]) ) ) )
-				{
-				diff_left = abs( values[xi-1][yi].value - eq_val);
-				diff_up = abs (values[xi][yi+1].value - eq_val);
-				if (diff_up <= diff_left) {check_and_mark_cells(xi,yi,0,1,prev_prev,prev,current);}
-				else { check_and_mark_cells(xi,yi,-1,0,prev_prev,prev,current);}
+			if (xi == xmax
+					|| (compare(prev, values[xi + 1][yi])
+							|| (compare(prev, values[xi][yi - 1])
+									&& compare(prev_prev,
+											values[xi + 1][yi - 1])))) {
+				diff_left = abs(values[xi - 1][yi].value - eq_val);
+				diff_up = abs(values[xi][yi + 1].value - eq_val);
+				if (diff_up <= diff_left) {
+					check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev,
+							current);
+				} else {
+					check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
+							current);
 				}
+			}
 
-			else if (xi == 0 || (compare(prev, values[xi-1][yi]) || (compare(prev,values[xi][yi-1]) && compare(prev_prev,values[xi-1][yi-1] ) ) ) )
-				{
-				diff_right = abs( values[xi+1][yi].value - eq_val);
-				diff_up = abs (values[xi][yi+1].value - eq_val);
-				if (diff_up <= diff_right) { check_and_mark_cells(xi,yi,0,1,prev_prev,prev,current);}
-				else 	{ check_and_mark_cells(xi,yi,1,0,prev_prev,prev,current);}
+			else if (xi == 0
+					|| (compare(prev, values[xi - 1][yi])
+							|| (compare(prev, values[xi][yi - 1])
+									&& compare(prev_prev,
+											values[xi - 1][yi - 1])))) {
+				diff_right = abs(values[xi + 1][yi].value - eq_val);
+				diff_up = abs(values[xi][yi + 1].value - eq_val);
+				if (diff_up <= diff_right) {
+					check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev,
+							current);
+				} else {
+					check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev,
+							current);
 				}
-			else
-				{
-				diff_left = abs( values[xi-1][yi].value - eq_val);
-				diff_right = abs( values[xi+1][yi].value - eq_val);
-				diff_up = abs (values[xi][yi+1].value - eq_val);
+			} else {
+				diff_left = abs(values[xi - 1][yi].value - eq_val);
+				diff_right = abs(values[xi + 1][yi].value - eq_val);
+				diff_up = abs(values[xi][yi + 1].value - eq_val);
 
-				if ((diff_up <= diff_right) && (diff_up <= diff_left)){check_and_mark_cells(xi,yi,0,1,prev_prev,prev,current);}
-				else if (diff_right <= diff_left) { check_and_mark_cells(xi,yi,1,0,prev_prev,prev,current);}
-				else { check_and_mark_cells(xi,yi,-1,0,prev_prev,prev,current);}
+				if ((diff_up <= diff_right) && (diff_up <= diff_left)) {
+					check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev,
+							current);
+				} else if (diff_right <= diff_left) {
+					check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev,
+							current);
+				} else {
+					check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
+							current);
 				}
+			}
 
-
-
-
-			if (yi>=ymax || xi<0 || xi>xmax) {break;}
+			if (yi >= ymax || xi < 0 || xi > xmax) {
+				break;
+			}
 
 // extra code for case if the eq. line goes through the figure
 
-		if (xi != 0 && xi != xmax && yi != 0 && yi != ymax && values[xi][yi].boundary == 1 )
-		{
-			int i = round_own(ii);
-			int xi=i;
-			int yi=ymax;
-			Value prev_prev;
-			prev_prev.value = 999.999;
-			prev_prev.flag = 1;
-			Value prev;
-			prev.value = 999.998;
-			prev.flag = 1;
-			Value current = values[xi][yi];
-			double eq_val = values[xi][yi].value;
-			double diff_left = 100;
-			if (xi != 0) {abs( values[xi+1][yi].value - eq_val);}
-			double diff_right = 100;
-			if (xi != xmax) {abs( values[xi-1][yi].value - eq_val);}
-			double diff_up = abs( values[xi][yi-1].value - eq_val);
-			values[xi][yi].flag = 1;
+			if (xi != 0 && xi != xmax && yi != 0 && yi != ymax
+					&& values[xi][yi].boundary == 1) {
+				int i = round_own(ii);
+				int xi = i;
+				int yi = ymax;
+				Value prev_prev;
+				prev_prev.value = 999.999;
+				prev_prev.flag = 1;
+				Value prev;
+				prev.value = 999.998;
+				prev.flag = 1;
+				Value current = values[xi][yi];
+				double eq_val = values[xi][yi].value;
+				double diff_left = 100;
+				if (xi != 0) {
+					abs(values[xi + 1][yi].value - eq_val);
+				}
+				double diff_right = 100;
+				if (xi != xmax) {
+					abs(values[xi - 1][yi].value - eq_val);
+				}
+				double diff_up = abs(values[xi][yi - 1].value - eq_val);
+				values[xi][yi].flag = 1;
 
+				if (diff_up <= diff_right && diff_up <= diff_left) {
+					check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
+							current);
+				} else if (diff_right <= diff_left) {
+					check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
+							current);
+				} else {
+					check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,
+							current);
+				}
 
+				for (;;) {
 
-			if (diff_up <= diff_right && diff_up <= diff_left) { check_and_mark_cells(xi,yi,0,-1,prev_prev,prev,current);}
-			else if (diff_right <= diff_left) { check_and_mark_cells(xi,yi,-1,0,prev_prev,prev,current);}
-			else { check_and_mark_cells(xi,yi,+1,0,prev_prev,prev,current);}
+					if (xi == 0
+							|| (compare(prev, values[xi - 1][yi])
+									|| (compare(prev, values[xi][yi + 1])
+											&& compare(prev_prev,
+													values[xi - 1][yi + 1])))) {
+						diff_left = abs(values[xi + 1][yi].value - eq_val);
+						diff_up = abs(values[xi][yi - 1].value - eq_val);
+						if (diff_up <= diff_left) {
+							check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
+									current);
+						}
 
-			for(;;) {
-
-				if ( xi==0 || (compare(prev, values[xi-1][yi]) || (compare(prev,values[xi][yi+1]) && compare(prev_prev,values[xi-1][yi+1]) ) ) )
-					{
-					diff_left = abs( values[xi+1][yi].value - eq_val);
-					diff_up = abs (values[xi][yi-1].value - eq_val);
-					if (diff_up <= diff_left) { check_and_mark_cells(xi,yi,0,-1,prev_prev,prev,current);}
-
-					else 	{ check_and_mark_cells(xi,yi,+1,0,prev_prev,prev,current);}
+						else {
+							check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,
+									current);
+						}
 					}
 
-				else if (xi == xmax || (compare(prev, values[xi+1][yi]) || (compare(prev,values[xi][yi+1]) && compare(prev_prev,values[xi+1][yi+1] ) ) ) )
-					{
-					diff_right = abs( values[xi-1][yi].value - eq_val);
-					diff_up = abs (values[xi][yi-1].value - eq_val);
-					if (diff_up <= diff_right) { check_and_mark_cells(xi,yi,0,-1,prev_prev,prev,current);}
+					else if (xi == xmax
+							|| (compare(prev, values[xi + 1][yi])
+									|| (compare(prev, values[xi][yi + 1])
+											&& compare(prev_prev,
+													values[xi + 1][yi + 1])))) {
+						diff_right = abs(values[xi - 1][yi].value - eq_val);
+						diff_up = abs(values[xi][yi - 1].value - eq_val);
+						if (diff_up <= diff_right) {
+							check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
+									current);
+						}
 
-					else 	{ check_and_mark_cells(xi,yi,-1,0,prev_prev,prev,current);}
+						else {
+							check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
+									current);
+						}
+					} else {
+						diff_left = abs(values[xi + 1][yi].value - eq_val);
+						diff_right = abs(values[xi - 1][yi].value - eq_val);
+						diff_up = abs(values[xi][yi - 1].value - eq_val);
+
+						if ((diff_up <= diff_right) && (diff_up <= diff_left)) {
+							check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
+									current);
+						}
+
+						else if (diff_right <= diff_left) {
+							check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
+									current);
+						} else {
+							check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,
+									current);
+						}
 					}
-				else
-					{
-					diff_left = abs( values[xi+1][yi].value - eq_val);
-					diff_right = abs( values[xi-1][yi].value - eq_val);
-					diff_up = abs (values[xi][yi-1].value - eq_val);
-
-					if ((diff_up <= diff_right) && (diff_up <= diff_left)){ check_and_mark_cells(xi,yi,0,-1,prev_prev,prev,current);}
-
-					else if (diff_right <= diff_left) { check_and_mark_cells(xi,yi,-1,0,prev_prev,prev,current);}
-					else { check_and_mark_cells(xi,yi,+1,0,prev_prev,prev,current);}
+					if (xi != 0 && xi != xmax && yi != 0 && yi != ymax
+							&& values[xi][yi].boundary == 1) {
+						break;
+					} else if (yi <= 0 || xi < 0 || xi > xmax) {
+						break;
 					}
-				if (xi != 0 && xi != xmax && yi != 0 && yi != ymax && values[xi][yi].boundary == 1 ) {break;}
-				else if (yi<=0 || xi<0 || xi>xmax) {break;}
+				}
+
+				break;
 			}
-
-		break;
 		}
 	}
-}
 
 // Makes the line wider if line_width is set to be 2 or higher.
 
-	if (  line_width >= 2 ) {
-		for (int xs=0; xs < values.size(); xs++) {
-			for (int ys=0; ys < values[0].size(); ys++) {
-				if ( values[xs][ys].flag == 1 ) {
-					int iii=1;
-					int kkk=1;
-					for (int i=1; i <= line_width-1; ++i) {
-						if (iii % 2 == 1 || xs==0) { if (xs+kkk <= xmax) {values[xs+kkk][ys].flag = 2;} }
-						else if ( iii % 2 == 0 || xs==xmax ) { if (xs-kkk >= 0) {values[xs-kkk][ys].flag = 2; ++kkk;} }
+	if (line_width >= 2) {
+		for (int xs = 0; xs < values.size(); xs++) {
+			for (int ys = 0; ys < values[0].size(); ys++) {
+				if (values[xs][ys].flag == 1) {
+					int iii = 1;
+					int kkk = 1;
+					for (int i = 1; i <= line_width - 1; ++i) {
+						if (iii % 2 == 1 || xs == 0) {
+							if (xs + kkk <= xmax) {
+								values[xs + kkk][ys].flag = 2;
+							}
+						} else if (iii % 2 == 0 || xs == xmax) {
+							if (xs - kkk >= 0) {
+								values[xs - kkk][ys].flag = 2;
+								++kkk;
+							}
+						}
 						++iii;
 					}
 				}
@@ -323,65 +400,104 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width, 
 
 // This part of the code outputs the values for each point depending on value of "menu" set by user
 
-	if ( menu == 1) {
+	if (menu == 1) {
 
-		for (int xs=0; xs < values.size(); xs++) {
-			for (int ys=0; ys < values[0].size(); ys++) {
-				if (values[xs][ys].boundary == 1) {values[xs][ys].value = 1;}
-				else if ( (values[xs][ys].flag == 1 || values[xs][ys].flag == 2) ) { values[xs][ys].value = 2;}
-				else {values[xs][ys].value = 0;}
-				if ( (xs==0 || ys==0 || xs== values.size()-1 || ys == values[0].size()-1) && (values[xs][ys].flag == 0) ) { values[xs][ys].value = 0;}
-				else if ( (xs==0 || ys==0 || xs== values.size()-1 || ys == values[0].size()-1) && (values[xs][ys].flag == 1 || values[xs][ys].flag == 2) ) { values[xs][ys].value = 2;}
+		for (int xs = 0; xs < values.size(); xs++) {
+			for (int ys = 0; ys < values[0].size(); ys++) {
+				if (values[xs][ys].boundary == 1) {
+					values[xs][ys].value = 1;
+				} else if ((values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+					values[xs][ys].value = 2;
+				} else {
+					values[xs][ys].value = 0;
+				}
+				if ((xs == 0 || ys == 0 || xs == values.size() - 1
+						|| ys == values[0].size() - 1)
+						&& (values[xs][ys].flag == 0)) {
+					values[xs][ys].value = 0;
+				} else if ((xs == 0 || ys == 0 || xs == values.size() - 1
+						|| ys == values[0].size() - 1)
+						&& (values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+					values[xs][ys].value = 2;
+				}
 			}
 		}
 	}
 
-	else if ( menu == 2) {
+	else if (menu == 2) {
 
-		for (int xs=0; xs < values.size(); xs++) {
-			for (int ys=0; ys < values[0].size(); ys++) {
-				if (values[xs][ys].boundary == 1) {values[xs][ys].value = 1;}
-				else if ( (values[xs][ys].flag == 1 || values[xs][ys].flag == 2) ) { values[xs][ys].value = 1;}
-				else {values[xs][ys].value = 0;}
-				if ( (xs==0 || ys==0 || xs== values.size()-1 || ys == values[0].size()-1) && (values[xs][ys].flag == 0) ) { values[xs][ys].value = 0;}
-				else if ( (xs==0 || ys==0 || xs== values.size()-1 || ys == values[0].size()-1) && (values[xs][ys].flag == 1 || values[xs][ys].flag == 2) ) { values[xs][ys].value = 1;}
+		for (int xs = 0; xs < values.size(); xs++) {
+			for (int ys = 0; ys < values[0].size(); ys++) {
+				if (values[xs][ys].boundary == 1) {
+					values[xs][ys].value = 1;
+				} else if ((values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+					values[xs][ys].value = 1;
+				} else {
+					values[xs][ys].value = 0;
+				}
+				if ((xs == 0 || ys == 0 || xs == values.size() - 1
+						|| ys == values[0].size() - 1)
+						&& (values[xs][ys].flag == 0)) {
+					values[xs][ys].value = 0;
+				} else if ((xs == 0 || ys == 0 || xs == values.size() - 1
+						|| ys == values[0].size() - 1)
+						&& (values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+					values[xs][ys].value = 1;
+				}
 			}
 		}
 	}
 
-	else if ( menu == 3) {
+	else if (menu == 3) {
 
-		for (int xs=0; xs < values.size(); xs++) {
-			for (int ys=0; ys < values[0].size(); ys++) {
-				if (xs!=0 && ys!=0 && xs!= values.size()-1 && ys != values[0].size()-1 && values[xs][ys].boundary == 1) {values[xs][ys].value = 2*Emax;}
-				else if ( (values[xs][ys].flag != 1 && values[xs][ys].flag != 2) ) { values[xs][ys].value = (-2)*Emax;}
-				if ( (xs==0 || ys==0 || xs== values.size()-1 || ys == values[0].size()-1) && (values[xs][ys].flag == 0) ) { values[xs][ys].value = (-2)*Emax;}
+		for (int xs = 0; xs < values.size(); xs++) {
+			for (int ys = 0; ys < values[0].size(); ys++) {
+				if (xs != 0 && ys != 0 && xs != values.size() - 1
+						&& ys != values[0].size() - 1
+						&& values[xs][ys].boundary == 1) {
+					values[xs][ys].value = 2 * Emax;
+				} else if ((values[xs][ys].flag != 1 && values[xs][ys].flag != 2)) {
+					values[xs][ys].value = (-2) * Emax;
+				}
+				if ((xs == 0 || ys == 0 || xs == values.size() - 1
+						|| ys == values[0].size() - 1)
+						&& (values[xs][ys].flag == 0)) {
+					values[xs][ys].value = (-2) * Emax;
+				}
 			}
 		}
 	}
 
-	else if ( menu == 4) {
+	else if (menu == 4) {
 
-		for (int xs=0; xs < values.size(); xs++) {
-			for (int ys=0; ys < values[0].size(); ys++) {
-				if ( (values[xs][ys].flag != 1 && values[xs][ys].flag != 2) && ((xs!=0 && ys!=0 && xs!= values.size()-1 && ys != values[0].size()-1) && (values[xs][ys].boundary != 1)) ) { values[xs][ys].value = (-2)*Emax;}
-				if ( (xs==0 || ys==0 || xs== values.size()-1 || ys == values[0].size()-1) && (values[xs][ys].flag == 0) ) { values[xs][ys].value = (-2)*Emax;}
+		for (int xs = 0; xs < values.size(); xs++) {
+			for (int ys = 0; ys < values[0].size(); ys++) {
+				if ((values[xs][ys].flag != 1 && values[xs][ys].flag != 2)
+						&& ((xs != 0 && ys != 0 && xs != values.size() - 1
+								&& ys != values[0].size() - 1)
+								&& (values[xs][ys].boundary != 1))) {
+					values[xs][ys].value = (-2) * Emax;
+				}
+				if ((xs == 0 || ys == 0 || xs == values.size() - 1
+						|| ys == values[0].size() - 1)
+						&& (values[xs][ys].flag == 0)) {
+					values[xs][ys].value = (-2) * Emax;
+				}
 			}
 		}
 	}
 
 }
 
-void Grid::check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2)
-	{
-	xa=xa+deltax;
-	ya=ya+deltay;
+void Grid::check_and_mark_cells(int &xa, int &ya, int deltax, int deltay,
+		Value &prev_prev2, Value &prev2, Value &current2) {
+	xa = xa + deltax;
+	ya = ya + deltay;
 	values[xa][ya].flag = 1;
 	prev_prev2 = prev2;
 	prev2 = current2;
 	current2 = values[xa][ya];
-	}
-
+}
 
 //////
 //////

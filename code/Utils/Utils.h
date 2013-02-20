@@ -37,4 +37,17 @@ inline double average_value(vector<double> vec) {
 	return total / vec.size();
 }
 
+inline double average_grid(Grid entry){
+  matrix mat = entry.get_values();
+  double total = 0;
+  for (int i = 0; i< mat.size(); i++){
+    for (int j = 0; j< mat[0].size(); j++){
+      total += mat[i][j].value;
+    }
+  }
+  return total / (mat.size()*mat[0].size());
+}
+
+
+
 #endif /* UTILS_H_ */

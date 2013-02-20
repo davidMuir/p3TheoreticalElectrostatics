@@ -24,6 +24,7 @@ struct Value {
 	double value;
 	bool boundary;
 	bool accessible;
+	int flag;
 };
 
 struct Grad {
@@ -53,6 +54,7 @@ public:
 	void set_coordinates(coordinate_matrix coords);
 	void set_values(matrix vals);
 	void set_gradients(grad_matrix grads);
+	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);
 	coordinate_matrix get_coordinates();
 	matrix get_values();
 	grad_matrix get_gradients();
@@ -75,6 +77,8 @@ private:
 	matrix values;
 	//private functions
 	int round_own(double a);
+	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2);
+	bool compare(Value nn, Value mm);
 
 };
 

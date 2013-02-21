@@ -1,5 +1,5 @@
 objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
-CC = g++ -std=c++11 -pg
+CC = g++ -std=c++11 -Ofast
 
 all : $(objects)
 	$(CC) -o foo $(objects)

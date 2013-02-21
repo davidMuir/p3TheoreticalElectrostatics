@@ -20,6 +20,7 @@ Grid::Grid(unsigned int x, unsigned int y) {
 	dummy_val.value = 1;
 	dummy_val.boundary = false;
 	dummy_val.accessible = true;
+	dummy_val.flag = 0;
 	while (iy > 0) {
 		dummy_vec_val.push_back(dummy_val);
 		iy--;
@@ -653,10 +654,9 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 
 	///RECTANGLE
 	case rectangle: {
-		int x1 = x1;
-		int x2 = y1;
-		int y1 = r;
-		int y2 = z;
+		x2 = y1;
+		y1 = r;
+		y2 = z;
 		if (x1 > values.size() - 1 || x2 > values.size() - 1
 				|| y1 > values.size() - 1 || y2 > values.size() - 1)
 			cout << "Out of range." << endl;
@@ -673,8 +673,7 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 
 	///TRIANGLE
 	case triangle: {
-		int x1 = x1;
-		int x2 = y1;
+		x2 = y1;
 		int y_base = r;
 		int y_tip = z;
 		if (x1 > values.size() - 1 || x2 > values.size() - 1
@@ -777,6 +776,189 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 	} ///end of switch
 }
 
+void Grid::set_boundary_shape(int x, int y, int r, int z,
+		Shape shape) {
+
+	switch (shape) {
+
+	///CIRCLE
+	case circle: {
+		if (x - r < 0 || x + r > values.size() - 1 || y - r < 0
+				|| y + r > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x + r; xs++) {
+				for (int ys = y - r; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+		//SEMICIRCLES
+	case semicircle_north: {
+		if (x - r < 0 || x + r > values.size() - 1 || y < 0
+				|| y + r > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x + r; xs++) {
+				for (int ys = y; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	case semicircle_south: {
+		if (x - r < 0 || x + r > values.size() - 1 || y - r < 0
+				|| y > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x + r; xs++) {
+				for (int ys = y - r; ys <= y; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	case semicircle_east: {
+		if (x < 0 || x + r > values.size() - 1 || y - r < 0
+				|| y > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x; xs <= x + r; xs++) {
+				for (int ys = y - r; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	case semicircle_west: {
+		if (x - r < 0 || x > values.size() - 1 || y - r < 0
+				|| y > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x; xs++) {
+				for (int ys = y - r; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+		///RECTANGLE
+	case rectangle: {
+		int x1 = x;
+		int x2 = y;
+		int y1 = r;
+		int y2 = z;
+		if (x1 > values.size() - 1 || x2 > values.size() - 1
+				|| y1 > values.size() - 1 || y2 > values.size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = min(x1, x2); xs <= max(x1, x2); xs++) {
+				for (int ys = min(y1, y2); ys <= max(y1, y2); ys++) {
+					values[xs][ys].boundary = true;
+					values[xs][ys].flag = 1;
+				}
+			}
+		}
+		break;
+	}
+
+		///TRIANGLE
+	case triangle: {
+		int x1 = x;
+		int x2 = y;
+		int y_base = r;
+		int y_tip = z;
+		if (x1 > values.size() - 1 || x2 > values.size() - 1
+				|| y_base > values.size() - 1 || y_tip > values.size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			double slope = (double) (y_tip - y_base) / (0.5 * abs(x1 - x2));
+			int xc = (x1 + x2) / 2;
+			for (int xs = min(x1, x2); xs <= max(x1, x2); xs++) {
+				for (int ys = min(y_tip, y_base); ys <= max(y_tip, y_base);
+						ys++) {
+					if (y_tip > y_base && ys <= y_tip + slope * (xs - xc)
+							&& ys <= y_tip - slope * (xs - xc)) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+					if (y_tip < y_base && ys >= y_tip + slope * (xs - xc)
+							&& ys >= y_tip - slope * (xs - xc)) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+		///ELLIPSE
+	case ellipse: {
+		int rx = r;
+		int ry = z;
+		if (x - rx < 0 || y - ry < 0 || x + rx > values.size() - 1
+				|| y + ry > values.size() - 1)
+			cout << "Out of range." << endl;
+		for (int xs = x - rx; xs <= x + rx; xs++) {
+			for (int ys = y - ry; ys <= y + ry; ys++) {
+				if (pow(((double) (xs - x) / rx), 2)
+						+ pow(((double) (ys - y) / ry), 2) <= 1) {
+					values[xs][ys].boundary = true;
+					values[xs][ys].flag = 1;
+				}
+			}
+		}
+		break;
+	}
+	} ///end of switch
+}
 
 //////
 //////
@@ -788,13 +970,25 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 //////
 //////
 
-Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
-	Grid grid(size_x,size_y);
-	grid.set_boundary_shape(x,y,dx,dy, 100, shape);
-	return grid;
+double Grid::get_average_value(matrix grid) {
+	double sum = 0.;
+	int entries = 0;
+	for(int x = 1; x < grid[0].size() - 1; x++) {
+		for(int y = 1; y < grid.size() - 1; y++) {
+			if(grid[x][y].boundary == true && grid[x][y].flag == 1) {sum += grid[x][y].value;
+								grid[x][y].flag = 0; entries++;}
+		}
+	}
+	return (double) sum/entries;
 }
+	
 
-//void Grid::set_conductor(
+void Grid::set_conductor(int x, int y, int dx, int dy, Shape shape) {
+	set_boundary_shape(x,y,dx,dy,shape);
+	double val = get_average_value(values);
+	set_boundary_shape(x,y,dx,dy,val,shape);
+}
+	
 
 //Print ASCII table with MINIMAL formatting
 

@@ -15,7 +15,7 @@ int main() {
 	Grid first_grid(n,m);
 
 	first_grid.set_flow(50, -50);
-	first_grid.set_conductor(50,25,20,40,triangle);
+	first_grid.set_conductor(60,25,15,0,triangle);
 	Finite_Difference fd (first_grid);
 	fd.set_precision(0.00001);
 	fd.set_maxit(10000);
@@ -34,7 +34,7 @@ int main() {
 	gp.add_plot();
 	gp.sendString();
 
-	sol_fd.set_conductor(50,50,15,0,circle);
+	sol_fd.set_conductor(50,75,15,0,circle);
 
 	Finite_Difference fd1 (sol_fd);
 	fd1.set_precision(0.00001);

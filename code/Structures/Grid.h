@@ -66,9 +66,10 @@ public:
 	void print_matrix_to(std::string filename);
 	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
+	void set_boundary_shape(int x, int y, int r, int z, Shape shape);
+	void set_conductor(int x, int y, int dx, int dy, Shape shape);
 	void set_boundary_shape(int x1, int y1, int r, int z, double val,
 			Shape shape, int x2=0, int x3 = 0, int x4 = 0, int y2 = 0, int y3 = 0, int y4 = 0);
-	Grid get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape);
 	//Solving
 	void efield();
 private:
@@ -80,6 +81,7 @@ private:
 	int round_own(double a);
 	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2);
 	bool compare(Value nn, Value mm);
+	double get_average_value(matrix grid);
 
 };
 

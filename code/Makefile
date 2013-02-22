@@ -1,4 +1,4 @@
-objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
+objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o ./Utils/Conductors.o
 libname = theoretical.a
 CC = g++ -std=c++11 -Ofast
 	
@@ -22,6 +22,9 @@ all : $(objects)
 	
 ./Utils/Gnuplot.o : ./Utils/Gnuplot.h ./Utils/Gnuplot.cpp
 	cd ./Utils/; $(CC) -c Gnuplot.cpp
+
+./Utils/Conductors.o : ./Utils/Conductors.h ./Utils/Conductors.cc
+	cd ./Utils/; $(CC) -c Conductors.cc
 	
 clean :
-	rm foo $(objects) $(libname) 
+	rm $(objects) $(libname) 

@@ -17,7 +17,7 @@ Grid::Grid(unsigned int x, unsigned int y) {
 	unsigned int iy = y + 1;
 	vector<Value> dummy_vec_val;
 	Value dummy_val;
-	dummy_val.value = 1;
+	dummy_val.value = 0;
 	dummy_val.boundary = false;
 	dummy_val.accessible = true;
 	dummy_val.flag = 0;

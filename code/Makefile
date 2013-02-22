@@ -2,7 +2,9 @@ objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast
 libname = theoretical.a
 CC = g++ -std=c++11 -Ofast
 	
-all : $(objects)
+all : $(libname)
+	
+$(libname) : $(objects)
 	ar rvs $(libname) $(objects)
 	
 ./Algorithms/Finite_Difference.o : ./Algorithms/Finite_Difference.h ./Algorithms/Finite_Difference.cc
@@ -24,4 +26,6 @@ all : $(objects)
 	cd ./Utils/; $(CC) -c Gnuplot.cpp
 	
 clean :
-	rm foo $(objects) $(libname) 
+	rm $(objects) $(libname) 
+
+.PHONY: all clean

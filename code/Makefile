@@ -1,11 +1,9 @@
-objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
+objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
+libname = theoretical.a
 CC = g++ -std=c++11 -Ofast
-
-all : $(objects)
-	$(CC) -o foo $(objects)
 	
-main.o : main.cc ./Algorithms/Finite_Difference.h
-	$(CC) -c main.cc
+all : $(objects)
+	ar rvs $(libname) $(objects)
 	
 ./Algorithms/Finite_Difference.o : ./Algorithms/Finite_Difference.h ./Algorithms/Finite_Difference.cc
 	cd ./Algorithms; $(CC) -c Finite_Difference.cc
@@ -26,4 +24,4 @@ main.o : main.cc ./Algorithms/Finite_Difference.h
 	cd ./Utils/; $(CC) -c Gnuplot.cpp
 	
 clean :
-	rm foo $(objects)
+	rm foo $(objects) $(libname) 

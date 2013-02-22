@@ -9,7 +9,7 @@ int Grid::round_own(double a) {
 }
 
 Grid::Grid() :
-										Grid::Grid(50, 50) {
+	Grid::Grid(50, 50) {
 }
 
 Grid::Grid(unsigned int x, unsigned int y) {

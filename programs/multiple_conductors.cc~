@@ -68,7 +68,7 @@ int main() {
 	conductors.new_conductor(50,70,15,0,circle);
 	conductors.set_precision(0);
 	conductors.set_maxit(10000);
-	Grid sol_new = conductors.get_solution(FD);
+	Grid sol_new = conductors.get_solution(FFD);
 
 	Gnuplot gp2(sol_new);
 	gp2.add_comment("testing comment");

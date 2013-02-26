@@ -11,6 +11,7 @@
 #include "../Structures/Grid.h"
 #include <iostream>
 #include <sstream>
+#include "../Utils/Utils.h"
 
 #define GNUPLOT "/usr/bin/gnuplot"
 
@@ -31,7 +32,8 @@ private:
 	std::string data;
 	std::stringstream strStream;
 	std::stringstream datStream;
-
+	std::string numberToString(int Number);
+    std::string numberToString(double Number);
 };
 
 #endif /* GNUPLOT_H_ */

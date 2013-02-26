@@ -81,7 +81,7 @@ private:
 	int round_own(double a);
 	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2);
 	bool compare(Value nn, Value mm);
-	double get_average_value(matrix &grid);
+	double get_average_value(matrix& grid);
 
 };
 

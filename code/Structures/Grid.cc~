@@ -986,6 +986,9 @@ double Grid::get_average_value(matrix &grid) {
 void Grid::set_conductor(int x, int y, int dx, int dy, Shape shape) {
 	set_boundary_shape(x,y,dx,dy,shape);
 	double val = get_average_value(values);
+	cout << val << endl;
+	val = get_average_value(values);
+	cout << val << endl;
 	set_boundary_shape(x,y,dx,dy,val,shape);
 }
 	

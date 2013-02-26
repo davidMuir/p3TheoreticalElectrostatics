@@ -1,11 +1,11 @@
-objects = main.o ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o
-CC = g++ -std=c++11 -pg
-
-all : $(objects)
-	$(CC) -o foo $(objects)
+objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o ./Utils/Conductors.o
+libname = theoretical.a
+CC = g++ -std=c++11 -Ofast
 	
-main.o : main.cc ./Algorithms/Finite_Difference.h
-	$(CC) -c main.cc
+all : $(libname)
+	
+$(libname) : $(objects)
+	ar rvs $(libname) $(objects)
 	
 ./Algorithms/Finite_Difference.o : ./Algorithms/Finite_Difference.h ./Algorithms/Finite_Difference.cc
 	cd ./Algorithms; $(CC) -c Finite_Difference.cc
@@ -24,6 +24,11 @@ main.o : main.cc ./Algorithms/Finite_Difference.h
 	
 ./Utils/Gnuplot.o : ./Utils/Gnuplot.h ./Utils/Gnuplot.cpp
 	cd ./Utils/; $(CC) -c Gnuplot.cpp
+
+./Utils/Conductors.o : ./Utils/Conductors.h ./Utils/Conductors.cc
+	cd ./Utils/; $(CC) -c Conductors.cc
 	
 clean :
-	rm foo $(objects)
+	rm $(objects) $(libname) 
+
+.PHONY: all clean

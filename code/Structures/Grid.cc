@@ -970,7 +970,7 @@ void Grid::set_boundary_shape(int x, int y, int r, int z,
 //////
 //////
 
-double Grid::get_average_value(matrix grid) {
+double Grid::get_average_value(matrix &grid) {
 	double sum = 0.;
 	int entries = 0;
 	for(int x = 1; x < grid[0].size() - 1; x++) {

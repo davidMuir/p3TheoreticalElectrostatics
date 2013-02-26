@@ -14,6 +14,8 @@
 #include <iomanip>
 #include <fstream>
 #include <assert.h>
+#include <ctime>
+#include <cstdlib>
 #include "Coordinate.h"
 
 enum Shape {circle, semicircle_north, semicircle_south, semicircle_east,
@@ -67,9 +69,15 @@ public:
 	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape);
-	void set_conductor(int x, int y, int dx, int dy, Shape shape);
+	void set_boundary_shape(int x, int y, int r, int z, Shape shape,
+                         int x2, int x3, int x4, int y2, int y3, int y4);
+    void set_conductor(int x, int y, int dx, int dy, Shape shape);
+	void set_conductor(int x, int y, int dx, int dy, Shape shape,
+                    int x1, int x2, int x3, int y1, int y2, int y3);
+    void set_boundary_shape(int x1, int y1, int r, int z, double val,
+			Shape shape);
 	void set_boundary_shape(int x1, int y1, int r, int z, double val,
-			Shape shape, int x2=0, int x3 = 0, int x4 = 0, int y2 = 0, int y3 = 0, int y4 = 0);
+			Shape shape, int x2, int x3, int x4, int y2, int y3, int y4);
 	//Solving
 	void efield();
 private:

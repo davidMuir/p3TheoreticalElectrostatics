@@ -19,7 +19,9 @@ int main() {
 
 	cout << "Integrated field before conductors: " << sum_grid(first_grid) << endl;
 
-	first_grid.set_conductor(150,130,15,0,circle);
+    first_grid.set_conductor(150, 130, 40, 70, random_shape, 50, 90, 120, 100, 140, 150);
+
+	//first_grid.set_conductor(150,130,40,50,star);
 	//first_grid.set_conductor(50,70,15,0,circle);
 
 	Finite_Difference fd (first_grid);
@@ -42,7 +44,7 @@ int main() {
 	gp.add_plot();
 	gp.sendString();
 
-	sol_fd.set_conductor(50,70,15,0,circle);
+	sol_fd.set_conductor(50,70,40,0,circle);
 	//sol_fd.set_conductor(150,130,15,0,circle);
 
 	Finite_Difference fd1 (sol_fd);
@@ -64,8 +66,8 @@ int main() {
 	gp1.sendString();
 
 	Conductors conductors(n,m,50.,-50.);
-	conductors.new_conductor(150,130,15,0,circle);
-	conductors.new_conductor(50,70,15,0,circle);
+	conductors.new_conductor(150,130,40,0,circle);
+	conductors.new_conductor(50,70,40,0,circle);
 	conductors.set_precision(0);
 	conductors.set_maxit(10000);
 	Grid sol_new = conductors.get_solution(FD);
@@ -106,7 +108,7 @@ int main() {
 	Grid ana = analytic.get_solution();
 
 	cout << "Integrated field in analytic method: " << sum_grid(ana) << endl;
-	
+
 
 	return 0;
 

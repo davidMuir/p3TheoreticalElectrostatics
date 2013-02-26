@@ -541,6 +541,11 @@ void Grid::set_circle_noflow(int x, int y, unsigned int r, double val) {
 }
 
 void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
+		Shape shape) {
+		    set_boundary_shape(x1,y1,r,z,val,shape,0,0,0,0,0,0);
+		}
+
+void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 		Shape shape, int x2, int x3, int x4, int y2, int y3, int y4) {
 
 	switch (shape) {
@@ -773,11 +778,64 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 		}
 		break;
 	}
+			case random_shape: {
+            srand(time(0));
+            int rand_shape = rand() % 9;
+            Shape new_shape;
+            switch (rand_shape) {
+                case 0:
+                    new_shape = circle;
+                    break;
+                case 1:
+                    new_shape = semicircle_north;
+                    break;
+                case 2:
+                    new_shape = semicircle_south;
+                    break;
+                case 3:
+                    new_shape = semicircle_west;
+                    break;
+                case 4:
+                    new_shape = semicircle_east;
+                    break;
+                case 5:
+                    new_shape = rectangle;
+                    break;
+                case 6:
+                    new_shape = triangle;
+                    break;
+                case 7:
+                    new_shape = ellipse;
+                    break;
+                case 8:
+                    new_shape = star;
+                    break;
+            }
+            int x1 = 1 + rand()%(values.size() - 3);
+            int x2 = 1 + rand()%(values.size() - 3);
+            int x3 = 1 + rand()%(values.size() - 3);
+            int x4 = 1 + rand()%(values.size() - 3);
+            int x5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+            int y1 = 1 + rand()%(values[0].size() - 3);
+            int y2 = 1 + rand()%(values[0].size() - 3);
+            int y3 = 1 + rand()%(values[0].size() - 3);
+            int y4 = 1 + rand()%(values[0].size() - 3);
+            int y5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+            set_boundary_shape(x1,y1,x5,y5, val, new_shape,x2,x3,x4,y2,y3,y4);
+		}
+
 	} ///end of switch
 }
 
 void Grid::set_boundary_shape(int x, int y, int r, int z,
 		Shape shape) {
+		set_boundary_shape(x,y,r,z,shape,0,0,0,0,0,0);
+                     }
+
+void Grid::set_boundary_shape(int x, int y, int r, int z,
+		Shape shape,  int x2, int x3, int x4, int y2, int y3, int y4) {
 
 	switch (shape) {
 
@@ -957,6 +1015,108 @@ void Grid::set_boundary_shape(int x, int y, int r, int z,
 		}
 		break;
 	}
+		case star: {
+		    int x1 = x;
+		    int y1 = y;
+		if (x1 > values.size() - 1 || x4 > values.size() - 1 || y1 > values.size() - 1 || y4 > values.size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs=x2; xs <= x3; xs++) {
+				for (int ys=y2; ys <= y3; ys++) {
+					values[xs][ys].flag=1;
+					values[xs][ys].boundary=true;
+				}
+			}
+
+			double slope=(double) (y4 - y3)/ (0.5*(x3 - x2));
+			double xc=(x2+x3)/2;
+			for (int xs=x2; xs <= x3; xs++) {
+				for (int ys=y3; ys <= y4; ys++) {
+					if ( ys <= y4 + slope * (xs - xc) && ys <= y4 - slope * (xs - xc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+
+			for (int xs=x2; xs <= x3; xs++) {
+				for (int ys=y1; ys <= y2; ys++) {
+					if ( ys >= y1 + slope * (xs - xc) && ys >= y1 - slope * (xs - xc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+
+			slope=(double) (x4 - x3)/ (0.5*(y3 - y2));
+			double yc=(y2+y3)/2;
+			for (int ys=y2; ys <= y3; ys++) {
+				for (int xs=x3; xs <= x4; xs++) {
+					if ( xs <= x4 + slope * (ys - yc) && xs <= x4 - slope * (ys - yc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+
+			for (int ys=y2; ys <= y3; ys++) {
+				for (int xs=x1; xs <= x2; xs++) {
+					if ( xs >= x1 + slope * (ys - yc) && xs >= x1 - slope * (ys - yc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+		}
+		break;
+		}
+		case random_shape: {
+            srand(time(0));
+            int rand_shape = rand() % 9;
+            Shape new_shape;
+            switch (rand_shape) {
+                case 0:
+                    new_shape = circle;
+                    break;
+                case 1:
+                    new_shape = semicircle_north;
+                    break;
+                case 2:
+                    new_shape = semicircle_south;
+                    break;
+                case 3:
+                    new_shape = semicircle_west;
+                    break;
+                case 4:
+                    new_shape = semicircle_east;
+                    break;
+                case 5:
+                    new_shape = rectangle;
+                    break;
+                case 6:
+                    new_shape = triangle;
+                    break;
+                case 7:
+                    new_shape = ellipse;
+                    break;
+                case 8:
+                    new_shape = star;
+                    break;
+            }
+            int x1 = 1 + rand()%(values.size() - 3);
+            int x2 = 1 + rand()%(values.size() - 3);
+            int x3 = 1 + rand()%(values.size() - 3);
+            int x4 = 1 + rand()%(values.size() - 3);
+            int x5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+            int y1 = 1 + rand()%(values[0].size() - 3);
+            int y2 = 1 + rand()%(values[0].size() - 3);
+            int y3 = 1 + rand()%(values[0].size() - 3);
+            int y4 = 1 + rand()%(values[0].size() - 3);
+            int y5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+            set_boundary_shape(x1,y1,x5,y5,new_shape,x2,x3,x4,y2,y3,y4);
+		}
 	} ///end of switch
 }
 
@@ -973,22 +1133,24 @@ void Grid::set_boundary_shape(int x, int y, int r, int z,
 double Grid::get_average_value(matrix &grid) {
 	double sum = 0.;
 	int entries = 0;
-	for(int x = 1; x < grid[0].size() - 1; x++) {
-		for(int y = 1; y < grid.size() - 1; y++) {
+	for(int x = 1; x < grid.size() - 1; x++) {
+		for(int y = 1; y < grid[0].size() - 1; y++) {
 			if(grid[x][y].boundary == true && grid[x][y].flag == 1) {sum += grid[x][y].value;
 								grid[x][y].flag = 0; entries++;}
 		}
 	}
 	return (double) sum/entries;
 }
-	
 
 void Grid::set_conductor(int x, int y, int dx, int dy, Shape shape) {
-	set_boundary_shape(x,y,dx,dy,shape);
+    set_conductor(x,y,dx,dy,shape,0,0,0,0,0,0);}
+
+void Grid::set_conductor(int x, int y, int dx, int dy, Shape shape, int x1, int x2, int x3, int y1, int y2, int y3) {
+	set_boundary_shape(x,y,dx,dy,shape, x1, x2, x3, y1, y2, y3);
 	double val = get_average_value(values);
-	set_boundary_shape(x,y,dx,dy,val,shape);
+	set_boundary_shape(x,y,dx,dy,val,shape, x1, x2, x3, y1, y2, y3);
 }
-	
+
 
 //Print ASCII table with MINIMAL formatting
 

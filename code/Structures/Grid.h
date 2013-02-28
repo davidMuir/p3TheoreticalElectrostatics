@@ -66,7 +66,6 @@ public:
 	void print_gnuplot_values();
 	void print_all_to(std::string filename);
 	void print_matrix_to(std::string filename);
-	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape,

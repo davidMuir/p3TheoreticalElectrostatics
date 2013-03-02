@@ -9,10 +9,11 @@
 #ifndef BMPREADER_H_
 #define BMPREADER_H_
 
-#include <string>
-#include <stdio.h>
 #include <iostream>
-#include "../Structures/Grid.h"
+#include <fstream>
+#include <vector>
+#include <string.h>
+#include <stdio.h>
 
 #define BMP_MAGIC_NUM 0x4D42		// Magic number for bmp file format
 // Compression Types
@@ -38,9 +39,9 @@ typedef struct {
     unsigned short bfReserved1;
     unsigned short bfReserved2;
     unsigned int   bfOffBits;
-} BITMAPFILEHEADER;
+} BITMAPFILEHEADER, *PBITMAPFILEHEADER;
 
-#pragma pack()
+#pragma pack(2)
 
 /**
  * @struct 					BITMAPINFOHEADER
@@ -69,7 +70,7 @@ typedef struct {
     int            biYPelsPerMeter;
     unsigned int   biClrUsed;
     unsigned int   biClrImportant;
-} BITMAPINFOHEADER;
+} BITMAPINFOHEADER, *PBITMAPINFOHEADER;
 
 /**
  * @struct 					RGBQUAD
@@ -80,10 +81,10 @@ typedef struct {
  * @var rgbReserved			unsigned char : Reserved
  */
 typedef struct {
-    unsigned char  rgbBlue;
-    unsigned char  rgbGreen;
-    unsigned char  rgbRed;
-    unsigned char  rgbReserved;
+    char  rgbBlue;
+    char  rgbGreen;
+    char  rgbRed;
+    char  rgbReserved;
 } RGBQUAD;
 
 /**
@@ -97,6 +98,7 @@ public:
 	 * @function					Constructor
 	 * @brief						Creates a bmp object from a requested bmp file
 	 * @param						std::string : filename
+	 * @param						enum : boundary
 	 * @return						None
 	 */
 	Bmp_Reader(std::string file);
@@ -116,11 +118,13 @@ public:
 	unsigned int get_height();
 
 	/**
-	 * @function					get_pixels
-	 * @brief						gets the array of pixel information
-	 * @return						Array of pixel information
+	 * @function					get_grid
+	 * @brief						gets a grid defined from the pixel information
+	 * @return						Grid : grid of pixel information
 	 */
-	RGBQUAD *get_pixels();
+//	Grid get_grid();
+
+	std::vector<RGBQUAD> get_pixels();
 
 	/**
 	 * @function					get_size
@@ -132,7 +136,7 @@ public:
 private:
 	BITMAPFILEHEADER fh;
 	BITMAPINFOHEADER ih;
-	RGBQUAD *pixels;
+	std::vector<RGBQUAD> pixels;
 };
 
 #endif /* BMPREADER_H_ */

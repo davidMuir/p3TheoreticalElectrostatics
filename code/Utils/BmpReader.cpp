@@ -8,49 +8,29 @@
 #include "BmpReader.h"
 
 Bmp_Reader::Bmp_Reader(std::string filename) {
-    std::ifstream file(filename,std::ios::in | std::ios::binary);
-
+	FILE *file = fopen(filename.c_str(),"rb");
     if (file) {
-        file.seekg(0,std::ios::end);
-        auto length = file.tellg();
-        file.seekg(0,std::ios::beg);
-        char * buffer = new char[length];
-
-        file.read(buffer,length);
-        file.close();
-
-        memcpy(&fh,&buffer,sizeof(BITMAPFILEHEADER));
-        memcpy(&fh,&buffer+sizeof(BITMAPFILEHEADER),sizeof(BITMAPFILEHEADER)+sizeof(BITMAPINFOHEADER));
+    	fread(&fh,sizeof(BITMAPFILEHEADER),1,file);
+    	fread(&ih,sizeof(BITMAPINFOHEADER),1,file);
+    	fseek(file,fh.bfOffBits,SEEK_SET);
         std::cout << fh.bfType << " " << fh.bfSize << " " << fh.bfReserved1 << fh.bfReserved2 << " " << fh.bfOffBits << std::endl;
         std::cout << ih.biSize << " " << ih.biWidth << " " << ih.biHeight << " " << ih.biPlanes << " " << ih.biBitCount
         		<< " "<< ih.biCompression << " " << ih.biSizeImage << " " << ih.biXPelsPerMeter << " " << ih.biYPelsPerMeter
         		<< " " << ih.biClrUsed<< " " << ih.biClrImportant << std::endl;
-
-        for (char *i = buffer+54;i!=buffer+length;i++) {
-			RGBQUAD pixel;
+        pixels = new RGBQUAD[ih.biWidth*ih.biHeight];
+        for (RGBQUAD * i = pixels; i!=pixels+ih.biWidth*ih.biHeight;++i) {
         	if (ih.biBitCount==8) {
-        		pixel.rgbReserved = *i;
+        		fread( &(*i).rgbReserved, 1, 1, file );
         	}
         	else if (ih.biBitCount==24) {
-        		pixel.rgbBlue = *i;
-        		pixel.rgbGreen = *(i+1);
-        		pixel.rgbRed = *(i+2);
-        		std::advance(i,2);
+        		fread( &(*i), 3, 1, file );
         	}
         	else if(ih.biBitCount==32) {
-        		pixel.rgbBlue = *i;
-        		pixel.rgbGreen = *i+1;
-        		pixel.rgbRed = *i+2;
-        		pixel.rgbReserved = *i+3;
-        		std::advance(i,3);
+        		fread( &(*i),4, 1, file );
         	}
-        	pixels.push_back(pixel);
         }
-        delete [] buffer;
-
-
+        fclose(file);
     }
-
 }
 
 unsigned int Bmp_Reader::get_height() {
@@ -62,12 +42,14 @@ unsigned int Bmp_Reader::get_width() {
 }
 
 unsigned int Bmp_Reader::get_size() {
-	return ih.biSizeImage;
+	return ih.biWidth*ih.biHeight;
 }
 
-std::vector<RGBQUAD> Bmp_Reader::get_pixels() {
+RGBQUAD * Bmp_Reader::get_pixels() {
 	return pixels;
 }
 
-Bmp_Reader::~Bmp_Reader() {}
+Bmp_Reader::~Bmp_Reader() {
+	delete [] pixels;
+}
 

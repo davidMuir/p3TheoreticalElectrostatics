@@ -9,11 +9,12 @@
 #ifndef BMPREADER_H_
 #define BMPREADER_H_
 
-#include <iostream>
-#include <fstream>
 #include <vector>
-#include <string.h>
+#include <string>
+#include <iostream>
 #include <stdio.h>
+#include <stdlib.h>
+#include <memory>
 
 #define BMP_MAGIC_NUM 0x4D42		// Magic number for bmp file format
 // Compression Types
@@ -81,10 +82,10 @@ typedef struct {
  * @var rgbReserved			unsigned char : Reserved
  */
 typedef struct {
-    char  rgbBlue;
-    char  rgbGreen;
-    char  rgbRed;
-    char  rgbReserved;
+    unsigned char  rgbBlue;
+    unsigned char  rgbGreen;
+    unsigned char  rgbRed;
+    unsigned char  rgbReserved;
 } RGBQUAD;
 
 /**
@@ -101,7 +102,7 @@ public:
 	 * @param						enum : boundary
 	 * @return						None
 	 */
-	Bmp_Reader(std::string file);
+	Bmp_Reader(std::string filename);
 
 	/**
 	 * @function					get_width
@@ -124,7 +125,7 @@ public:
 	 */
 //	Grid get_grid();
 
-	std::vector<RGBQUAD> get_pixels();
+	RGBQUAD * get_pixels();
 
 	/**
 	 * @function					get_size
@@ -136,7 +137,7 @@ public:
 private:
 	BITMAPFILEHEADER fh;
 	BITMAPINFOHEADER ih;
-	std::vector<RGBQUAD> pixels;
+	RGBQUAD * pixels;
 };
 
 #endif /* BMPREADER_H_ */

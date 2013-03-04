@@ -1,0 +1,6 @@
+err_vs_shape_size_fd.dat : average error of grid and radius of circle for finite difference method
+err_vs_shape_size_fv.dat : same as above except for finite volume method
+
+
+fd_conv.dat : contains -
+ grid size : average error once converged: number of iterations to reach convergance value (to last sig fig given) : number of its to approach conv value ( last sig fig given to within 2 places of correct value)

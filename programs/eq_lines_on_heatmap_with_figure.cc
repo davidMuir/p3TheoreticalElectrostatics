@@ -32,10 +32,20 @@ int main() {
 //	fd.set_precision(0.00001);
 //	fd.set_maxit(10000);
 //	Grid sol = fd.get_solution();
+
 	sol.print_points_to("results.dat");
 	sol.equip_values(N,n,m,Emax,1,1);
 	sol.print_contours_to("eq_lines.dat", N);
 	sol.print_figure_to("figure.dat", 2); // 2 - the number of figures
+
+	Gnuplot gp(sol);
+	gp.add_command("set term jpeg");
+	gp.add_command("set output 'test.jpg'");
+	gp.add_command("set palette defined");
+	gp.add_command("plot 'results.dat' with image, 'eq_lines.dat' with lines ls -1, 'figure.dat' with filledcurve ls -3");
+	gp.sendString();
+
+
 
 // then go to gnuplot and type in:
 // set palette defined, set term ... and then

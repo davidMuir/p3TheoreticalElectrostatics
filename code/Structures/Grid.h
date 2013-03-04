@@ -56,9 +56,7 @@ public:
 	void set_coordinates(coordinate_matrix coords);
 	void set_values(matrix vals);
 	void set_gradients(grad_matrix grads);
-	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);	
-	void set_flags_to_zero();
-	void get_surface_points_of_figure();
+	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);
 	coordinate_matrix get_coordinates();
 	matrix get_values();
 	grad_matrix get_gradients();
@@ -67,11 +65,7 @@ public:
 	void print_points();
 	void print_gnuplot_values();
 	void print_all_to(std::string filename);
-	void print_contours_to(std::string filename, int n);
-	void print_figure_to(std::string filename, int number_of_figures);
 	void print_matrix_to(std::string filename);
-	void print_points_to(std::string filename);
-	//Shapes -- These are just here temporarily, these should be moved to their own class/file
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape,
@@ -92,7 +86,7 @@ private:
 	matrix values;
 	//private functions
 	int round_own(double a);
-	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2, int flag_numb2);
+	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2);
 	bool compare(Value nn, Value mm);
 	double get_average_value(matrix &grid);
 

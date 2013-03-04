@@ -1,4 +1,4 @@
-objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o ./Utils/Conductors.o ./Utils/BmpReader.o
+objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o ./Utils/Conductors.o ./Utils/BmpReader.o ./Utils/Animation.o
 libname = theoretical.a
 CC = g++ -std=c++11 -Ofast
 	
@@ -30,6 +30,10 @@ $(libname) : $(objects)
 	
 ./Utils/BmpReader.o : ./Utils/BmpReader.h ./Utils/BmpReader.cpp
 	cd ./Utils/; $(CC) -c BmpReader.cpp
+
+./Utils/Animation.o : ./Utils/Animation.h ./Utils/Animation.cpp
+	cd ./Utils/; $(CC) -c Animation.cpp
+
 	
 clean :
 	rm $(objects) $(libname) 

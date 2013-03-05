@@ -21,6 +21,8 @@
 enum Shape {circle, semicircle_north, semicircle_south, semicircle_east,
 	semicircle_west, rectangle, triangle, ellipse, star, random_shape};
 
+enum Boundary {boundary,accessible,conductor};
+
 //Data structures to be used for grid
 struct Value {
 	double value;

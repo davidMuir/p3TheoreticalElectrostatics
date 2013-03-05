@@ -1,0 +1,209 @@
+
+\documentclass[aps,twocolumn,pre,nofootinbib]{revtex4}
+
+
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful symbols and definitions that may save time
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\breite}{1.0} %  for twocolumn
+
+
+\newtheorem{prop}{Proposition}
+\newtheorem{cor}{Corollary}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+
+\newcommand{\Reals}{\mathbb{R}}     % Real
+\newcommand{\Int}{\mathbb{Z}}       % Integer
+\newcommand{\Com}{\mathbb{C}}       % Complex 
+\newcommand{\Nat}{\mathbb{N}}       % Natural 
+
+
+\newcommand{\id}{\mathbbm{1}}    
+
+\newcommand{\Real}{\mathop{\mathrm{Re}}}
+\newcommand{\Imag}{\mathop{\mathrm{Im}}}
+
+\def\O{\mbox{$\mathcal{O}$}}    
+\def\F{\mathcal{F}}			
+\def\sgn{\text{sgn}}
+
+\newcommand{\dw}{\ensuremath{\Delta}} %I think I have most we need but will add any if needed.
+\newcommand{\wbp}{\ensuremath{\omega_0}}
+\newcommand{\dv}{\ensuremath{\delta}}
+\newcommand{\vbp}{\ensuremath{\nu_0}}
+\newcommand{\vplus}{\ensuremath{\nu_{+}}}
+\newcommand{\vminus}{\ensuremath{\nu_{-}}}
+\newcommand{\wplus}{\ensuremath{\omega_{+}}}
+\newcommand{\wminus}{\ensuremath{\omega_{-}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%Title of paper (I know it isn't very creative but it isn't supposed to be. We can definitely discuss this! 
+\title{Zero Net Charge Conductors Of Various Shapes In A Uniform Electrostatic Field}
+
+
+%Us
+\author{Karl Nordstorm}
+
+\author{David Muir}
+
+\author{Julia Kettle}
+
+\author{John Maccorquodale}
+
+\author{Jevgeny Klochan}
+
+\author{Stephen Shepstone: }
+
+
+\affiliation{University Of Glasgow}
+
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%ABSTRACT
+\begin{abstract}
+
+Abstract... 
+  
+\end{abstract}
+
+
+%FINISH TITLE
+\maketitle
+
+
+%INTRODUCTION
+
+\section{Introduction \label{sec:int}}
+
+Intro...
+
+
+ 
+
+%THEORY AND ALGORITHMS
+\section{Theory \label{sec:the}}
+
+Theory...
+
+
+\subsection{Analytical Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE FIGURE ONE COLUMN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\includegraphics*[width=\breite \columnwidth]{crescent.eps} 
+\caption{One column figure.
+}
+\label{fig:Half}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE EQUATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+\begin{split}
+F(v) &= v^2 
+\end{split}
+\label{Simple example}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE FIG BOTH COLUMNS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure*}
+
+\includegraphics*[width= 1.6 \columnwidth]{crescent.eps} 
+\caption{Full page figure.
+}
+\label{fig:Full}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%METHODS- I think algorithms should go here rather than code. Any chunks of code that are necessary for the 
+%report should go into the appendix
+\section{Method \label{sec:met}}
+
+ 
+\subsection{Finite Difference }
+
+
+\subsection{Assymetric Finite Volume }
+
+
+\subsection{3D algorithm}
+
+
+
+
+
+
+%RESULTS- Many plots here, I imagine.
+\section{Results \label{sec:res}}
+
+
+Results...
+
+
+%UNCERTAINTIES
+\section{Uncertainties \label{sec:unc}}
+
+
+
+
+%SUMMARY AND CONCLUSIONS
+\section{Summary and Discussion \label{sec:sum}}
+
+
+%Mostly for Adrian 
+\begin{acknowledgments}
+Adrian...
+\end{acknowledgments}
+
+
+\appendix*
+\section{Full analytical solution}
+\section{Code}
+
+
+% I thought we wouldn't need Bibtex because I doubt we will have many references. With that in mind,
+% it is probably a better idea to type references in manually.
+
+
+%BIBLIOGRAPHY-I have made a basic template for references but here is a good link to a page for making reference if anyone can't remember how to do references: 
+% http://tim.thorpeallen.net/Courses/Reference/Citations.html
+\begin{thebibliography}{5}
+
+\bibitem[Reflabel]  Names of Authors, year, ``name of book,'' publisher, city {\bf 999}.
+
+
+\end{thebibliography}
+
+
+\end{document}
+

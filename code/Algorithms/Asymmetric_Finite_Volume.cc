@@ -47,17 +47,169 @@ Iteration Asymmetric_Finite_Volume::iteration(Iteration old) {
 			DV = average - old_value;
 			if(abs(DV) > change)change = abs(DV);
 			total_difference = total_value(dv);
-			if(total_difference == 0 || DV == 0)continue; //Bad luck!
-			coefficient = -DV/total_difference;
-			count = 0;
-			if(m[x-1][y].accessible == true){if(m[x-1][y].boundary == false){m[x-1][y].value = m[x-1][y].value + coefficient * dv[count];} count++;}
-			if(m[x+1][y].accessible == true){if(m[x+1][y].boundary == false){m[x+1][y].value = m[x+1][y].value + coefficient * dv[count];} count++;}
-			if(m[x][y-1].accessible == true){if(m[x][y-1].boundary == false){m[x][y-1].value = m[x][y-1].value + coefficient * dv[count];} count++;}
-			if(m[x][y+1].accessible == true){if(m[x][y+1].boundary == false){m[x][y+1].value = m[x][y+1].value + coefficient * dv[count];} count++;}
+			if(total_difference == 0 || DV == 0) {
+                if(m[x-1][y].accessible == true && m[x+1][y].accessible == true){
+                    double xnew = (m[x-1][y].value + m[x+1][y].value) / 2.;
+                    if(m[x-1][y].boundary == false){m[x-1][y].value = xnew;} if(m[x+1][y].boundary == false){m[x+1][y].value = xnew;}
+                }
+                if(m[x][y-1].accessible == true && m[x][y+1].accessible == true){
+                    double ynew = (m[x][y-1].value + m[x][y+1].value) / 2.;
+                    if(m[x][y-1].boundary == false){m[x][y-1].value = ynew;} if(m[x][y+1].boundary == false){m[x][y+1].value = ynew;}
+                }
+            }
+			else {coefficient = -DV/total_difference;
+                count = 0;
+                if(m[x-1][y].accessible == true){if(m[x-1][y].boundary == false){m[x-1][y].value = m[x-1][y].value + coefficient * dv[count];} count++;}
+                if(m[x+1][y].accessible == true){if(m[x+1][y].boundary == false){m[x+1][y].value = m[x+1][y].value + coefficient * dv[count];} count++;}
+                if(m[x][y-1].accessible == true){if(m[x][y-1].boundary == false){m[x][y-1].value = m[x][y-1].value + coefficient * dv[count];} count++;}
+                if(m[x][y+1].accessible == true){if(m[x][y+1].boundary == false){m[x][y+1].value = m[x][y+1].value + coefficient * dv[count];} count++;}
+			}
 			cells.clear();
 			dv.clear();
 		}
 	}
+    for(int x = no-2; x > 0; x--) {
+		for(int y = mo-2; y > 0; y--) {
+			old_value = m[x][y].value;
+			if(m[x-1][y].accessible == true){
+			cells.push_back(m[x-1][y]);
+			dv.push_back(m[x][y].value - m[x-1][y].value);
+			}
+			if(m[x+1][y].accessible == true){
+			cells.push_back(m[x+1][y]);
+			dv.push_back(m[x][y].value - m[x+1][y].value);
+			}
+			if(m[x][y-1].accessible == true){
+			cells.push_back(m[x][y-1]);
+			dv.push_back(m[x][y].value - m[x][y-1].value);
+			}
+			if(m[x][y+1].accessible == true){
+			cells.push_back(m[x][y+1]);
+			dv.push_back(m[x][y].value - m[x][y+1].value);
+			}
+			cells.push_back(m[x][y]);
+			double average = average_value(cells);
+			if(m[x][y].boundary == false)m[x][y].value = average;
+			DV = average - old_value;
+			if(abs(DV) > change)change = abs(DV);
+			total_difference = total_value(dv);
+			if(total_difference == 0 || DV == 0) {
+                if(m[x-1][y].accessible == true && m[x+1][y].accessible == true){
+                    double xnew = (m[x-1][y].value + m[x+1][y].value) / 2.;
+                    if(m[x-1][y].boundary == false){m[x-1][y].value = xnew;} if(m[x+1][y].boundary == false){m[x+1][y].value = xnew;}
+                }
+                if(m[x][y-1].accessible == true && m[x][y+1].accessible == true){
+                    double ynew = (m[x][y-1].value + m[x][y+1].value) / 2.;
+                    if(m[x][y-1].boundary == false){m[x][y-1].value = ynew;} if(m[x][y+1].boundary == false){m[x][y+1].value = ynew;}
+                }
+            }
+			else {coefficient = -DV/total_difference;
+                count = 0;
+                if(m[x-1][y].accessible == true){if(m[x-1][y].boundary == false){m[x-1][y].value = m[x-1][y].value + coefficient * dv[count];} count++;}
+                if(m[x+1][y].accessible == true){if(m[x+1][y].boundary == false){m[x+1][y].value = m[x+1][y].value + coefficient * dv[count];} count++;}
+                if(m[x][y-1].accessible == true){if(m[x][y-1].boundary == false){m[x][y-1].value = m[x][y-1].value + coefficient * dv[count];} count++;}
+                if(m[x][y+1].accessible == true){if(m[x][y+1].boundary == false){m[x][y+1].value = m[x][y+1].value + coefficient * dv[count];} count++;}
+			}
+			cells.clear();
+			dv.clear();
+		}
+	}
+
+	for(int y = 1; y < mo-1; y++){
+		for(int x = 1; x < no-1; x++) {
+			old_value = m[x][y].value;
+			if(m[x-1][y].accessible == true){
+			cells.push_back(m[x-1][y]);
+			dv.push_back(m[x][y].value - m[x-1][y].value);
+			}
+			if(m[x+1][y].accessible == true){
+			cells.push_back(m[x+1][y]);
+			dv.push_back(m[x][y].value - m[x+1][y].value);
+			}
+			if(m[x][y-1].accessible == true){
+			cells.push_back(m[x][y-1]);
+			dv.push_back(m[x][y].value - m[x][y-1].value);
+			}
+			if(m[x][y+1].accessible == true){
+			cells.push_back(m[x][y+1]);
+			dv.push_back(m[x][y].value - m[x][y+1].value);
+			}
+			cells.push_back(m[x][y]);
+			double average = average_value(cells);
+			if(m[x][y].boundary == false)m[x][y].value = average;
+			DV = average - old_value;
+			if(abs(DV) > change)change = abs(DV);
+			total_difference = total_value(dv);
+			if(total_difference == 0 || DV == 0) {
+                if(m[x-1][y].accessible == true && m[x+1][y].accessible == true){
+                    double xnew = (m[x-1][y].value + m[x+1][y].value) / 2.;
+                    if(m[x-1][y].boundary == false){m[x-1][y].value = xnew;} if(m[x+1][y].boundary == false){m[x+1][y].value = xnew;}
+                }
+                if(m[x][y-1].accessible == true && m[x][y+1].accessible == true){
+                    double ynew = (m[x][y-1].value + m[x][y+1].value) / 2.;
+                    if(m[x][y-1].boundary == false){m[x][y-1].value = ynew;} if(m[x][y+1].boundary == false){m[x][y+1].value = ynew;}
+                }
+            }
+			else {coefficient = -DV/total_difference;
+                count = 0;
+                if(m[x-1][y].accessible == true){if(m[x-1][y].boundary == false){m[x-1][y].value = m[x-1][y].value + coefficient * dv[count];} count++;}
+                if(m[x+1][y].accessible == true){if(m[x+1][y].boundary == false){m[x+1][y].value = m[x+1][y].value + coefficient * dv[count];} count++;}
+                if(m[x][y-1].accessible == true){if(m[x][y-1].boundary == false){m[x][y-1].value = m[x][y-1].value + coefficient * dv[count];} count++;}
+                if(m[x][y+1].accessible == true){if(m[x][y+1].boundary == false){m[x][y+1].value = m[x][y+1].value + coefficient * dv[count];} count++;}
+			}
+			cells.clear();
+			dv.clear();
+		}
+	}
+
+    for(int y = mo-2; y > 0; y--) {
+        for(int x = no-2; x > 0; x--) {
+			old_value = m[x][y].value;
+			if(m[x-1][y].accessible == true){
+			cells.push_back(m[x-1][y]);
+			dv.push_back(m[x][y].value - m[x-1][y].value);
+			}
+			if(m[x+1][y].accessible == true){
+			cells.push_back(m[x+1][y]);
+			dv.push_back(m[x][y].value - m[x+1][y].value);
+			}
+			if(m[x][y-1].accessible == true){
+			cells.push_back(m[x][y-1]);
+			dv.push_back(m[x][y].value - m[x][y-1].value);
+			}
+			if(m[x][y+1].accessible == true){
+			cells.push_back(m[x][y+1]);
+			dv.push_back(m[x][y].value - m[x][y+1].value);
+			}
+			cells.push_back(m[x][y]);
+			double average = average_value(cells);
+			if(m[x][y].boundary == false)m[x][y].value = average;
+			DV = average - old_value;
+			if(abs(DV) > change)change = abs(DV);
+			total_difference = total_value(dv);
+			if(total_difference == 0 || DV == 0) {
+                if(m[x-1][y].accessible == true && m[x+1][y].accessible == true){
+                    double xnew = (m[x-1][y].value + m[x+1][y].value) / 2.;
+                    if(m[x-1][y].boundary == false){m[x-1][y].value = xnew;} if(m[x+1][y].boundary == false){m[x+1][y].value = xnew;}
+                }
+                if(m[x][y-1].accessible == true && m[x][y+1].accessible == true){
+                    double ynew = (m[x][y-1].value + m[x][y+1].value) / 2.;
+                    if(m[x][y-1].boundary == false){m[x][y-1].value = ynew;} if(m[x][y+1].boundary == false){m[x][y+1].value = ynew;}
+                }
+            }
+			else {coefficient = -DV/total_difference;
+                count = 0;
+                if(m[x-1][y].accessible == true){if(m[x-1][y].boundary == false){m[x-1][y].value = m[x-1][y].value + coefficient * dv[count];} count++;}
+                if(m[x+1][y].accessible == true){if(m[x+1][y].boundary == false){m[x+1][y].value = m[x+1][y].value + coefficient * dv[count];} count++;}
+                if(m[x][y-1].accessible == true){if(m[x][y-1].boundary == false){m[x][y-1].value = m[x][y-1].value + coefficient * dv[count];} count++;}
+                if(m[x][y+1].accessible == true){if(m[x][y+1].boundary == false){m[x][y+1].value = m[x][y+1].value + coefficient * dv[count];} count++;}
+			}
+			cells.clear();
+			dv.clear();
+		}
+	}
+
+
 	Iteration next;
 	next.it = m;
 	next.error = change;

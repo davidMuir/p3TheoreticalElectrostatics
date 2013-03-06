@@ -1,11 +1,13 @@
 code = ../code/
 libname = $(code)theoretical.a
 CC = g++ -std=c++11 -Ofast
-main = multiple_conductors.cc
-program = multiple_conductors
+programs = multiple_conductors integrating_test
 
-all :
-	$(MAKE) -C $(code); $(CC) -I $(code) $(main) $(libname) -o $(program)
-	
-clean : 
-	rm $(program); cd $(code); make clean
+multiple_conductors : multiple_conductors.cc
+	$(MAKE) -C $(code); $(CC) -I $(code) multiple_conductors.cc $(libname) -o multiple_conductors
+
+integrating_test : integrating_test.cc
+	$(MAKE) -C $(code); $(CC) -I $(code) integrating_test.cc $(libname) -o integrating_test
+
+clean :
+	rm $(programs); cd $(code); make clean

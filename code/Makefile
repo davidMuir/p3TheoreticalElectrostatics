@@ -1,6 +1,6 @@
 objects = ./Structures/Grid.o ./Algorithms/Finite_Difference.o ./Algorithms/Fast_Finite_Difference.o ./Algorithms/Asymmetric_Finite_Volume.o ./Algorithms/Algorithm.o ./Utils/Gnuplot.o ./Utils/Conductors.o ./Utils/BmpReader.o ./Utils/Animation.o
 libname = theoretical.a
-CC = g++ -std=c++11 -Ofast -g
+#CC = g++ -std=c++11 -Ofast -g
 	
 all : $(libname)
 	

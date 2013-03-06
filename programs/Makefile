@@ -4,11 +4,8 @@ CC = g++ -std=c++11 -Ofast
 main = multiple_conductors.cc
 program = multiple_conductors
 
-all : $(libname)
-	$(CC) -I $(code) $(main) $(libname) -o $(program)
-	
-$(libname) : ../code/Makefile
-	cd $(code); make
+all :
+	$(MAKE) -C $(code); $(CC) -I $(code) $(main) $(libname) -o $(program)
 	
 clean : 
 	rm $(program); cd $(code); make clean

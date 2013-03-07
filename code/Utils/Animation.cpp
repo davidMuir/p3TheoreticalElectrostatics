@@ -79,7 +79,7 @@ void Animation::create_data() {
 	ss << "data"<< iii << ".dat";
 	string str = ss.str();		
 	ofstream outdata;
-	outdata.open(str);
+	outdata.open(str.c_str());
 	if (outdata.is_open()) {
 		
 		if (iii!=0) {entry = sol.get_solution();}
@@ -107,7 +107,7 @@ void Animation::create_data() {
 	kk << "gnu_animate.gp";
 	string str = kk.str();		
 	ofstream outdata;
-	outdata.open(str);
+	outdata.open(str.c_str());
 	if (outdata.is_open()) {
 
 		for (int ii=0; ii<total_frames; ++ii)

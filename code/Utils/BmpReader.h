@@ -14,7 +14,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <memory>
+#include "../Structures/Grid.h"
 
 #define BMP_MAGIC_NUM 0x4D42		// Magic number for bmp file format
 // Compression Types
@@ -133,11 +133,19 @@ public:
 	 * @return						Number of pixels
 	 */
 	unsigned int get_size();
+
+	/**
+	 * @function 					get_grid
+	 * @brief						Creates a grid from the bmp file and returns it
+	 * @return						Grid object
+	 */
+	Grid get_grid(Boundary,int l,int r);
 	virtual ~Bmp_Reader();
 private:
-	BITMAPFILEHEADER fh;
-	BITMAPINFOHEADER ih;
-	RGBQUAD * pixels;
+	BITMAPFILEHEADER 	fh;
+	BITMAPINFOHEADER 	ih;
+	RGBQUAD 			*pixels;
+	Grid 				grid;
 };
 
 #endif /* BMPREADER_H_ */

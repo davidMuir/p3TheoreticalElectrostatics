@@ -60,8 +60,40 @@ Grid::Grid(unsigned int x, unsigned int y) {
 Grid::~Grid() {
 }
 
-//Set range (so that it's possible to use a different increment than 1). Not really used at the moment
 
+void Grid::recalculate_matrices(int x,int y) {
+	Coordinate coordinate;
+	vector<Coordinate> dummy_vec_coord;
+	unsigned int ix = x + 1;
+	unsigned int iy = y + 1;
+
+	while (ix <= x) {
+		for (int z = 0; z <= y; z++) {
+			coordinate.set_x((double) ix);
+			coordinate.set_y(z);
+			dummy_vec_coord.push_back(coordinate);
+		}
+		points.push_back(dummy_vec_coord);
+		dummy_vec_coord.clear();
+		ix++;
+	}
+	Grad dummy_grad;
+	vector<Grad> dummy_vec_grad;
+	dummy_grad.dx = 0;
+	dummy_grad.dy = 0;
+	ix = x + 1;
+	iy = y + 1;
+	while (iy > 0) {
+		dummy_vec_grad.push_back(dummy_grad);
+		iy--;
+	}
+	while (ix > 0) {
+		gradients.push_back(dummy_vec_grad);
+		ix--;
+	}
+}
+
+//Set range (so that it's possible to use a different increment than 1). Not really used at the moment
 void Grid::set_range(double x, double y) {
 	unsigned int x_size = points.size() - 1;
 	unsigned int y_size = points[0].size() - 1;
@@ -549,15 +581,6 @@ void Grid::get_surface_points_of_figure() {
 			}
 		}	
 }	
-//////
-//////
-//////
-
-// BOUNDARY CONDITION FUNCTIONS SHOULD BE WRITTEN BELOW
-
-//////
-//////
-//////
 
 //Think of this as a simple way to create a uniform electric field (or liquid flow)
 //from left to right or the other way around
@@ -1164,16 +1187,6 @@ void Grid::set_boundary_shape(int x, int y, int r, int z,
 	} ///end of switch
 }
 
-//////
-//////
-//////
-
-// BOUNDARY CONDITION FUNCTIONS SHOULD BE WRITTEN ABOVE
-
-//////
-//////
-//////
-
 double Grid::get_average_value(matrix &grid) {
 	double sum = 0.;
 	int entries = 0;
@@ -1334,13 +1347,24 @@ void Grid::print_figure_to(string filename, int number_of_figures) {
 						values[xss][yss].flag = 20000001;
 						for (;;) 
 							{
-							if ( values[xss-1][yss].flag == 10000000 ) {  values[xss-1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1;} 
-							else if ( values[xss-1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1; yss=yss+1; }
+							if ( values[xss-1][yss].flag == 10000000 ) {
+								values[xss-1][yss].flag = 20000000;
+								outdata << xss << "\t" << yss << endl;
+								xss++;
+							}
+							else if ( values[xss-1][yss+1].flag == 10000000 ) {
+								x_prev=xss;
+								y_prev=yss;
+								values[xss-1][yss+1].flag = 20000000;
+								outdata << xss << "\t" << yss << endl;
+								xss--;
+								yss++;
+							}
 							else if ( values[xss][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss+1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; yss=yss+1;}
 							else if ( values[xss+1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss+1;} 
 							else if ( values[xss+1][yss].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1;} 
 							else if ( values[xss+1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss-1;} 
-							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss; yss=yss-1;} 
+							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; yss=yss-1;}
 							else if ( values[xss-1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss-1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; xss=xss-1; yss=yss-1;} 
 							else 
 								{

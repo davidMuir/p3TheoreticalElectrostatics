@@ -13,24 +13,71 @@ Bmp_Reader::Bmp_Reader(std::string filename) {
     	fread(&fh,sizeof(BITMAPFILEHEADER),1,file);
     	fread(&ih,sizeof(BITMAPINFOHEADER),1,file);
     	fseek(file,fh.bfOffBits,SEEK_SET);
-        std::cout << fh.bfType << " " << fh.bfSize << " " << fh.bfReserved1 << fh.bfReserved2 << " " << fh.bfOffBits << std::endl;
-        std::cout << ih.biSize << " " << ih.biWidth << " " << ih.biHeight << " " << ih.biPlanes << " " << ih.biBitCount
-        		<< " "<< ih.biCompression << " " << ih.biSizeImage << " " << ih.biXPelsPerMeter << " " << ih.biYPelsPerMeter
-        		<< " " << ih.biClrUsed<< " " << ih.biClrImportant << std::endl;
         pixels = new RGBQUAD[ih.biWidth*ih.biHeight];
-        for (RGBQUAD * i = pixels; i!=pixels+ih.biWidth*ih.biHeight;++i) {
-        	if (ih.biBitCount==8) {
-        		fread( &(*i).rgbReserved, 1, 1, file );
+        int pad = ih.biWidth%4;
+        char * dump[pad*ih.biHeight];
+        for (RGBQUAD * h = pixels;h!=pixels+ih.biWidth*ih.biHeight;h+=(ih.biWidth)) {
+        	for (RGBQUAD * i = h; i!=h+(ih.biWidth);++i) {
+        		if (ih.biBitCount==8) {
+        			fread( &(*i).rgbReserved, 1, 1, file );
+        		}
+        		else if (ih.biBitCount==24) {
+        			fread( &(*i), 3, 1, file );
+        		}
+        		else if(ih.biBitCount==32) {
+        			fread( &(*i),4, 1, file );
+        		}
         	}
-        	else if (ih.biBitCount==24) {
-        		fread( &(*i), 3, 1, file );
-        	}
-        	else if(ih.biBitCount==32) {
-        		fread( &(*i),4, 1, file );
-        	}
+        	fread(&dump,pad,1,file);
         }
         fclose(file);
     }
+}
+
+
+Grid Bmp_Reader::get_grid(Boundary b,int l,int r) {
+	grid = Grid(ih.biWidth,ih.biHeight);
+	grid.set_flow(-50,50);
+	matrix g = grid.get_values();
+	matrix mat;
+	Value boundaryVal,val;
+	val.value = 0;
+	val.accessible = 0;
+	val.boundary = 0;
+	val.flag = 0;
+	boundaryVal = val;
+	boundaryVal.boundary = true;
+	if (b==conductor) boundaryVal.flag = 1;
+	std::vector<Value> row;
+	for (RGBQUAD * h = pixels;h!=pixels+ih.biWidth*ih.biHeight;h+=(ih.biWidth)) {
+		row.clear();
+		for (RGBQUAD * i = h; i!=h+(ih.biWidth);++i) {
+			if ( (ih.biBitCount>8 && ((*i).rgbBlue < 0xee || (*i).rgbGreen < 0xee || (*i).rgbBlue < 0xee || (ih.biBitCount==32 && (*i).rgbReserved < 0xee)))
+					|| (ih.biBitCount==8 && (*i).rgbReserved < 0xee) ) {
+				row.push_back(boundaryVal);
+			}
+			else {
+				row.push_back(val);
+			}
+		}
+		mat.push_back(row);
+	}
+//	int value = grid.get_average_value(g);
+	int value = 0;
+	for (int x = 1; x < g.size()-1; x++) {
+		for (int y = 1; y < g[0].size()-1; y++) {
+			if (mat[x][y].boundary==1) {
+				g[x][y].boundary = 1;
+				g[x][y].value = value;
+				if (b==conductor) g[x][y].flag = 1;
+			}
+		}
+	}
+
+
+	grid.set_values(g);
+//	grid.recalculate_matrices(ih.biWidth,ih.biHeight);
+	return grid;
 }
 
 unsigned int Bmp_Reader::get_height() {

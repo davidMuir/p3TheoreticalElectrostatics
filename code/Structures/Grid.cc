@@ -1334,9 +1334,9 @@ void Grid::print_figure_to(string filename, int number_of_figures) {
 			{
 			outdata << "# Contour " << iii << ", label: \t " << "figure No " << iii+1 << endl;
 			bool finished=0;			
-			for (int y = 1; y < values[0].size()-1 && !finished; ++y) 
+			for (int y = 1; y < values[0].size()-1 && !finished; y++) 
 				{	
-				for (int x = 1; x < values.size()-1 && !finished; ++x) 
+				for (int x = 1; x < values.size()-1 && !finished; x++) 
 					{
 					if ( values[x][y].flag == 10000000 ) 
 						{
@@ -1347,13 +1347,13 @@ void Grid::print_figure_to(string filename, int number_of_figures) {
 						values[xss][yss].flag = 20000001;
 						for (;;) 
 							{
-							if ( values[xss-1][yss].flag == 10000000 ) {  values[xss-1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1;} 
+							if ( values[xss-1][yss].flag == 10000000 ) {  x_prev=xss; y_prev=yss; values[xss-1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1;} 
 							else if ( values[xss-1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1; yss=yss+1; }
 							else if ( values[xss][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss+1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; yss=yss+1;}
 							else if ( values[xss+1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss+1;} 
 							else if ( values[xss+1][yss].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1;} 
 							else if ( values[xss+1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss-1;} 
-							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss; yss=yss-1;} 
+							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; yss=yss-1;} 
 							else if ( values[xss-1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss-1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; xss=xss-1; yss=yss-1;} 
 							else 
 								{
@@ -1365,8 +1365,7 @@ void Grid::print_figure_to(string filename, int number_of_figures) {
 									finished =1;
 									break;
 									}
-								else { 
-									xss=x_prev; yss=y_prev; }
+								else { xss=x_prev; yss=y_prev; }
 								}
 							}
 						}

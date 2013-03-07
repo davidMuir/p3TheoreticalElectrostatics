@@ -55,7 +55,7 @@
 
 
 %Title of paper (I know it isn't very creative but it isn't supposed to be. We can definitely discuss this! 
-\title{Zero Net Charge Conductors Of Various Shapes In A Uniform Electrostatic Field}
+\title{Numerical solutions to the Laplace Equation applied to electrostatic fields}
 
 
 %Us
@@ -69,7 +69,7 @@
 
 \author{Jevgeny Klochan}
 
-\author{Stephen Shepstone: }
+\author{Stephen Shepstone }
 
 
 \affiliation{University Of Glasgow}
@@ -101,7 +101,7 @@ Intro...
 %THEORY AND ALGORITHMS
 \section{Theory \label{sec:the}}
 
-\subsection*{Solving Laplace's Equation in two dimensions}
+\subsection*{Solving the Laplace Equation in two dimensions}
 We'll solve Laplace's Equation in polar coordinates for the scalar field $\Phi(r, \theta)$:
 \[ \left( r \Phi_r \right)_r + \frac{1}{r} \left(\Phi_\theta \right)_\theta = 0 \]
 Assuming we can separate variables such that $\Phi(r, \theta) = R(r)\Theta(\theta)$:
@@ -166,7 +166,7 @@ Consider two charges, $q_+$ and $q_-$, separated by $l$. The total potential at 
 \[ \approx \frac{q}{4 \pi \epsilon_0} \left( \frac{l \sin\theta}{r^2} \right) \]
 Here $r$ is the distance from the midpoint between the two charges to $\bar{r}$. Note that this potential is proportional to $1/r^2$ unlike the electric potential from a point charge, which limits its effective range considerably.
 
-Gauge theory is a powerful tool for analysing fields where the observable quantities are invariant under certain transformations of the field itself. By Noether's theorem, these symmetries all have corresponding conservation laws: the conserved Noether currents. The symmetry group of electromagnetism is $U(1)$, which requires (for local gauge invariance) that its gauge boson is massless and hence gives the force infinite range. Gauge invariance is here the symmetry that results in conservation of charge. The same symmetry is actually required for the weak force as well, which is why the Higgs mechanism was invented to introduce a way to consistently give mass to the $Z$ and $W^{\pm}$ bosons and hence limit the range of the weak force without breaking gauge invariance. In our case we are interested in gauge theory because it allows us to predict that meaningfully limiting the range of the electromagnetic force by using a finite grid size with the assumption that the conductor won't change the field at the 
+Gauge theory is a powerful tool for analysing fields where the observable quantities are invariant under certain transformations of the field itself \cite{gaugetheory1}. By Noether's two theorems, these symmetries all have corresponding conservation laws: the conserved Noether currents \footnote{Note that there are two theorems to deal with global and local symmetries separately. Global symmetries always lead to conserved currents, while local symmetries do so when we know that the gauge fields belong to a symmetry group. See for example \cite{gaugetheory2}.}. The symmetry group of electromagnetism is $U(1)$, and for local gauge invariance requires that its gauge boson is massless and hence gives the force infinite range. Local gauge invariance is here the symmetry that results in conservation of charge. The same symmetry is of course required for the weak force as well to make it not break charge conservation, which is why the Higgs mechanism was invented to introduce a way to consistently give mass to the $Z$ and $W^{\pm}$ bosons and hence limit the range of the weak force without breaking gauge invariance \cite{gaugetheory3}. In our case we are interested in gauge theory because it allows us to predict that meaningfully limiting the range of the electromagnetic force by using a finite grid size with the assumption that the conductor won't change the field at the 
 boundaries will break conservation of charge. 'Meaningfully' here refers to the fact that the potential from the conductor will tend to 0 quickly as we move further away from it due to the inverse square law, so we can estimate the field to be effectively zero at some finite distance away. This allows us to justify the use of the finite grid sizes we require to make sensible numerical simulations, and gives us a good variable to use for determining how small we can make the grid in comparison to the conductor without creating unphysical solutions: conservation of charge. The dipole potential calculation also tells us that the required size of the grid varies roughly linearly with the length $l$ of the conductor in the direction of the field, whereas the size in the orthogonal direction to the field is less important.
 
 \subsection*{Multiple conductors}
@@ -250,24 +250,26 @@ Results...
 Adrian...
 \end{acknowledgments}
 
+\begin{thebibliography}{5}
+
+\bibitem{gaugetheory1} Becchi, C., 1997, \emph{Introduction to Gauge Theories}, arXiv:hep-ph/9705211.
+
+\bibitem{gaugetheory3} Bednyakov, V.A., Giokaris, N.D., Bednyakov, A.V., 2007, \emph{On Higgs mass generation mechanism in the Standard Model}, 	arXiv:hep-ph/0703280.
+
+\bibitem{gaugetheory2} Brading, K., Brown, H., 2000, \emph{Noether's Theorems and Gauge Symmetries}, arXiv:hep-th/0009058.
+
+%The following paper has a bunch of comparisons between numerical and analytical solutions... Might want
+%to give it a citation in the errors part?
+%\bibitem{eulerfluids} Trac, H. and Pen, U., 2002, A primer on Eulerian computational fluid dynamics for astrophysics, arXiv:astro-ph/0210611.
+
+
+\end{thebibliography}
+
+
 
 \appendix*
 \section{Full analytical solution}
 \section{Code}
-
-
-% I thought we wouldn't need Bibtex because I doubt we will have many references. With that in mind,
-% it is probably a better idea to type references in manually.
-
-
-%BIBLIOGRAPHY-I have made a basic template for references but here is a good link to a page for making reference if anyone can't remember how to do references: 
-% http://tim.thorpeallen.net/Courses/Reference/Citations.html
-\begin{thebibliography}{5}
-
-\bibitem[Reflabel]  Names of Authors, year, ``name of book,'' publisher, city {\bf 999}.
-
-
-\end{thebibliography}
 
 
 \end{document}

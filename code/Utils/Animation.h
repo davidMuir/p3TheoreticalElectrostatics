@@ -25,6 +25,7 @@ color eq_color;
 struct figure_outline{
 bool access;  // 0 if you dont need figure outline
 color figure_color;
+string type;  // filledcurve / points / lines
 };
 
 
@@ -45,7 +46,7 @@ void set_iterations(int it);
 void set_time(double t);
 void set_algorithm(Algo algo);
 void set_lines(bool a, color b, int c);
-void set_figure(bool a, color b);
+void set_figure(bool a, color b, string c);
 void set_heatmap(bool a);
 void create_data();
 void delete_data();

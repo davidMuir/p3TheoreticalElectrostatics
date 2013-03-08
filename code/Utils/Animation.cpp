@@ -28,9 +28,10 @@ void Animation::set_lines(bool a, color b, int c) {
 	lines.number_of_lines=c;
 	}
 
-void Animation::set_figure(bool a, color b) {
+void Animation::set_figure(bool a, color b, string c) {
 	figure.access =a;
 	figure.figure_color=b;
+	figure.type=c;
 	}
 void Animation::set_heatmap(bool a) {
 	heatmap = a;
@@ -43,6 +44,7 @@ Animation::Animation(Grid input_grid) {
 	alg=FFD;
 	figure.access = 1;
 	figure.figure_color = black;
+	figure.type = "filledcurve";
 	lines.access = 1;
 	lines.eq_color = black;
 	lines.number_of_lines = 11;
@@ -98,7 +100,7 @@ void Animation::create_data() {
 	stringstream bbb;
 	bbb << "eq_lines"<< iii << ".dat";
 	string str2 = bbb.str();	
-	sol2.equip_values(lines.number_of_lines,100,100,100,1,1);
+	sol2.equip_values(lines.number_of_lines,entry.get_xmax()-1,entry.get_ymax()-1,entry.get_value(entry.get_xmax()-1,entry.get_ymax()-1),1,1);
 	sol2.print_contours_to(str2, lines.number_of_lines);
 	}
 	}
@@ -114,19 +116,19 @@ void Animation::create_data() {
 		{
 			if (heatmap) {
 				if (lines.access && figure.access) 
-					{outdata << "plot 'data" << ii << ".dat' with image, 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 <<", 'figure.dat' with filledcurve ls " << figure.figure_color -3 << endl;}
+					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\", 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 <<" notitle, 'figure.dat' with "<< figure.type <<" ls " << figure.figure_color -3 << " notitle " << endl;}
 				else if (figure.access)
-					{outdata << "plot 'data" << ii << ".dat' with image, 'figure.dat' with filledcurve ls " << figure.figure_color -3 << endl;}
+					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\", 'figure.dat' with "<< figure.type <<" ls " << figure.figure_color -3 << " notitle "  << endl;}
 				else if (lines.access)
-					{outdata << "plot 'data" << ii << ".dat' with image, 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 << endl;}
+					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\", 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 << " notitle "  << endl;}
 				else 
-					{outdata << "plot 'data" << ii << ".dat' with image" << endl;}
+					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\"" << endl;}
 			}
 			
 			else if (lines.access && figure.access) 
-				{outdata << "plot 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 <<", 'figure.dat' with filledcurve ls " << figure.figure_color -3 << endl;}
+				{outdata << "plot 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 <<", 'figure.dat' with "<< figure.type <<" ls " << figure.figure_color -3 << " notitle "  << endl;}
 			else if (lines.access)
-				{outdata << "plot 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 << endl;}
+				{outdata << "plot 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 << " notitle "  << endl;}
 		
 		}
 		outdata.close();
@@ -140,6 +142,11 @@ void Animation::animate() {
 	gp.add_command("set term gif animate");
 	gp.add_command("set output 'animation.gif'");
 	gp.add_command("set palette defined");
+	gp.add_command("set key opaque");
+	stringstream bbb;
+	bbb << "set key at "<< entry.get_xmax()-1 << "," << entry.get_ymax()-1;
+	string aaa = bbb.str();	
+	gp.add_command(aaa.c_str());
 	gp.add_command("load 'gnu_animate.gp'");
 	gp.sendString();
 	}

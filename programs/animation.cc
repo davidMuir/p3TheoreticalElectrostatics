@@ -14,8 +14,8 @@ using namespace std;
 int main() {
 
 	int N = 17;   // number of eq.p. lines
-	int n = 100;
-	int m = 100;
+	int n = 200;
+	int m = 200;
 
 	double Emax=100;
 	double Emin=-100;
@@ -23,12 +23,12 @@ int main() {
 	Grid first_grid(n,m);
 
 	first_grid.set_flow(Emax, Emin);
-	first_grid.set_boundary_shape(50,50,20,0,0,circle);
+	first_grid.set_boundary_shape(100,100,40,0,0,circle);
 	first_grid.print_figure_to("figure.dat", 1);
 
 	Animation anim(first_grid);
 //	anim.set_lines(1, white, N); // 0 - if you dont need eq.p lines. possible colors: black, white, green, blue, violet, red
-//	anim.set_figure(1, violet);  // same here
+	anim.set_figure(1, black, "lines");  // same here for first two variables. possible types of figure: "filledcurve" , "lines" , "points"
 //	anim.set_iterations(4000);
 //	anim.set_time(10.0); // for which your animation will run, in seconds
 //	anim.set_precision(0.00001);
@@ -37,5 +37,6 @@ int main() {
 	anim.create_data(); 
 	anim.animate();
 	anim.delete_data();
+ 
 }
 

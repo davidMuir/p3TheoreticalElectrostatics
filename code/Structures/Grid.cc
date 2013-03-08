@@ -1347,24 +1347,13 @@ void Grid::print_figure_to(string filename, int number_of_figures) {
 						values[xss][yss].flag = 20000001;
 						for (;;) 
 							{
-							if ( values[xss-1][yss].flag == 10000000 ) {
-								values[xss-1][yss].flag = 20000000;
-								outdata << xss << "\t" << yss << endl;
-								xss++;
-							}
-							else if ( values[xss-1][yss+1].flag == 10000000 ) {
-								x_prev=xss;
-								y_prev=yss;
-								values[xss-1][yss+1].flag = 20000000;
-								outdata << xss << "\t" << yss << endl;
-								xss--;
-								yss++;
-							}
+							if ( values[xss-1][yss].flag == 10000000 ) {  x_prev=xss; y_prev=yss; values[xss-1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1;} 
+							else if ( values[xss-1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1; yss=yss+1; }
 							else if ( values[xss][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss+1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; yss=yss+1;}
 							else if ( values[xss+1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss+1;} 
 							else if ( values[xss+1][yss].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1;} 
 							else if ( values[xss+1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss-1;} 
-							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; yss=yss-1;}
+							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; yss=yss-1;} 
 							else if ( values[xss-1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss-1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; xss=xss-1; yss=yss-1;} 
 							else 
 								{
@@ -1400,7 +1389,6 @@ void Grid::print_points_to(string filename) {
 	if (outdata.is_open()) {
 		for (int x = 0; x < values.size(); x++) {
 			for (int y = 0; y < values[0].size(); y++) {
-
 				outdata << x << "\t" << y << "\t" << values[x][y].value << endl;
 			}
 		}

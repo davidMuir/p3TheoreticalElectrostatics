@@ -1,0 +1,102 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{default}
+\usepackage{animate}
+\usepackage{graphicx}
+\usepackage{color}
+\graphicspath{{../plots/}}
+\usepackage{textpos}
+\definecolor{light-gray}{gray}{0.95}
+
+\logo{\includegraphics[height=0.8cm]{GlasgowLogo.png}\vspace{220pt}}
+
+\usetheme{CambridgeUS}
+\usecolortheme{lily}
+
+\setbeamercolor{footline}{bg=gray}
+
+\setbeamertemplate{frametitle}
+{
+\begin{flushleft}
+\color{black}
+\textbf{\normalsize\insertframetitle}
+\end{flushleft}
+}
+
+\setbeamertemplate{titlepage}
+{
+\begin{flushleft}
+\color{black}
+\textbf{\normalsize\insertframetitle}
+\end{flushleft}
+}
+
+\defbeamertemplate*{title page}{customized}
+{
+  \centering{
+  \fontsize{15pt}{12pt}\textbf\inserttitle\par
+  \insertsubtitle\par
+  \bigskip
+  \insertauthor\par
+  \insertdate\par
+  }
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{footline}%
+    \usebeamerfont{title in head/foot}{\insertframenumber{} / \inserttotalframenumber}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\setbeamertemplate{headline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{footline}%
+    \usebeamerfont{title in head/foot}\inserttitle\hspace*{3em}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
+\setbeamertemplate{navigation symbols}{}
+
+\title{Numerical solutions to electrostatic problems: justification and constraints}
+\author{Karl Nordstrom}
+\institute{University of Glasgow}
+\date{March 21st, 2013}
+
+\begin{document}
+
+{
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\begin{frame}
+  \titlepage
+\end{frame}
+\addtocounter{framenumber}{-1}
+
+}
+
+\section{Introduction}
+
+\begin{frame} 
+  \graphicspath{{../plots/}}
+  \frametitle{Example of animation}
+  \animategraphics[controls,width=.5\textwidth]{1}{./animations/my_example_animation_}{0}{49}
+\end{frame}
+
+
+\end{document}

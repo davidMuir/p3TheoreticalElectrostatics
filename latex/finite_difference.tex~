@@ -1,0 +1,27 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{times}
+
+\begin{document}
+
+Consider the arbitrary function \(f(x)\). The taylor series of this function about the value \(x=a\) is;
+
+\[f(x) = f(a) +(x-a)f^{(1)}(x)+\frac{(x-a)^{2}f^{(2)}(x)}{2!}+\frac{(x-a)^{3}f^{(3)}(x)}{3!}+...\]
+
+Let \(\x=x_i + h\) \(a=x_i\) then;
+
+\[f(x_i+h)=f(x_i)+hf^{(1)}(x_i)+\frac{h^2f^{(2)}(x_i)}{2!}+\frac{h^3f^{(3)}(x_i)}{3!}+...\]
+
+Similarly;
+
+\[f(x_i-h)=f(x_i)-hf^{(1)}(x_i)+\frac{h^2f^{(2)}(x_i)}{2!}-\frac{h^3f^{(3)}(x_i)}{3!}+...\]
+Therefore;
+
+\[f(x_i+h)+f(x_i-h) = 2f(x_i) + h^2f^{(2)}(x_i) + \frac{h^4}{12}f^{(4)}(x_i)+...\]
+
+If h is very small then only the first two terms are significant and the later terms can be ignored to yield a good approximation.
+
+\[f(x_i+h)+f(x_i-h) \approx 2f(x_i) + h^2f^{(2)}(x_i)\]
+
+So, by rearranging, the second order derivative of a function at \(x_i\) can be approximated by;
+\[\frac{d^2f}{dx^2}\Bigg| \]
+

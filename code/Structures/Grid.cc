@@ -9,7 +9,7 @@ int Grid::round_own(double a) {
 }
 
 Grid::Grid() :
-										Grid::Grid(50, 50) {
+			Grid::Grid(50, 50) {
 }
 
 Grid::Grid(unsigned int x, unsigned int y) {
@@ -17,9 +17,10 @@ Grid::Grid(unsigned int x, unsigned int y) {
 	unsigned int iy = y + 1;
 	vector<Value> dummy_vec_val;
 	Value dummy_val;
-	dummy_val.value = 1;
+	dummy_val.value = 0;
 	dummy_val.boundary = false;
 	dummy_val.accessible = true;
+	dummy_val.flag = 0;
 	while (iy > 0) {
 		dummy_vec_val.push_back(dummy_val);
 		iy--;
@@ -59,8 +60,40 @@ Grid::Grid(unsigned int x, unsigned int y) {
 Grid::~Grid() {
 }
 
-//Set range (so that it's possible to use a different increment than 1). Not really used at the moment
 
+void Grid::recalculate_matrices(int x,int y) {
+	Coordinate coordinate;
+	vector<Coordinate> dummy_vec_coord;
+	unsigned int ix = x + 1;
+	unsigned int iy = y + 1;
+
+	while (ix <= x) {
+		for (int z = 0; z <= y; z++) {
+			coordinate.set_x((double) ix);
+			coordinate.set_y(z);
+			dummy_vec_coord.push_back(coordinate);
+		}
+		points.push_back(dummy_vec_coord);
+		dummy_vec_coord.clear();
+		ix++;
+	}
+	Grad dummy_grad;
+	vector<Grad> dummy_vec_grad;
+	dummy_grad.dx = 0;
+	dummy_grad.dy = 0;
+	ix = x + 1;
+	iy = y + 1;
+	while (iy > 0) {
+		dummy_vec_grad.push_back(dummy_grad);
+		iy--;
+	}
+	while (ix > 0) {
+		gradients.push_back(dummy_vec_grad);
+		ix--;
+	}
+}
+
+//Set range (so that it's possible to use a different increment than 1). Not really used at the moment
 void Grid::set_range(double x, double y) {
 	unsigned int x_size = points.size() - 1;
 	unsigned int y_size = points[0].size() - 1;
@@ -142,6 +175,17 @@ grad_matrix Grid::get_gradients() {
 	return gradients;
 }
 
+double Grid::get_value(unsigned x, unsigned y) {
+	return values[x][y].value;
+} 
+
+int Grid::get_xmax() {
+	return values.size();
+}
+
+int Grid::get_ymax() {
+	return values[0].size();
+}
 void Grid::set_coordinates(coordinate_matrix coords) {
 	points = coords;
 }
@@ -187,7 +231,9 @@ bool Grid::compare(Value nn, Value mm) {
 void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 		int menu) {
 
+	set_flags_to_zero();
 	double dx = (double) xmax / (n - 1);
+	int flag_numb = 1;
 
 	for (double ii = 0; ii <= xmax; ii = ii + dx) {
 		int i = round_own(ii);
@@ -195,10 +241,10 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 		int yi = 0;
 		Value prev_prev;
 		prev_prev.value = 999.999;
-		prev_prev.flag = 1;
+		prev_prev.flag = flag_numb;
 		Value prev;
 		prev.value = 999.998;
-		prev.flag = 1;
+		prev.flag = flag_numb;
 		Value current = values[xi][yi];
 		double eq_val = values[xi][yi].value;
 		double diff_left = 100;
@@ -210,14 +256,17 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 			diff_right = abs(values[xi + 1][yi].value - eq_val);
 		}
 		double diff_up = abs(values[xi][yi + 1].value - eq_val);
-		values[xi][yi].flag = 1;
+		values[xi][yi].flag = flag_numb;
 
 		if (diff_up <= diff_right && diff_up <= diff_left) {
-			check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev, current);
-		} else if (diff_right <= diff_left) {
-			check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev, current);
-		} else {
-			check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev, current);
+			check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev, current, flag_numb);
+
+		} else if (diff_right < diff_left) {
+			check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev, current, flag_numb);
+		} else if (diff_right == diff_left) {if (abs(values[xi-1][yi+1].value - eq_val) > abs(values[xi+1][yi+1].value - eq_val)) {check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev, current, flag_numb);} else {check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,current, flag_numb);}}
+
+		 else {
+			check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev, current, flag_numb);
 		}
 
 		for (;;) {
@@ -231,10 +280,10 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 				diff_up = abs(values[xi][yi + 1].value - eq_val);
 				if (diff_up <= diff_left) {
 					check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev,
-							current);
+							current, flag_numb);
 				} else {
 					check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
-							current);
+							current, flag_numb);
 				}
 			}
 
@@ -247,10 +296,10 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 				diff_up = abs(values[xi][yi + 1].value - eq_val);
 				if (diff_up <= diff_right) {
 					check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev,
-							current);
+							current, flag_numb);
 				} else {
 					check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev,
-							current);
+							current, flag_numb);
 				}
 			} else {
 				diff_left = abs(values[xi - 1][yi].value - eq_val);
@@ -259,13 +308,15 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 
 				if ((diff_up <= diff_right) && (diff_up <= diff_left)) {
 					check_and_mark_cells(xi, yi, 0, 1, prev_prev, prev,
-							current);
-				} else if (diff_right <= diff_left) {
+							current, flag_numb);
+				} else if (diff_right < diff_left) {
 					check_and_mark_cells(xi, yi, 1, 0, prev_prev, prev,
-							current);
+							current, flag_numb);
+				} else if (diff_right == diff_left) {if (abs(values[xi-1][yi+1].value - eq_val) > abs(values[xi+1][yi+1].value - eq_val)) {check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev, current, flag_numb);} else {check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,current, flag_numb);}
+
 				} else {
 					check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
-							current);
+							current, flag_numb);
 				}
 			}
 
@@ -273,7 +324,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 				break;
 			}
 
-			// extra code for case if the eq. line goes through the figure
+// extra code for case if the eq. line goes through the figure
 
 			if (xi != 0 && xi != xmax && yi != 0 && yi != ymax
 					&& values[xi][yi].boundary == 1) {
@@ -282,10 +333,10 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 				int yi = ymax;
 				Value prev_prev;
 				prev_prev.value = 999.999;
-				prev_prev.flag = 1;
+				prev_prev.flag = flag_numb;
 				Value prev;
 				prev.value = 999.998;
-				prev.flag = 1;
+				prev.flag = flag_numb;
 				Value current = values[xi][yi];
 				double eq_val = values[xi][yi].value;
 				double diff_left = 100;
@@ -297,17 +348,19 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 					abs(values[xi - 1][yi].value - eq_val);
 				}
 				double diff_up = abs(values[xi][yi - 1].value - eq_val);
-				values[xi][yi].flag = 1;
+				values[xi][yi].flag = flag_numb;
 
 				if (diff_up <= diff_right && diff_up <= diff_left) {
 					check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
-							current);
-				} else if (diff_right <= diff_left) {
+							current, flag_numb);
+				} else if (diff_right < diff_left) {
 					check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
-							current);
-				} else {
+							current, flag_numb);
+				} else if (diff_right == diff_left) {if (abs(values[xi+1][yi-1].value - eq_val) > abs(values[xi-1][yi-1].value - eq_val)) {check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev, current, flag_numb);} else {check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,current, flag_numb);} } 
+
+				else {
 					check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,
-							current);
+							current, flag_numb);
 				}
 
 				for (;;) {
@@ -321,12 +374,12 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 						diff_up = abs(values[xi][yi - 1].value - eq_val);
 						if (diff_up <= diff_left) {
 							check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
-									current);
+									current, flag_numb);
 						}
 
 						else {
 							check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,
-									current);
+									current, flag_numb);
 						}
 					}
 
@@ -339,12 +392,12 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 						diff_up = abs(values[xi][yi - 1].value - eq_val);
 						if (diff_up <= diff_right) {
 							check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
-									current);
+									current, flag_numb);
 						}
 
 						else {
 							check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
-									current);
+									current, flag_numb);
 						}
 					} else {
 						diff_left = abs(values[xi + 1][yi].value - eq_val);
@@ -353,15 +406,17 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 
 						if ((diff_up <= diff_right) && (diff_up <= diff_left)) {
 							check_and_mark_cells(xi, yi, 0, -1, prev_prev, prev,
-									current);
+									current, flag_numb);
 						}
 
-						else if (diff_right <= diff_left) {
+						else if (diff_right < diff_left) {
 							check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,
-									current);
+									current, flag_numb);
+						} else if (diff_right == diff_left) {if (abs(values[xi+1][yi-1].value - eq_val) > abs(values[xi-1][yi-1].value - eq_val)) {check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev, current, flag_numb);} else {check_and_mark_cells(xi, yi, -1, 0, prev_prev, prev,current, flag_numb);} 
+
 						} else {
 							check_and_mark_cells(xi, yi, +1, 0, prev_prev, prev,
-									current);
+									current, flag_numb);
 						}
 					}
 					if (xi != 0 && xi != xmax && yi != 0 && yi != ymax
@@ -375,24 +430,26 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 				break;
 			}
 		}
+	++flag_numb;	
 	}
 
-	// Makes the line wider if line_width is set to be 2 or higher.
+
+// Makes the line wider if line_width is set to be 2 or higher.
 
 	if (line_width >= 2) {
 		for (int xs = 0; xs < values.size(); xs++) {
 			for (int ys = 0; ys < values[0].size(); ys++) {
-				if (values[xs][ys].flag == 1) {
+				if (values[xs][ys].flag != 0) {
 					int iii = 1;
 					int kkk = 1;
 					for (int i = 1; i <= line_width - 1; ++i) {
 						if (iii % 2 == 1 || xs == 0) {
 							if (xs + kkk <= xmax) {
-								values[xs + kkk][ys].flag = 2;
+								values[xs + kkk][ys].flag = 1000001;
 							}
 						} else if (iii % 2 == 0 || xs == xmax) {
 							if (xs - kkk >= 0) {
-								values[xs - kkk][ys].flag = 2;
+								values[xs - kkk][ys].flag = 1000001;
 								++kkk;
 							}
 						}
@@ -403,7 +460,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 		}
 	}
 
-	// This part of the code outputs the values for each point depending on value of "menu" set by user
+// This part of the code outputs the values for each point depending on value of "menu" set by user
 
 	if (menu == 1) {
 
@@ -411,7 +468,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 			for (int ys = 0; ys < values[0].size(); ys++) {
 				if (values[xs][ys].boundary == 1) {
 					values[xs][ys].value = 1;
-				} else if ((values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+				} else if ((values[xs][ys].flag != 0)) {
 					values[xs][ys].value = 2;
 				} else {
 					values[xs][ys].value = 0;
@@ -422,7 +479,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 					values[xs][ys].value = 0;
 				} else if ((xs == 0 || ys == 0 || xs == values.size() - 1
 						|| ys == values[0].size() - 1)
-						&& (values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+						&& (values[xs][ys].flag !=0)) {
 					values[xs][ys].value = 2;
 				}
 			}
@@ -435,7 +492,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 			for (int ys = 0; ys < values[0].size(); ys++) {
 				if (values[xs][ys].boundary == 1) {
 					values[xs][ys].value = 1;
-				} else if ((values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+				} else if (values[xs][ys].flag !=0) {
 					values[xs][ys].value = 1;
 				} else {
 					values[xs][ys].value = 0;
@@ -446,7 +503,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 					values[xs][ys].value = 0;
 				} else if ((xs == 0 || ys == 0 || xs == values.size() - 1
 						|| ys == values[0].size() - 1)
-						&& (values[xs][ys].flag == 1 || values[xs][ys].flag == 2)) {
+						&& (values[xs][ys].flag !=0)) {
 					values[xs][ys].value = 1;
 				}
 			}
@@ -461,7 +518,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 						&& ys != values[0].size() - 1
 						&& values[xs][ys].boundary == 1) {
 					values[xs][ys].value = 2 * Emax;
-				} else if ((values[xs][ys].flag != 1 && values[xs][ys].flag != 2)) {
+				} else if (values[xs][ys].flag ==0) {
 					values[xs][ys].value = (-2) * Emax;
 				}
 				if ((xs == 0 || ys == 0 || xs == values.size() - 1
@@ -477,7 +534,7 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 
 		for (int xs = 0; xs < values.size(); xs++) {
 			for (int ys = 0; ys < values[0].size(); ys++) {
-				if ((values[xs][ys].flag != 1 && values[xs][ys].flag != 2)
+				if ((values[xs][ys].flag == 0)
 						&& ((xs != 0 && ys != 0 && xs != values.size() - 1
 								&& ys != values[0].size() - 1)
 								&& (values[xs][ys].boundary != 1))) {
@@ -490,29 +547,40 @@ void Grid::equip_values(int n, int xmax, int ymax, double Emax, int line_width,
 				}
 			}
 		}
+		
 	}
-
 }
 
+// small function used equip_values(...);
+
 void Grid::check_and_mark_cells(int &xa, int &ya, int deltax, int deltay,
-		Value &prev_prev2, Value &prev2, Value &current2) {
+		Value &prev_prev2, Value &prev2, Value &current2, int flag_numb2) {
 	xa = xa + deltax;
 	ya = ya + deltay;
-	values[xa][ya].flag = 1;
+	values[xa][ya].flag = flag_numb2;
 	prev_prev2 = prev2;
 	prev2 = current2;
 	current2 = values[xa][ya];
 }
 
-//////
-//////
-//////
+// set all flags to zero
 
-// BOUNDARY CONDITION FUNCTIONS SHOULD BE WRITTEN BELOW
+void Grid::set_flags_to_zero() {
 
-//////
-//////
-//////
+	for (int xs = 0; xs < values.size(); xs++) 
+		for (int ys = 0; ys < values[0].size(); ys++) 
+			values[xs][ys].flag = 0; 
+	}
+
+// gets the outline of the figure; used in print_figure_to(...) 
+
+void Grid::get_surface_points_of_figure() {
+		for (int xs = 1; xs < values.size()-1; xs++) {
+			for (int ys = 1; ys < values[0].size()-1; ys++) {
+				if ((values[xs][ys].boundary == 1) && !( (values[xs-1][ys].boundary == 0 && values[xs][ys-1].boundary == 0 && values[xs+1][ys].boundary == 0 && values[xs][ys+1].boundary == 0 )) && !((values[xs-1][ys].boundary == 1 && values[xs][ys-1].boundary == 1 && values[xs+1][ys].boundary == 1 && values[xs][ys+1].boundary == 1 ) ) ) { values[xs][ys].flag = 10000000;}
+			}
+		}	
+}	
 
 //Think of this as a simple way to create a uniform electric field (or liquid flow)
 //from left to right or the other way around
@@ -537,6 +605,11 @@ void Grid::set_circle_noflow(int x, int y, unsigned int r, double val) {
 			}
 		}
 	}
+}
+
+void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
+		Shape shape) {
+	set_boundary_shape(x1,y1,r,z,val,shape,0,0,0,0,0,0);
 }
 
 void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
@@ -653,10 +726,9 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 
 	///RECTANGLE
 	case rectangle: {
-		int x1 = x1;
-		int x2 = y1;
-		int y1 = r;
-		int y2 = z;
+		x2 = y1;
+		y1 = r;
+		y2 = z;
 		if (x1 > values.size() - 1 || x2 > values.size() - 1
 				|| y1 > values.size() - 1 || y2 > values.size() - 1)
 			cout << "Out of range." << endl;
@@ -673,8 +745,7 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 
 	///TRIANGLE
 	case triangle: {
-		int x1 = x1;
-		int x2 = y1;
+		x2 = y1;
 		int y_base = r;
 		int y_tip = z;
 		if (x1 > values.size() - 1 || x2 > values.size() - 1
@@ -774,27 +845,369 @@ void Grid::set_boundary_shape(int x1, int y1, int r, int z, double val,
 		}
 		break;
 	}
+	case random_shape: {
+		srand(time(0));
+		int rand_shape = rand() % 9;
+		Shape new_shape;
+		switch (rand_shape) {
+		case 0:
+			new_shape = circle;
+			break;
+		case 1:
+			new_shape = semicircle_north;
+			break;
+		case 2:
+			new_shape = semicircle_south;
+			break;
+		case 3:
+			new_shape = semicircle_west;
+			break;
+		case 4:
+			new_shape = semicircle_east;
+			break;
+		case 5:
+			new_shape = rectangle;
+			break;
+		case 6:
+			new_shape = triangle;
+			break;
+		case 7:
+			new_shape = ellipse;
+			break;
+		case 8:
+			new_shape = star;
+			break;
+		}
+		int x1 = 1 + rand()%(values.size() - 3);
+		int x2 = 1 + rand()%(values.size() - 3);
+		int x3 = 1 + rand()%(values.size() - 3);
+		int x4 = 1 + rand()%(values.size() - 3);
+		int x5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+		int y1 = 1 + rand()%(values[0].size() - 3);
+		int y2 = 1 + rand()%(values[0].size() - 3);
+		int y3 = 1 + rand()%(values[0].size() - 3);
+		int y4 = 1 + rand()%(values[0].size() - 3);
+		int y5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+		set_boundary_shape(x1,y1,x5,y5, val, new_shape,x2,x3,x4,y2,y3,y4);
+	}
+
 	} ///end of switch
 }
 
-
-//////
-//////
-//////
-
-// BOUNDARY CONDITION FUNCTIONS SHOULD BE WRITTEN ABOVE
-
-//////
-//////
-//////
-
-Grid Grid::get_boundary_grid(int size_x, int size_y, int x, int y, int dx, int dy, Shape shape) {
-	Grid grid(size_x,size_y);
-	grid.set_boundary_shape(x,y,dx,dy, 100, shape);
-	return grid;
+void Grid::set_boundary_shape(int x, int y, int r, int z,
+		Shape shape) {
+	set_boundary_shape(x,y,r,z,shape,0,0,0,0,0,0);
 }
 
-//void Grid::set_conductor(
+void Grid::set_boundary_shape(int x, int y, int r, int z,
+		Shape shape,  int x2, int x3, int x4, int y2, int y3, int y4) {
+
+	switch (shape) {
+
+	///CIRCLE
+	case circle: {
+		if (x - r < 0 || x + r > values.size() - 1 || y - r < 0
+				|| y + r > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x + r; xs++) {
+				for (int ys = y - r; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	//SEMICIRCLES
+	case semicircle_north: {
+		if (x - r < 0 || x + r > values.size() - 1 || y < 0
+				|| y + r > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x + r; xs++) {
+				for (int ys = y; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	case semicircle_south: {
+		if (x - r < 0 || x + r > values.size() - 1 || y - r < 0
+				|| y > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x + r; xs++) {
+				for (int ys = y - r; ys <= y; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	case semicircle_east: {
+		if (x < 0 || x + r > values.size() - 1 || y - r < 0
+				|| y > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x; xs <= x + r; xs++) {
+				for (int ys = y - r; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	case semicircle_west: {
+		if (x - r < 0 || x > values.size() - 1 || y - r < 0
+				|| y > values[0].size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = x - r; xs <= x; xs++) {
+				for (int ys = y - r; ys <= y + r; ys++) {
+					Coordinate xy;
+					xy.set_xy(xs, ys);
+					Coordinate mid;
+					mid.set_xy(x, y);
+					if (mid.distance(xy) < r) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	///RECTANGLE
+	case rectangle: {
+		int x1 = x;
+		int x2 = y;
+		int y1 = r;
+		int y2 = z;
+		if (x1 > values.size() - 1 || x2 > values.size() - 1
+				|| y1 > values.size() - 1 || y2 > values.size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs = min(x1, x2); xs <= max(x1, x2); xs++) {
+				for (int ys = min(y1, y2); ys <= max(y1, y2); ys++) {
+					values[xs][ys].boundary = true;
+					values[xs][ys].flag = 1;
+				}
+			}
+		}
+		break;
+	}
+
+	///TRIANGLE
+	case triangle: {
+		int x1 = x;
+		int x2 = y;
+		int y_base = r;
+		int y_tip = z;
+		if (x1 > values.size() - 1 || x2 > values.size() - 1
+				|| y_base > values.size() - 1 || y_tip > values.size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			double slope = (double) (y_tip - y_base) / (0.5 * abs(x1 - x2));
+			int xc = (x1 + x2) / 2;
+			for (int xs = min(x1, x2); xs <= max(x1, x2); xs++) {
+				for (int ys = min(y_tip, y_base); ys <= max(y_tip, y_base);
+						ys++) {
+					if (y_tip > y_base && ys <= y_tip + slope * (xs - xc)
+							&& ys <= y_tip - slope * (xs - xc)) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+					if (y_tip < y_base && ys >= y_tip + slope * (xs - xc)
+							&& ys >= y_tip - slope * (xs - xc)) {
+						values[xs][ys].boundary = true;
+						values[xs][ys].flag = 1;
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	///ELLIPSE
+	case ellipse: {
+		int rx = r;
+		int ry = z;
+		if (x - rx < 0 || y - ry < 0 || x + rx > values.size() - 1
+				|| y + ry > values.size() - 1)
+			cout << "Out of range." << endl;
+		for (int xs = x - rx; xs <= x + rx; xs++) {
+			for (int ys = y - ry; ys <= y + ry; ys++) {
+				if (pow(((double) (xs - x) / rx), 2)
+						+ pow(((double) (ys - y) / ry), 2) <= 1) {
+					values[xs][ys].boundary = true;
+					values[xs][ys].flag = 1;
+				}
+			}
+		}
+		break;
+	}
+	case star: {
+		int x1 = x;
+		int y1 = y;
+		if (x1 > values.size() - 1 || x4 > values.size() - 1 || y1 > values.size() - 1 || y4 > values.size() - 1)
+			cout << "Out of range." << endl;
+		else {
+			for (int xs=x2; xs <= x3; xs++) {
+				for (int ys=y2; ys <= y3; ys++) {
+					values[xs][ys].flag=1;
+					values[xs][ys].boundary=true;
+				}
+			}
+
+			double slope=(double) (y4 - y3)/ (0.5*(x3 - x2));
+			double xc=(x2+x3)/2;
+			for (int xs=x2; xs <= x3; xs++) {
+				for (int ys=y3; ys <= y4; ys++) {
+					if ( ys <= y4 + slope * (xs - xc) && ys <= y4 - slope * (xs - xc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+
+			for (int xs=x2; xs <= x3; xs++) {
+				for (int ys=y1; ys <= y2; ys++) {
+					if ( ys >= y1 + slope * (xs - xc) && ys >= y1 - slope * (xs - xc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+
+			slope=(double) (x4 - x3)/ (0.5*(y3 - y2));
+			double yc=(y2+y3)/2;
+			for (int ys=y2; ys <= y3; ys++) {
+				for (int xs=x3; xs <= x4; xs++) {
+					if ( xs <= x4 + slope * (ys - yc) && xs <= x4 - slope * (ys - yc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+
+			for (int ys=y2; ys <= y3; ys++) {
+				for (int xs=x1; xs <= x2; xs++) {
+					if ( xs >= x1 + slope * (ys - yc) && xs >= x1 - slope * (ys - yc)) {
+						values[xs][ys].flag=1;
+						values[xs][ys].boundary = true;
+					}
+				}
+			}
+		}
+		break;
+	}
+	case random_shape: {
+		srand(time(0));
+		int rand_shape = rand() % 9;
+		Shape new_shape;
+		switch (rand_shape) {
+		case 0:
+			new_shape = circle;
+			break;
+		case 1:
+			new_shape = semicircle_north;
+			break;
+		case 2:
+			new_shape = semicircle_south;
+			break;
+		case 3:
+			new_shape = semicircle_west;
+			break;
+		case 4:
+			new_shape = semicircle_east;
+			break;
+		case 5:
+			new_shape = rectangle;
+			break;
+		case 6:
+			new_shape = triangle;
+			break;
+		case 7:
+			new_shape = ellipse;
+			break;
+		case 8:
+			new_shape = star;
+			break;
+		}
+		int x1 = 1 + rand()%(values.size() - 3);
+		int x2 = 1 + rand()%(values.size() - 3);
+		int x3 = 1 + rand()%(values.size() - 3);
+		int x4 = 1 + rand()%(values.size() - 3);
+		int x5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+		int y1 = 1 + rand()%(values[0].size() - 3);
+		int y2 = 1 + rand()%(values[0].size() - 3);
+		int y3 = 1 + rand()%(values[0].size() - 3);
+		int y4 = 1 + rand()%(values[0].size() - 3);
+		int y5 = (1 + rand()%(values.size() - 3) + 1 + rand()%(values[0].size() - 3)) / 4;
+
+		set_boundary_shape(x1,y1,x5,y5,new_shape,x2,x3,x4,y2,y3,y4);
+	}
+	} ///end of switch
+}
+
+double Grid::get_average_value(matrix &grid) {
+	double sum = 0.;
+	int entries = 0;
+	for(int x = 1; x < grid.size() - 1; x++) {
+		for(int y = 1; y < grid[0].size() - 1; y++) {
+			if(grid[x][y].boundary == true && grid[x][y].flag == 1) {sum += grid[x][y].value;
+			grid[x][y].flag = 0; entries++;}
+		}
+	}
+	return (double) sum/entries;
+}
+
+void Grid::set_conductor(int x, int y, int dx, int dy, Shape shape) {
+	set_conductor(x,y,dx,dy,shape,0,0,0,0,0,0);}
+
+void Grid::set_conductor(int x, int y, int dx, int dy, Shape shape, int x1, int x2, int x3, int y1, int y2, int y3) {
+	set_boundary_shape(x,y,dx,dy,shape, x1, x2, x3, y1, y2, y3);
+	double val = get_average_value(values);
+	set_boundary_shape(x,y,dx,dy,val,shape, x1, x2, x3, y1, y2, y3);
+}
+
 
 //Print ASCII table with MINIMAL formatting
 
@@ -880,3 +1293,112 @@ void Grid::print_points() {
 	}
 	cout << endl;
 }
+
+// prints out the points for eq.p lines. n - the number of eq.pot. lines
+
+void Grid::print_contours_to(string filename, int n) {
+	ofstream outdata;
+	outdata.open(filename.c_str());
+	if (outdata.is_open()) {
+		for (int i=1; i <= n; ++i) {
+			outdata << "# Contour " << i-1 << ", label: \t " << i << endl;	
+			for (int y = 0; y < values[0].size(); y++) {
+				for (int x = 0; x < values.size(); x++) {
+				
+					if ( values[x][y].flag == i ) {
+						if (x==0 || x==values.size()-1 || y==0 || y == values[0].size()-1 ) {outdata << x << "\t" << y << "\t"  << endl;}
+						else if (values[x][y].flag != values[x][y+1].flag) {outdata << x << "\t" << y << "\t"  << endl;}
+					}
+				}
+			}
+			outdata << endl;
+		}
+		outdata.close();
+
+	}
+
+	else
+		cout << "unable to open file" << endl;
+
+}
+
+// prints out the outline points (contour) of the figure. must specify the number of seperate figures ( usually just 1 )
+
+void Grid::print_figure_to(string filename, int number_of_figures) {
+	get_surface_points_of_figure();	
+	ofstream outdata;
+	outdata.open(filename.c_str());
+	if (outdata.is_open()) 
+		{
+		for (int iii=0; iii < number_of_figures; ++iii)
+			{
+			outdata << "# Contour " << iii << ", label: \t " << "figure No " << iii+1 << endl;
+			bool finished=0;			
+			for (int y = 1; y < values[0].size()-1 && !finished; y++) 
+				{	
+				for (int x = 1; x < values.size()-1 && !finished; x++) 
+					{
+					if ( values[x][y].flag == 10000000 ) 
+						{
+						int xss = x;
+						int yss = y;
+						int x_prev=0;
+						int y_prev=0;
+						values[xss][yss].flag = 20000001;
+						for (;;) 
+							{
+							if ( values[xss-1][yss].flag == 10000000 ) {  x_prev=xss; y_prev=yss; values[xss-1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1;} 
+							else if ( values[xss-1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss-1; yss=yss+1; }
+							else if ( values[xss][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss+1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; yss=yss+1;}
+							else if ( values[xss+1][yss+1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss+1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss+1;} 
+							else if ( values[xss+1][yss].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1;} 
+							else if ( values[xss+1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss+1][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; xss=xss+1; yss=yss-1;} 
+							else if ( values[xss][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss][yss-1].flag = 20000000; outdata << xss << "\t" << yss << endl; yss=yss-1;} 
+							else if ( values[xss-1][yss-1].flag == 10000000 ) { x_prev=xss; y_prev=yss; values[xss-1][yss-1].flag = 20000000; outdata << xss << "\t" << yss <<  endl; xss=xss-1; yss=yss-1;} 
+							else 
+								{
+								outdata << xss << "\t" << yss << endl;
+								if (values[xss-1][yss].flag==20000001 || values[xss-1][yss+1].flag==20000001 || values[xss][yss+1].flag==20000001 || values[xss+1][yss+1].flag==20000001 || values[xss+1][yss].flag==20000001 || values[xss+1][yss-1].flag==20000001 || values[xss][yss-1].flag==20000001 || values[xss-1][yss-1].flag==20000001) 
+									{
+									
+									outdata << x << "\t" << y << endl;
+									finished =1;
+									break;
+									}
+								else { xss=x_prev; yss=y_prev; }
+								}
+							}
+						}
+					}
+				}		
+			outdata << endl;
+			}
+		outdata.close();
+		}
+
+	else
+		cout << "unable to open file" << endl;
+
+}
+
+// prints out the values of points in format:	 x	y	E
+
+void Grid::print_points_to(string filename) {
+	ofstream outdata;
+	outdata.open(filename.c_str());
+	if (outdata.is_open()) {
+		for (int x = 0; x < values.size(); x++) {
+			for (int y = 0; y < values[0].size(); y++) {
+				outdata << x << "\t" << y << "\t" << values[x][y].value << endl;
+			}
+		}
+		outdata.close();
+
+	}
+
+	else
+		cout << "unable to open file" << endl;
+
+}
+
+

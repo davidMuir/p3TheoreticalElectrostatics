@@ -11,13 +11,24 @@ Gnuplot::Gnuplot(Grid entry) {
 	matrix vals = entry.get_values();
 	fp = popen(GNUPLOT, "w");
 	str = strStream.str();
-	for (unsigned int y = 0; y <= vals.size() - 1; y++) {
+	for (unsigned int y = 0; y < vals[0].size(); y++) {
 		for (unsigned int x = 0; x < vals.size(); x++) {
 			 datStream << vals[x][y].value << "	";
 		}
 		datStream << "\n";
 	}
-	data = datStream.str();
+    data = datStream.str();
+    int x_siz = vals.size() - 1;
+    int y_siz = vals[0].size() - 1;
+    double min = lowest_value(vals);
+    double max = highest_value(vals);
+    std::string s1 = std::string("set xrange [0:") + numberToString(x_siz) + std::string("]");
+	add_command(s1);
+	std::string s2 = std::string("set yrange [0:") + numberToString(y_siz) + std::string("]");
+    add_command(s2);
+    std::string s3 = std::string("set cbrange [") + numberToString(min) + std::string(":") + numberToString(max) + std::string("]");
+    add_command(s3);
+
 }
 
 Gnuplot::~Gnuplot() {
@@ -56,3 +67,16 @@ void Gnuplot::read_file(std::string input) {
 void Gnuplot::add_plot() {
 	strStream << "\np '-' matrix with image #\n" << data;
 }
+
+std::string Gnuplot::numberToString (int Number) {
+    std::ostringstream ss;
+    ss << Number;
+    return ss.str();
+}
+
+std::string Gnuplot::numberToString (double Number) {
+    std::ostringstream ss;
+    ss << Number;
+    return ss.str();
+}
+

@@ -4,6 +4,8 @@
 #include "../Structures/Grid.h"
 #include "../Utils/Utils.h"
 
+enum Algo { FD, FFD, AFV };
+
 struct Iteration {
 
 	matrix it;

@@ -1,0 +1,262 @@
+\documentclass[aps,twocolumn,pre,nofootinbib]{revtex4}
+
+
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{rotating}
+\graphicspath{{../plots/}}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful symbols and definitions that may save time
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\breite}{1.0} %  for twocolumn
+
+
+\newtheorem{prop}{Proposition}
+\newtheorem{cor}{Corollary}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+
+\newcommand{\Reals}{\mathbb{R}}     % Real
+\newcommand{\Int}{\mathbb{Z}}       % Integer
+\newcommand{\Com}{\mathbb{C}}       % Complex 
+\newcommand{\Nat}{\mathbb{N}}       % Natural 
+
+
+\newcommand{\id}{\mathbbm{1}}    
+
+\newcommand{\Real}{\mathop{\mathrm{Re}}}
+\newcommand{\Imag}{\mathop{\mathrm{Im}}}
+
+\def\O{\mbox{$\mathcal{O}$}}    
+\def\F{\mathcal{F}}			
+\def\sgn{\text{sgn}}
+
+\newcommand{\dw}{\ensuremath{\Delta}} %I think I have most we need but will add any if needed.
+\newcommand{\wbp}{\ensuremath{\omega_0}}
+\newcommand{\dv}{\ensuremath{\delta}}
+\newcommand{\vbp}{\ensuremath{\nu_0}}
+\newcommand{\vplus}{\ensuremath{\nu_{+}}}
+\newcommand{\vminus}{\ensuremath{\nu_{-}}}
+\newcommand{\wplus}{\ensuremath{\omega_{+}}}
+\newcommand{\wminus}{\ensuremath{\omega_{-}}}
+\newcommand{\den}{\ensuremath{\rho}}
+\newcommand{\del}{\ensuremath{\nabla}}
+\newcommand{\per}{\ensuremath{\epsilon_0}}
+\newcommand{\pot}{\ensuremath{\phi}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%Title of paper (I know it isn't very creative but it isn't supposed to be. We can definitely discuss this! 
+\title{Zero Net Charge Conductors Of Various Shapes In A Uniform Electrostatic Field}
+
+
+%Us
+\author{Karl Nordstorm}
+
+\author{David Muir}
+
+\author{Julia Kettle}
+
+\author{John Maccorquodale}
+
+\author{Jevgeny Klochan}
+
+\author{Stephen Shepstone: }
+
+
+\affiliation{University Of Glasgow}
+
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%ABSTRACT
+\begin{abstract}
+
+Abstract... 
+  
+\end{abstract}
+
+
+%FINISH TITLE
+\maketitle
+
+
+%INTRODUCTION
+
+\section{Introduction \label{sec:int}}
+
+Computational Physics is becoming a larger part of modern physics. This has become apparent in various modern fields such as astrophysics, particle physics and is an integral part in all of Theoretical Physics. Applications include quantum mechanical calculations involving atomic, molecular and condensation physics, modelling in medical physics and industry, and calculations involving fields hydrodynamics, thermal physics, astrophysics, meteorology and geophysics. 
+Specifically computational physics can be applied to differential equations, with many applications in fields mentioned above, as well as in classical electromagnetism.
+Consider a sationary zero net-charge conducting cylinder in a uniform electrostatic field as shown in (~\ref{fig:fig1}). The divergence of the electric field would be,
+
+\begin{equation}
+\begin{split}
+\vec{\del}.\vec{E}= \frac{\den}{\per} 
+\end{split}
+\label{eqn1}
+\end{equation}
+
+by Gauss' law where \del is the differential operator, E is the electric field, \den  is the charge density and \per is the permittivity of free space.
+
+\begin{figure}
+\includegraphics*[width=\breite \columnwidth]{newtest.ps} 
+\caption{Cross section of zero net charge conductor in uniform electrostatic field. The colours are used to show the potential at each point.
+}
+\label{fig:fig1}
+\end{figure}
+
+As charge is redistributed to either side of the conductor, the electric fields close to the conductor are warped (negative side will become a sink, whereas the positive side will become a source since \den  will be negative and positive, respectively around these areas. For points outside the space filled by the conductor, there will be a zero charge density. This implies that (~\ref{fig:fig1}) is reduced to,
+
+\begin{equation}
+\begin{split}
+\vec{\del}.\vec{E}= 0 
+\end{split}
+\label{eqn2}
+\end{equation}
+
+for all points outside the conductor. It is also the case that the field will be conservative and can therefore be written as a scalar potential with,
+
+\begin{equation}
+\begin{split}
+\vec{E}= -\del\pot.
+\end{split}
+\label{eqn3}
+\end{equation}
+
+Combining (~\ref{fig:eqn2}) and (~\ref{fig:eqn3}) gives,
+
+\begin{equation}
+\begin{split}
+\del^2\pot=0
+\end{split}
+\label{eqn4}
+\end{equation}
+
+Hence, the solution to the problem is a laplace equation.
+
+
+
+
+ 
+
+%THEORY AND ALGORITHMS
+\section{Theory \label{sec:the}}
+
+Theory...
+
+
+\subsection{Analytical Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE FIGURE ONE COLUMN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\includegraphics*[width=\breite \columnwidth]{circle.ps} 
+\caption{One column figure.
+}
+\label{fig:Half}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE EQUATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+\begin{split}
+F(v) &= v^2 
+\end{split}
+\label{Simple example}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE FIG BOTH COLUMNS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure*}
+
+\includegraphics*[width= 1.6 \columnwidth]{circle.ps} 
+\caption{Full page figure.
+}
+\label{fig:Full}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%METHODS- I think algorithms should go here rather than code. Any chunks of code that are necessary for the 
+%report should go into the appendix
+\section{Method \label{sec:met}}
+
+ 
+\subsection{Finite Difference }
+
+
+\subsection{Assymetric Finite Volume }
+
+
+\subsection{3D algorithm}
+
+
+
+
+
+
+%RESULTS- Many plots here, I imagine.
+\section{Results \label{sec:res}}
+
+
+Results...
+
+
+%UNCERTAINTIES
+\section{Uncertainties \label{sec:unc}}
+
+
+
+
+%SUMMARY AND CONCLUSIONS
+\section{Summary and Discussion \label{sec:sum}}
+
+
+%Mostly for Adrian 
+\begin{acknowledgments}
+Adrian...
+\end{acknowledgments}
+
+
+\appendix*
+\section{Full analytical solution}
+\section{Code}
+
+
+% I thought we wouldn't need Bibtex because I doubt we will have many references. With that in mind,
+% it is probably a better idea to type references in manually.
+
+
+%BIBLIOGRAPHY-I have made a basic template for references but here is a good link to a page for making reference if anyone can't remember how to do references: 
+% http://tim.thorpeallen.net/Courses/Reference/Citations.html
+\begin{thebibliography}{5}
+
+\bibitem[Reflabel]  Names of Authors, year, ``name of book,'' publisher, city {\bf 999}.
+
+
+\end{thebibliography}
+
+
+\end{document}
+

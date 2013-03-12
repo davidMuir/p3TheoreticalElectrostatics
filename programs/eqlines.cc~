@@ -10,9 +10,9 @@ using namespace std;
   
 int main() {    
         
-	int N = 21 ;     // number of eq.p. lines
-	int n = 200;
-	int m = 200; 
+	int N = 11 ;     // number of eq.p. lines
+	int n = 50;
+	int m = 50; 
      
    
 	double Emax=100;
@@ -21,7 +21,7 @@ int main() {
 	Grid first_grid(n,m);
 
 	first_grid.set_flow(Emax, Emin);   
-	first_grid.set_boundary_shape(100,100,50,0,0,circle);   
+	first_grid.set_boundary_shape(25,25,10,0,0,circle);   
 
 	Finite_Difference fd (first_grid);
 	fd.set_precision(0.00001); 

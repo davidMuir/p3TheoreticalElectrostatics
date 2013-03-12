@@ -58,7 +58,7 @@ public:
 	void set_coordinates(coordinate_matrix coords);
 	void set_values(matrix vals);
 	void set_gradients(grad_matrix grads);
-	void equip_values(int n, int xmax, int ymax, double Emax);	
+	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);	
 	void get_efield(int n, int xmax, int ymax, double Emax);	
 	void set_flags_to_zero();
 	void get_surface_points_of_figure();

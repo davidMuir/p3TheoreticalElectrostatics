@@ -100,7 +100,7 @@ void Animation::create_data() {
 	stringstream bbb;
 	bbb << "eq_lines"<< iii << ".dat";
 	string str2 = bbb.str();
-	sol2.equip_values(lines.number_of_lines,entry.get_xmax()-1,entry.get_ymax()-1,entry.get_value(entry.get_xmax()-1,entry.get_ymax()-1));
+	sol2.equip_values(lines.number_of_lines,entry.get_xmax()-1,entry.get_ymax()-1,entry.get_value(entry.get_xmax()-1,entry.get_ymax()-1),1,1);
 	sol2.print_contours_to(str2, lines.number_of_lines);
 	}
 	}

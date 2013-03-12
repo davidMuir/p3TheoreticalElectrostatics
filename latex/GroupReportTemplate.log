@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2012.10.22)  12 MAR 2013 11:19
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2012.10.22)  12 MAR 2013 16:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -98,68 +98,40 @@ Class revtex4-1 Info: Repairing natbib's \BibitemShut on input line 7549.
 Package: revsymb4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ f
 or documentation)
 LaTeX Info: Redefining \REV@mathfrak on input line 119.
-)) (/usr/share/texlive/texmf-dist/tex/latex/auto-pst-pdf/auto-pst-pdf.sty
-Package: auto-pst-pdf 2009/04/26 v0.6 Wrapper for pst-pdf
+)) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algcompatible.sty
+Package: algcompatible 
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is not detected.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-\XKV@toks=\toks16
-\XKV@tempa@toks=\toks17
-\XKV@depth=\count95
-File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
-
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))
-(/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count95
+\c@ALG@rem=\count96
+\c@ALG@nested=\count97
+\ALG@tlm=\skip46
+\ALG@thistlm=\skip47
+\c@ALG@Lnr=\count98
+\c@ALG@blocknr=\count99
+\c@ALG@storecount=\count100
+\c@ALG@tmpcounter=\count101
+\ALG@tmplength=\skip48
 )
+Document Style - algorithmic compatible environments for the `algorithmicx' sty
+le
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode is ignored in DVI mode.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/catchfile.sty
-Package: catchfile 2011/03/01 v1.6 Catch the contents of a file (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-))
-
-Package ifplatform Warning: 
-    shell escape is disabled, so I can only detect \ifwindows.
-
-)
-\c@app@runs=\count96
- (/usr/share/texlive/texmf-dist/tex/latex/pst-pdf/pst-pdf.sty
-Package: pst-pdf 2008/10/09 v1.1v PS graphics for pdfLaTeX (RN,HjG)
-\c@pspicture=\count97
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
@@ -177,11 +149,9 @@ File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 \Gin@req@height=\dimen102
 \Gin@req@width=\dimen103
 )
-Package pst-pdf Info: MODE: 9 (inactive mode) on input line 458.
-))
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
-\@mathmargin=\skip46
+\@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -189,7 +159,7 @@ Package: amstext 2000/06/29 v2.01
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks18
+\@emptytoks=\toks17
 \ex@=\dimen104
 )
 LaTeX Info: Redefining \text on input line 53.
@@ -201,13 +171,13 @@ Package: amsbsy 1999/11/29 v1.2d
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count98
+\inf@bad=\count102
 LaTeX Info: Redefining \frac on input line 211.
-\uproot@=\count99
-\leftroot@=\count100
+\uproot@=\count103
+\leftroot@=\count104
 LaTeX Info: Redefining \overline on input line 307.
-\classnum@=\count101
-\DOTSCASE@=\count102
+\classnum@=\count105
+\DOTSCASE@=\count106
 LaTeX Info: Redefining \ldots on input line 379.
 LaTeX Info: Redefining \dots on input line 382.
 LaTeX Info: Redefining \cdots on input line 467.
@@ -216,26 +186,26 @@ LaTeX Info: Redefining \cdots on input line 467.
 \big@size=\dimen106
 LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
-\macc@depth=\count103
-\c@MaxMatrixCols=\count104
+\macc@depth=\count107
+\c@MaxMatrixCols=\count108
 \dotsspace@=\muskip11
-\c@parentequation=\count105
-\dspbrk@lvl=\count106
-\tag@help=\toks19
-\row@=\count107
-\column@=\count108
-\maxfields@=\count109
-\andhelp@=\toks20
+\c@parentequation=\count109
+\dspbrk@lvl=\count110
+\tag@help=\toks18
+\row@=\count111
+\column@=\count112
+\maxfields@=\count113
+\andhelp@=\toks19
 \eqnshift@=\dimen107
 \alignsep@=\dimen108
 \tagshift@=\dimen109
 \tagwidth@=\dimen110
 \totwidth@=\dimen111
 \lineht@=\dimen112
-\@envbody=\toks21
-\multlinegap=\skip47
-\multlinetaggap=\skip48
-\mathdisplay@stack=\toks22
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
@@ -253,15 +223,15 @@ LaTeX Info: Redefining \Bbb on input line 101.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2009/07/02 v2.20.1
-\thm@style=\toks23
-\thm@bodyfont=\toks24
-\thm@headfont=\toks25
-\thm@notefont=\toks26
-\thm@headpunct=\toks27
-\thm@preskip=\skip49
-\thm@postskip=\skip50
-\thm@headsep=\skip51
-\dth@everypar=\toks28
+\thm@style=\toks22
+\thm@bodyfont=\toks23
+\thm@headfont=\toks24
+\thm@notefont=\toks25
+\thm@headpunct=\toks26
+\thm@preskip=\skip52
+\thm@postskip=\skip53
+\thm@headsep=\skip54
+\dth@everypar=\toks27
 )
 (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/bbm.sty
 Package: bbm 1999/03/15 V 1.2 provides fonts for set symbols - TH
@@ -270,69 +240,176 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbbm' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 (Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
 )
-Class revtex4-1 Info: Patching LaTeX tabular. on input line 11.
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 11.
+(/usr/share/texlive/texmf-dist/tex/latex/caption/newfloat.sty
+Package: newfloat 2011/11/16 v1.0a Defining new floating environments (AR)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count114
+\float@exts=\toks28
+\float@box=\box43
+\@float@everytoks=\toks29
+\@floatcapt=\box44
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen113
+\extrarowheight=\dimen114
+\NC@list=\toks30
+\extratabsurround=\skip55
+\backup@length=\skip56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/esint/esint.sty
+Package: esint 
+\symlargesymbolsA=\mathgroup6
+)
+Package newfloat Info: New float `algorithm' with options ` fileext=loa, listna
+me=List of Algorithms, name=ALGORITHM, placement=tbhp, ' on input line 24.
+\c@algorithm=\count115
+Package newfloat Info: float type `algorithm'=4 on input line 24.
+Class revtex4-1 Info: Patching array package. on input line 27.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 11.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 11.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 11.
 
+Class revtex4-1 Warning: Repair the float package.
+
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 27.
+
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 27.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 27.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 27.
 (./GroupReportTemplate.aux)
 \openout1 = `GroupReportTemplate.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 27.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
 \openout3 = `GroupReportTemplateNotes.bib'.
 
-\c@prop=\count110
-\c@cor=\count111
-LaTeX Font Info:    Try loading font information for U+msa on input line 105.
+\c@prop=\count116
+\c@cor=\count117
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 115.
+LaTeX Font Info:    Try loading font information for U+msa on input line 121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 105.
+LaTeX Font Info:    Try loading font information for U+msb on input line 121.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1]
+)
+LaTeX Font Info:    Try loading font information for U+esint on input line 121.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/esint/uesint.fd
+File: uesint.fd 
+)
+File: ../plots/first_plot.ps Graphic file (type eps)
+
+<../plots/first_plot.ps>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[1] [2]
 File: ../plots/difference.ps Graphic file (type eps)
-
-<../plots/difference.ps> [2]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 228.
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 265--266
-
+ <../plots/difference.ps> [3]
+Overfull \hbox (19.7774pt too wide) in paragraph at lines 296--296
+[] 
  []
 
 
-Underfull \hbox (badness 3158) in paragraph at lines 335--336
- []\OT1/cmr/m/n/9 Becchi, C., 1997, \OT1/cmr/m/it/9 In-tro-duc-tion to Gauge Th
-e-o-ries\OT1/cmr/m/n/9 ,
+Overfull \hbox (23.8634pt too wide) in paragraph at lines 302--302
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
+
+ []
+
+[4]
+File: ../plots/pure_eqlines.eps Graphic file (type eps)
+ <../plots/pure_eqlines.eps>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 397.
+
+File: ../plots/eqlines_heatmap.eps Graphic file (type eps)
+<../plots/eqlines_heatmap.eps>
+File: ../plots/efield_lines.eps Graphic file (type eps)
+ <../plots/efield_lines.eps>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: ../plots/efield.eps Graphic file (type eps)
+<../plots/efield.eps> [6] [7]
+File: finite_diff_conv.eps Graphic file (type eps)
+ <finite_diff_conv.eps>
+File: fd_err_h_fit.eps Graphic file (type eps)
+ <fd_err_h_fit.eps>
+File: sym_fv_conv.eps Graphic file (type eps)
+
+<sym_fv_conv.eps>
+File: fv_conv.eps Graphic file (type eps)
+ <fv_conv.eps> [8]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 528.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 549--550
+ [] $\OML/cmm/m/it/9 newm[]$ $\OMS/cmsy/m/n/9  $
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 594--595
+ [] $\OML/cmm/m/it/9 alternate[]$ $\OMS/cmsy/m/n/9  $
+ []
+
+
+Overfull \hbox (24.60109pt too wide) in paragraph at lines 594--595
+ \OT1/cmr/m/n/9 [[]]\OML/cmm/m/it/9 =\OT1/cmr/m/n/9 2$ 
+ []
+
+[9]
+Underfull \hbox (badness 1142) in paragraph at lines 655--656
+ \OT1/ptm/m/it/9 Higgs mass gen-er-a-tion mech-a-nism in the Stan-dard Model\OT
+1/ptm/m/n/9 ,
  []
 
 No file GroupReportTemplate.bbl.
-[4] [5] (./GroupReportTemplate.aux) ) 
+[10] [11] (./GroupReportTemplate.aux) ) 
 Here is how much of TeX's memory you used:
- 4185 strings out of 495060
- 53661 string characters out of 3182052
- 137563 words of memory out of 3000000
- 7308 multiletter control sequences out of 15000+200000
- 11242 words of font info for 44 fonts, out of 3000000 for 9000
+ 4603 strings out of 495060
+ 59197 string characters out of 3182052
+ 137970 words of memory out of 3000000
+ 7722 multiletter control sequences out of 15000+200000
+ 16167 words of font info for 57 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 39i,12n,36p,1064b,344s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,12n,25p,1884b,334s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on GroupReportTemplate.dvi (5 pages, 26864 bytes).
+Output written on GroupReportTemplate.dvi (11 pages, 61196 bytes).

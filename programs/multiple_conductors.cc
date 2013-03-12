@@ -32,8 +32,10 @@ int main() {
 	cout << "Integrated field after one conductor: " << sum_grid(sol_fd) << endl;
 
 	Gnuplot gp(sol_fd);
-	gp.add_command("set term jpeg");
-	gp.add_command("set output 'test.jpg'");
+	gp.add_command("set term postscript");
+	gp.add_command("set ytics ('200' 200)");
+    gp.add_command("set xtics ('200' 200)");
+	gp.add_command("set output 'single_conductor.ps'");
 	gp.add_command("unset key");
 	gp.add_command("set palette color");
 	gp.add_command("set palette defined");
@@ -49,8 +51,10 @@ int main() {
 	Grid sol_fd1 = fd1.get_solution();
 
 	Gnuplot gp1(sol_fd1);
-	gp1.add_command("set term jpeg");
-	gp1.add_command("set output 'test_second.jpg'");
+	gp1.add_command("set term postscript");
+    gp1.add_command("set ytics ('200' 200)");
+    gp1.add_command("set xtics ('200' 200)");
+	gp1.add_command("set output 'two_conductors_old.ps'");
 	gp1.add_command("unset key");
 	gp1.add_command("set palette color");
 	gp1.add_command("set palette defined");
@@ -65,24 +69,29 @@ int main() {
 	Grid sol_new = conductors.get_solution(FFD);
 
 	Gnuplot gp2(sol_new);
-	gp2.add_command("set term jpeg");
-	gp2.add_command("set output 'test_new.jpg'");
+	gp2.add_command("set term postscript");
+    gp2.add_command("set ytics ('200' 200)");
+    gp2.add_command("set xtics ('200' 200)");
+	gp2.add_command("set output 'two_conductors_new.ps'");
 	gp2.add_command("unset key");
 	gp2.add_command("set palette color");
 	gp2.add_command("set palette defined");
 	gp2.add_plot();
 	gp2.sendString();
 
-	Grid diff = find_err(sol_fd1, sol_new);
+	Grid diff = find_err_relative(sol_fd1, sol_new);
 
 	Gnuplot gp3(diff);
-	gp3.add_command("set term jpeg");
-	gp3.add_command("set output 'test_diff.jpg'");
+	gp3.add_command("set term postscript");
+    gp3.add_command("set ytics ('200' 200)");
+    gp3.add_command("set xtics ('200' 200)");
+	gp3.add_command("set output 'difference.ps'");
 	gp3.add_command("unset key");
 	gp3.add_command("set palette color");
 	gp3.add_command("set palette defined");
 	gp3.add_plot();
 	gp3.sendString();
+
 
 	cout << "Integrated field in old method: " << sum_grid(sol_fd1) << endl;
 	cout << "Integrated field in new method: " << sum_grid(sol_new) << endl;

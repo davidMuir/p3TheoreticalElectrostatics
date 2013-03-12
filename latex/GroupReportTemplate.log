@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2012.10.22)  7 MAR 2013 17:33
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2012.10.22)  12 MAR 2013 11:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -74,11 +74,7 @@ Class revtex4-1 Info: RevTeX society APS selected on input line 31.
 )
 Class revtex4-1 Info: Selecting journal pre on input line 7544.
 Class revtex4-1 Info: APS journal PRE selected on input line 7545.
-
-
-Class revtex4-1 Warning: No type size specified, using default 10.
-
-(./aps10pt4-1.rtx
+ (./aps10pt4-1.rtx
 File: aps10pt4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ for 
 documentation)
 Class revtex4-1 Info: RevTeX pointsize 10pt selected on input line 30.
@@ -309,26 +305,34 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 105.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1] [2]
+) [1]
 File: ../plots/difference.ps Graphic file (type eps)
 
-<../plots/difference.ps>
-File: ../plots/circle.ps Graphic file (type eps)
- <../plots/circle.ps>
-Underfull \hbox (badness 3158) in paragraph at lines 254--255
+<../plots/difference.ps> [2]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 228.
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 265--266
+
+ []
+
+
+Underfull \hbox (badness 3158) in paragraph at lines 335--336
  []\OT1/cmr/m/n/9 Becchi, C., 1997, \OT1/cmr/m/it/9 In-tro-duc-tion to Gauge Th
 e-o-ries\OT1/cmr/m/n/9 ,
  []
 
 No file GroupReportTemplate.bbl.
-[3] [4] (./GroupReportTemplate.aux) ) 
+[4] [5] (./GroupReportTemplate.aux) ) 
 Here is how much of TeX's memory you used:
- 4187 strings out of 495060
- 53688 string characters out of 3182052
- 124548 words of memory out of 3000000
- 7310 multiletter control sequences out of 15000+200000
+ 4185 strings out of 495060
+ 53661 string characters out of 3182052
+ 137563 words of memory out of 3000000
+ 7308 multiletter control sequences out of 15000+200000
  11242 words of font info for 44 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 39i,15n,36p,1429b,344s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,12n,36p,1064b,344s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on GroupReportTemplate.dvi (4 pages, 16728 bytes).
+Output written on GroupReportTemplate.dvi (5 pages, 26864 bytes).

@@ -1,0 +1,62 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{default}
+\usepackage{animate}
+\usepackage{graphicx}
+\graphicspath{{../plots/}}
+\usepackage{textpos}
+
+\logo{\includegraphics[height=0.8cm]{GlasgowLogo.png}\vspace{220pt}}
+
+\usetheme{CambridgeUS}
+\usecolortheme{lily}
+
+\setbeamertemplate{frametitle}
+{
+\begin{flushleft}
+\color{black}
+\textbf{\normalsize\insertframetitle}
+\end{flushleft}
+}
+
+\setbeamertemplate{titlepage}
+{
+\begin{flushleft}
+\color{black}
+\textbf{\normalsize\insertframetitle}
+\end{flushleft}
+}
+
+\defbeamertemplate*{title page}
+{
+  \usebeamerfont{title}\inserttitle\par
+  \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+  \bigskip
+  \usebeamerfont{author}\insertauthor\par
+  \usebeamerfont{institute}\insertinstitute\par
+  \usebeamerfont{date}\insertdate\par
+  \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+}
+
+
+\title{Title}
+\author{Karl Nordstrom}
+\institute{University of Glasgow}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame} 
+  \graphicspath{{../plots/}}
+  \frametitle{Introduction}
+\end{frame}
+
+
+\end{document}

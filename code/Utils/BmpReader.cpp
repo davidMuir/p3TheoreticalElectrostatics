@@ -35,19 +35,21 @@ Bmp_Reader::Bmp_Reader(std::string filename) {
 }
 
 
-Grid Bmp_Reader::get_grid(Boundary b,int l,int r) {
-	grid = Grid(ih.biWidth,ih.biHeight);
-	grid.set_flow(-50,50);
+Grid Bmp_Reader::get_grid(Boundary b,double l,double r, double vals) {
+	grid = Grid(ih.biWidth-1,ih.biHeight-1);
+	grid.set_flow(l,r);
 	matrix g = grid.get_values();
 	matrix mat;
 	Value boundaryVal,val;
 	val.value = 0;
-	val.accessible = 0;
-	val.boundary = 0;
+	val.accessible = true;
+	val.boundary = false;
 	val.flag = 0;
-	boundaryVal = val;
 	boundaryVal.boundary = true;
-	if (b==conductor) boundaryVal.flag = 1;
+    if (b!=accessible) {boundaryVal.accessible = true;}
+    else {boundaryVal.accessible = false;}
+	if (b==conductor){ boundaryVal.flag = 1; }
+	else {boundaryVal.flag = 0;}
 	std::vector<Value> row;
 	for (RGBQUAD * h = pixels;h!=pixels+ih.biWidth*ih.biHeight;h+=(ih.biWidth)) {
 		row.clear();
@@ -62,16 +64,36 @@ Grid Bmp_Reader::get_grid(Boundary b,int l,int r) {
 		}
 		mat.push_back(row);
 	}
-//	int value = grid.get_average_value(g);
-	int value = 0;
+	//std::cout << mat.size() << " " << mat[0].size() << " now grid " << g.size() <<  "    " << g[0].size() << std::endl;
+
 	for (int x = 1; x < g.size()-1; x++) {
 		for (int y = 1; y < g[0].size()-1; y++) {
-			if (mat[x][y].boundary==1) {
-				g[x][y].boundary = 1;
-				g[x][y].value = value;
-				if (b==conductor) g[x][y].flag = 1;
+			if (mat[x][y].boundary==true) {
+				g[x][y].boundary = true;
+				if(b!=conductor)g[x][y].value = vals;
 			}
-		}
+            if (mat[x][y].flag==1) {
+                g[x][y].flag = 1;
+            }
+            if (mat[x][y].accessible==false) {
+                g[x][y].accessible = false;
+            }
+        }
+    }
+    //int check = 0;
+	if (b==conductor) {
+        double avvalue = grid.get_average_value_safe(g);
+        //std::cout << avvalue << std::endl;
+        for (int x = 1; x < g.size()-1; x++) {
+            for (int y = 1; y < g[0].size()-1; y++) {
+                if(g[x][y].flag == 1){
+                    //std::cout << check << std::endl;
+                    //check++;
+                    g[x][y].value = avvalue;
+                    g[x][y].flag = 0;
+                }
+            }
+        }
 	}
 
 

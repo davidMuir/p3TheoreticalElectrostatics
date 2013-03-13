@@ -139,7 +139,7 @@ public:
 	 * @brief						Creates a grid from the bmp file and returns it
 	 * @return						Grid object
 	 */
-	Grid get_grid(Boundary,int l,int r);
+	Grid get_grid(Boundary,double l,double r, double vals);
 	virtual ~Bmp_Reader();
 private:
 	BITMAPFILEHEADER 	fh;

@@ -9,7 +9,7 @@ class Analytic {
   }
   ~Analytic(){};
 
-  void solve(int x, int y, unsigned int r, double val, double h){ 
+  void solve(int x, int y, unsigned int r, double val, double h){
     matrix sol = grid.get_values();
 if(x<r || x+r>sol.size()-1 || y<r || y+r>sol[0].size()-1)
       cout << "Out of range" << endl;
@@ -66,7 +66,28 @@ Grid find_err(Grid grid1, Grid grid2){
 	  err_grid.set_value(xs,ys,abs(val_1-val_2));
 	}
       }
-       
+
       return err_grid;
     }
   }
+
+  Grid find_err_relative(Grid grid1, Grid grid2){
+
+    matrix m1 = grid1.get_values();
+    matrix m2 = grid2.get_values();
+    Grid err_grid(m1.size(),m1[0].size());
+    if(m1.size()!= m2.size() || m1[0].size() != m2[0].size()){
+      cout << "Error: grids not the same size" << endl;
+    }else{
+      for(int xs=0; xs<m1.size(); xs++){
+	for(int ys=0; ys<m1[0].size(); ys++){
+	  double val_1 = m1[xs][ys].value;
+	  double val_2 = m2[xs][ys].value;
+	  err_grid.set_value(xs,ys,val_1-val_2);
+	}
+      }
+
+      return err_grid;
+    }
+  }
+

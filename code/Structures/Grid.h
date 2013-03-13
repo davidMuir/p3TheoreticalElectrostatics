@@ -58,7 +58,8 @@ public:
 	void set_coordinates(coordinate_matrix coords);
 	void set_values(matrix vals);
 	void set_gradients(grad_matrix grads);
-	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);	
+	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);
+	void get_efield(int n, int xmax, int ymax, double Emax);
 	void set_flags_to_zero();
 	void get_surface_points_of_figure();
 	coordinate_matrix get_coordinates();
@@ -74,6 +75,7 @@ public:
 	void print_gnuplot_values();
 	void print_all_to(std::string filename);
 	void print_contours_to(std::string filename, int n);
+	void print_efield_to(std::string filename, int n);
 	void print_figure_to(std::string filename, int number_of_figures);
 	void print_matrix_to(std::string filename);
 	void print_points_to(std::string filename);

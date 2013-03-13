@@ -4,7 +4,7 @@
 
 using namespace std;
 
-	
+
 void Animation::set_precision(double prec) {
 		precision = prec;
 	}
@@ -52,7 +52,7 @@ Animation::Animation(Grid input_grid) {
 	entry = input_grid;
 }
 
-	 
+
 
 void Animation::create_data() {
 	int total_frames = 10*time;
@@ -79,35 +79,35 @@ void Animation::create_data() {
 	{
 	stringstream ss;
 	ss << "data"<< iii << ".dat";
-	string str = ss.str();		
+	string str = ss.str();
 	ofstream outdata;
 	outdata.open(str.c_str());
 	if (outdata.is_open()) {
-		
+
 		if (iii!=0) {entry = sol.get_solution();}
 		for (int x = 0; x < entry.get_xmax(); x++) {
 				for (int y = 0; y < entry.get_ymax(); y++) {
 				outdata << x << "\t" << y << "\t" << entry.get_value(x,y) << endl;
 				}
-			}	
+			}
 		outdata.close();
 		}
 	else
 		{cout << "unable to open file" << endl;}
-	
+
 	if (lines.access) {
 	Grid sol2=entry;
 	stringstream bbb;
 	bbb << "eq_lines"<< iii << ".dat";
-	string str2 = bbb.str();	
+	string str2 = bbb.str();
 	sol2.equip_values(lines.number_of_lines,entry.get_xmax()-1,entry.get_ymax()-1,entry.get_value(entry.get_xmax()-1,entry.get_ymax()-1),1,1);
 	sol2.print_contours_to(str2, lines.number_of_lines);
 	}
 	}
-	
+
 	stringstream kk;
 	kk << "gnu_animate.gp";
-	string str = kk.str();		
+	string str = kk.str();
 	ofstream outdata;
 	outdata.open(str.c_str());
 	if (outdata.is_open()) {
@@ -115,21 +115,21 @@ void Animation::create_data() {
 		for (int ii=0; ii<total_frames; ++ii)
 		{
 			if (heatmap) {
-				if (lines.access && figure.access) 
+				if (lines.access && figure.access)
 					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\", 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 <<" notitle, 'figure.dat' with "<< figure.type <<" ls " << figure.figure_color -3 << " notitle " << endl;}
 				else if (figure.access)
 					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\", 'figure.dat' with "<< figure.type <<" ls " << figure.figure_color -3 << " notitle "  << endl;}
 				else if (lines.access)
 					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\", 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 << " notitle "  << endl;}
-				else 
+				else
 					{outdata << "plot 'data" << ii << ".dat' with image title \"" << ii*iterations / 10 /time << " iterations\"" << endl;}
 			}
-			
-			else if (lines.access && figure.access) 
+
+			else if (lines.access && figure.access)
 				{outdata << "plot 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 <<", 'figure.dat' with "<< figure.type <<" ls " << figure.figure_color -3 << " notitle "  << endl;}
 			else if (lines.access)
 				{outdata << "plot 'eq_lines" << ii <<".dat' with lines ls " << lines.eq_color -3 << " notitle "  << endl;}
-		
+
 		}
 		outdata.close();
 	}
@@ -145,7 +145,7 @@ void Animation::animate() {
 	gp.add_command("set key opaque");
 	stringstream bbb;
 	bbb << "set key at "<< entry.get_xmax()-1 << "," << entry.get_ymax()-1;
-	string aaa = bbb.str();	
+	string aaa = bbb.str();
 	gp.add_command(aaa.c_str());
 	gp.add_command("load 'gnu_animate.gp'");
 	gp.sendString();
@@ -174,7 +174,7 @@ void Animation::delete_data() {
 	remove ("figure.dat");
 		}
 }
-	
+
 
 //Animation::~Animation {
 //}

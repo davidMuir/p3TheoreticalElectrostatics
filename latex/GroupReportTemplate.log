@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2012.10.22)  12 MAR 2013 20:11
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2012.10.22)  13 MAR 2013 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -266,62 +266,119 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 Package: esint 
 \symlargesymbolsA=\mathgroup6
 )
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count115
+\Gm@cntv=\count116
+\c@Gm@tempcnt=\count117
+\Gm@bindingoffset=\dimen115
+\Gm@wd@mp=\dimen116
+\Gm@odd@mp=\dimen117
+\Gm@even@mp=\dimen118
+\Gm@layoutwidth=\dimen119
+\Gm@layoutheight=\dimen120
+\Gm@layouthoffset=\dimen121
+\Gm@layoutvoffset=\dimen122
+\Gm@dimlist=\toks31
+)
 Package newfloat Info: New float `algorithm' with options ` fileext=loa, listna
-me=List of Algorithms, name=ALGORITHM, placement=tbhp, ' on input line 27.
-\c@algorithm=\count115
-Package newfloat Info: float type `algorithm'=4 on input line 27.
-Class revtex4-1 Info: Patching array package. on input line 30.
+me=List of Algorithms, name=ALGORITHM, placement=tbhp, ' on input line 28.
+\c@algorithm=\count118
+Package newfloat Info: float type `algorithm'=4 on input line 28.
+Class revtex4-1 Info: Patching array package. on input line 31.
 
 
 Class revtex4-1 Warning: Repair the float package.
 
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 30.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 31.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 30.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 30.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 30.
-(./GroupReportTemplate.aux
-
-LaTeX Warning: Label `fig:fd_lin' multiply defined.
-
-)
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 31.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 31.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 31.
+(./GroupReportTemplate.aux)
 \openout1 = `GroupReportTemplate.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 30.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 31.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
+*geometry* driver: auto-detecting
+*geometry* detected driver: dvips
+*geometry* verbose mode - [ preamble ] result:
+* driver: dvips
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(36.135pt, 542.02501pt, 36.135pt)
+* v-part:(T,H,B)=(36.135pt, 722.7pt, 36.135pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=542.02501pt
+* \textheight=722.7pt
+* \oddsidemargin=-36.135pt
+* \evensidemargin=-36.135pt
+* \topmargin=-77.135pt
+* \headheight=25.0pt
+* \headsep=16.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=30.0pt
+* \marginparsep=6.0pt
+* \columnsep=18.0pt
+* \skip\footins=39.0pt plus 4.0pt minus 12.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
 \openout3 = `GroupReportTemplateNotes.bib'.
 
-\c@prop=\count116
-\c@cor=\count117
+\c@prop=\count119
+\c@cor=\count120
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 111.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 116.
-LaTeX Font Info:    Try loading font information for U+msa on input line 122.
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 125.
+LaTeX Font Info:    Try loading font information for U+msa on input line 131.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 122.
+LaTeX Font Info:    Try loading font information for U+msb on input line 131.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+esint on input line 122.
+LaTeX Font Info:    Try loading font information for U+esint on input line 131.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/esint/uesint.fd
@@ -329,97 +386,98 @@ File: uesint.fd
 )
 File: ../plots/first_plot.ps Graphic file (type eps)
 
-<../plots/first_plot.ps> [1] [2]
+<../plots/first_plot.ps> [1]
+Underfull \hbox (badness 2205) in paragraph at lines 177--179
+\OT1/ptm/m/n/10 Assuming we can sep-a-rate vari-ables such that $\OT1/cmr/m/n/1
+0 ^^H(\OML/cmm/m/it/10 r; ^^R\OT1/cmr/m/n/10 ) =
+ []
+
+[2]
 File: ../plots/difference.ps Graphic file (type eps)
  <../plots/difference.ps> [3]
-Overfull \hbox (19.7774pt too wide) in paragraph at lines 299--299
+File: ../plots/semicircle.ps Graphic file (type eps)
+ <../plots/semicircle.ps>
+File: ../plots/triangle.ps Graphic file (type eps)
+
+<../plots/triangle.ps>
+File: ../plots/ellipse.ps Graphic file (type eps)
+ <../plots/ellipse.ps>
+File: ../plots/feynman.ps Graphic file (type eps)
+ <../plots/feynman.ps> [4]
+Overfull \hbox (3.76491pt too wide) in paragraph at lines 335--335
 [] 
  []
 
 
-Overfull \hbox (23.8634pt too wide) in paragraph at lines 305--305
+Overfull \hbox (7.8509pt too wide) in paragraph at lines 341--341
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
 
  []
 
-[4] [5]
+[5]
 File: ../plots/pure_eqlines.eps Graphic file (type eps)
- <../plots/pure_eqlines.eps>
+ <../plots/pure_eqlines.eps> [6]
 File: ../plots/eqlines_heatmap.eps Graphic file (type eps)
  <../plots/eqlines_heatmap.eps>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 File: ../plots/efield_lines.eps Graphic file (type eps)
+
 <../plots/efield_lines.eps>
-File: ../plots/efield.eps Graphic file (type eps)
- <../plots/efield.eps>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 437.
-
-[7]
+File: ../plots/efield.eps Graphic file (type eps)
+<../plots/efield.eps> [7] [8]
 File: ../plots/position.eps Graphic file (type eps)
  <../plots/position.eps>
-File: finite_diff_conv.eps Graphic file (type eps)
- <finite_diff_conv.eps>
-File: fd_err_h_fit.eps Graphic file (type eps)
- <fd_err_h_fit.eps> [8]
+File: ../plots/fd_it.eps Graphic file (type eps)
+ <../plots/fd_it.eps>
+File: ../plots/fd_h.eps Graphic file (type eps)
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 520.
-
-File: sym_fv_conv.eps Graphic file (type eps)
-<sym_fv_conv.eps>
-File: fv_conv.eps Graphic file (type eps)
- <fv_conv.eps> [9]
-Underfull \hbox (badness 10000) in paragraph at lines 566--567
- [] $\OML/cmm/m/it/9 newm[]$ $\OMS/cmsy/m/n/9  $
+<../plots/fd_h.eps>
+File: ../plots/fv_it.eps Graphic file (type eps)
+ <../plots/fv_it.eps> [9]
+File: ../plots/fv_h.eps Graphic file (type eps)
+ <../plots/fv_h.eps>
+Overfull \hbox (36.01122pt too wide) in paragraph at lines 607--608
+ [] $\OML/cmm/m/it/9 newm[]$ $\OMS/cmsy/m/n/9  $ $\OT1/cmr/m/n/9 [[]]\OML/cmm/m
+/it/9 =\OT1/cmr/m/n/9 2$ 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 620--621
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 661--662
  [] $\OML/cmm/m/it/9 alternate[]$ $\OMS/cmsy/m/n/9  $
  []
 
 
-Overfull \hbox (24.60109pt too wide) in paragraph at lines 620--621
+Overfull \hbox (8.5886pt too wide) in paragraph at lines 661--662
  \OT1/cmr/m/n/9 [[]]\OML/cmm/m/it/9 =\OT1/cmr/m/n/9 2$ 
  []
 
-[10]
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 694.
-
-
-Underfull \hbox (badness 1142) in paragraph at lines 741--742
- \OT1/ptm/m/it/9 Higgs mass gen-er-a-tion mech-a-nism in the Stan-dard Model\OT
-1/ptm/m/n/9 ,
+Underfull \hbox (badness 1226) in paragraph at lines 663--664
+ [] \OT1/ptm/m/n/9 er-ror $\OMS/cmsy/m/n/9  $ $j\OML/cmm/m/it/9 alternate[] \OM
+S/cmsy/m/n/9 ^^@ \OML/cmm/m/it/9 current[]\OMS/cmsy/m/n/9 j \OML/cmm/m/it/9 >
  []
 
 [11]
+Underfull \hbox (badness 1354) in paragraph at lines 780--781
+ []\OT1/ptm/m/n/9 Becchi, C., 1997, \OT1/ptm/m/it/9 In-tro-duc-tion to Gauge Th
+e-o-ries\OT1/ptm/m/n/9 , arXiv:hep-
+ []
+
 No file GroupReportTemplate.bbl.
-[12] (./GroupReportTemplate.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[12] (./GroupReportTemplate.aux) ) 
 Here is how much of TeX's memory you used:
- 4624 strings out of 495060
- 59542 string characters out of 3182052
- 153970 words of memory out of 3000000
- 7742 multiletter control sequences out of 15000+200000
+ 5141 strings out of 495060
+ 67238 string characters out of 3182052
+ 151629 words of memory out of 3000000
+ 8241 multiletter control sequences out of 15000+200000
  16167 words of font info for 57 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,12n,25p,1368b,334s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,12n,32p,1389b,334s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on GroupReportTemplate.dvi (12 pages, 70376 bytes).
+Output written on GroupReportTemplate.dvi (12 pages, 76636 bytes).

@@ -13,9 +13,10 @@
 \newlabel{fig:eqn4}{{4}{1}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Cross section of zero net charge circular conductor in uniform electrostatic field. The colours are used to show the potential at each point, and the lines show points of equipotential. Solved using a finite difference method.}}{1}{}}
 \newlabel{fig:fig1}{{1.1}{1}{}{}{}}
-\newlabel{sec:the}{{II}{1}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Theory }{1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Solving the Laplace Equation in two dimensions}{1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}On dimensions}{1}{}}
+\newlabel{sec:the}{{II}{2}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Theory }{2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Solving the Laplace Equation in two dimensions}{2}{}}
 \newlabel{generalsol}{{5}{2}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Particular solution for infinite cylinder in $\mathaccentV {vec}17E{E}$ field}{2}{}}
 \newlabel{analyticsol}{{6}{2}{}{}{}}
@@ -27,83 +28,91 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Difference between solutions when two circular conductors are added one at a time and solved simultaneously. A negative value means the solution where conductors are added one at a time is lower than the simultaneous solution. The original uniform field runs from 50 on the left to -50 on the right. An integration over the fields gives a mean charge of about -0.16 in the one at a time solution and effectively 0 in the simultaneous one: a clear indication that charge conservation is violated when adding conductors one at at time.}}{3}{}}
 \newlabel{fig:difference}{{2.2}{3}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {D}Multiple conductors}{3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Results}{4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Solution for a semicircle facing north. Solved using a finite difference method.}}{4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Solution for an equilateral triangle facing north. Solved using a finite difference method.}}{4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Solution for an ellipse with its long side in the direction of the field. Solved using a finite difference method. Notice that it distorts the field more than the circle in figure 1.1{}{}{}\hbox {} even though it has roughly the same area. This is because it is longer in the direction of the field, as predicted by (7{}{}{}\hbox {}).}}{4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Solution for a conductor shaped like a QED Feynman diagram. This conductor was first drawn in MS Paint and then parsed into our program. Solved using a finite difference method. Notice the value of the conductor is not zero, as it isn't symmetric. The value of the conductor is found by integrating over its area and taking the average value.}}{4}{}}
 \citation{compmethods}
 \citation{compmethods}
-\newlabel{sec:met}{{III}{4}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Numerical Methods }{4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Finite Difference Method}{4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Background Information}{4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Accuracy of the method}{4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Approximation of second order derivative}{4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4}Laplace Equation}{4}{}}
+\citation{math_meth}
+\newlabel{sec:met}{{IV}{5}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Numerical Methods }{5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Finite Difference Method}{5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Background Information}{5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Accuracy of the method}{5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Approximation of second order derivative}{5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4}Laplace Equation}{5}{}}
 \citation{compmethods}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5}Method}{5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Asymmetric Finite Volume}{5}{}}
-\newlabel{conservationvol}{{8}{5}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Data presentation}{5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Equipotential lines}{5}{}}
+\citation{recipes_c}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5}Method}{6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Asymmetric Finite Volume}{6}{}}
+\newlabel{conservationvol}{{8}{6}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Data presentation}{6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Equipotential lines}{6}{}}
 \citation{compmethods}
-\newlabel{pureeq}{{IV\tmspace  +\thinmuskip {.1667em}A}{6}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Figure outline}{6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Electrostatic field}{6}{}}
-\newlabel{eqheat}{{IV\tmspace  +\thinmuskip {.1667em}B}{6}{}{}{}}
-\newlabel{efieldlines}{{IV\tmspace  +\thinmuskip {.1667em}C}{6}{}{}{}}
-\newlabel{efield}{{IV\tmspace  +\thinmuskip {.1667em}C}{7}{}{}{}}
-\newlabel{sec:unc}{{V}{7}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Error Analysis }{7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Discretising the Analytical Solution}{7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Truncation Error}{7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Finite Difference Method}{7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Finite Volume Method}{7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Round-Off Errors}{7}{}}
+\newlabel{pureeq}{{V\tmspace  +\thinmuskip {.1667em}A}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Figure outline}{7}{}}
+\newlabel{eqheat}{{V\tmspace  +\thinmuskip {.1667em}B}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Electrostatic field}{7}{}}
+\newlabel{efieldlines}{{V\tmspace  +\thinmuskip {.1667em}C}{7}{}{}{}}
+\newlabel{efield}{{V\tmspace  +\thinmuskip {.1667em}C}{7}{}{}{}}
+\newlabel{sec:unc}{{VI}{7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Error Analysis }{7}{}}
+\citation{recipes_c}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Discretising the Analytical Solution}{8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Truncation Error}{8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Finite Difference Method}{8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Finite Volume Method}{8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Round-Off Errors}{8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {D}Convergence}{8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Boundary Conditions}{8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Relationship between the shortest distance from the conductor to the boundary on the x axis, $d$, and the average error in the grid. The error is linearly depedent on $d$ as expected from our theoretical estimation (7{}{}{}\hbox {}).}}{8}{}}
-\newlabel{fig:fd_lin}{{5.3}{8}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Relationship between the error and the number of iterations for different sized grids using the finite difference method. The larger grid sizes converge to a smaller error but also do so much slower.}}{8}{}}
-\newlabel{fig:fd}{{5.4}{8}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Relationship between the average error in the solution and the step-size h using the finite difference method. The error is linearly depedent on h.}}{9}{}}
-\newlabel{fig:fd_lin}{{5.5}{9}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces Relationship between the shortest distance from the conductor to the boundary on the x axis, $d$, and the average error in the grid. The error is linearly depedent on $d$ as expected from our theoretical estimation (7{}{}{}\hbox {}).}}{9}{}}
+\newlabel{fig:fd_distance}{{6.7}{9}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Boundary Conditions}{9}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Finite Difference}{9}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Finite Volume}{9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Average error in grid for different grid sizes as a function of the number of iterations in the finite volume method. The errors grow as the size is increased past $100 \times 100$ due to the flux leak errors detailed above.}}{9}{}}
-\newlabel{fig:fv}{{5.6}{9}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Average error in grid in the steady state solution as a function of step-size h for the finite volume method. The errors decrease until h$\approx 0.01$ at which point the flux leak errors start to dominate.}}{9}{}}
-\newlabel{fig:fv_opt}{{5.7}{9}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Minimising the Error}{9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Algorithm Cost}{10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces Relationship between the error and the number of iterations for different sized grids using the finite difference method. The larger grid sizes converge to a smaller error but also do so much slower.}}{9}{}}
+\newlabel{fig:fd}{{6.8}{9}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.9}{\ignorespaces Relationship between the average error in the solution and the step-size h using the finite difference method. The error is linearly depedent on h.}}{9}{}}
+\newlabel{fig:fd_lin}{{6.9}{9}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces Average error in grid for different grid sizes as a function of the number of iterations in the finite volume method. The errors grow as the size is increased past $100 \times 100$ due to the flux leak errors detailed above.}}{10}{}}
+\newlabel{fig:fv}{{6.10}{10}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces Average error in grid in the steady state solution as a function of step-size h for the finite volume method. The errors decrease until h$\approx 0.01$ at which point the flux leak errors start to dominate.}}{10}{}}
+\newlabel{fig:fv_opt}{{6.11}{10}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Finite Volume}{10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}Minimising the Error}{10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Algorithm Cost}{10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Theoretical Analysis}{10}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Finite Difference}{10}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Finite Difference}}{10}{}}
 \newlabel{alg:fd}{{1}{10}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Fast Finite Difference}{10}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Fast Finite Difference}}{10}{}}
-\newlabel{alg:ffd}{{2}{10}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Asymmetric Finite Volume}{10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Fast Finite Difference}{11}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Fast Finite Difference}}{11}{}}
+\newlabel{alg:ffd}{{2}{11}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3}Asymmetric Finite Volume}{11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Experimental Analysis}{11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Worst Case}{11}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Asymmetric Finite Volume}}{11}{}}
+\newlabel{alg:afv}{{3}{11}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Average Case}{11}{}}
 \bibcite{gaugetheory1}{{1}{}{{}}{{}}}
 \bibcite{gaugetheory3}{{2}{}{{}}{{}}}
 \bibcite{gaugetheory2}{{3}{}{{}}{{}}}
-\bibcite{pinkbook}{{4}{}{{}}{{}}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Asymmetric Finite Volume}}{11}{}}
-\newlabel{alg:afv}{{3}{11}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Experimental Analysis}{11}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1}Worst Case}{11}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2}Average Case}{11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Comparison of the methods}{11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Note about Scale}{11}{}}
-\newlabel{sec:sum}{{VIII}{11}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Summary and Discussion }{11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {}References}{11}{}}
-\bibcite{compmethods}{{5}{}{{}}{{}}}
-\bibcite{eulerfluids}{{6}{}{{}}{{}}}
+\bibcite{num_math_comp}{{4}{}{{}}{{}}}
+\bibcite{pinkbook}{{5}{}{{}}{{}}}
+\bibcite{compmethods}{{6}{}{{}}{{}}}
+\bibcite{recipes_c}{{7}{}{{}}{{}}}
+\bibcite{math_meth}{{8}{}{{}}{{}}}
+\bibcite{eulerfluids}{{9}{}{{}}{{}}}
 \bibdata{GroupReportTemplateNotes}
 \bibstyle{apsrev4-1}
 \citation{REVTEX41Control}
 \citation{apsrev41Control}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\newlabel{LastBibItem}{{6}{12}{}{}{}}
-\@writefile{toc}{\appendix }
-\@writefile{toc}{\contentsline {section}{\numberline {\unskip }Full analytical solution}{12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {\unskip }Code}{12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Comparison of the methods}{12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Note about Scale}{12}{}}
+\newlabel{sec:sum}{{IX}{12}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Summary }{12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {}References}{12}{}}
+\newlabel{LastBibItem}{{9}{12}{}{}{}}
 \newlabel{LastPage}{{}{12}{}{}{}}

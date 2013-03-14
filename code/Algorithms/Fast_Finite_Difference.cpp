@@ -1,10 +1,3 @@
-/*
- * FiniteDifference.cpp
- *
- *  Created on: 19 Feb 2013
- *      Author: david
- */
-
 #include "Fast_Finite_Difference.h"
 
 Fast_Finite_Difference::Fast_Finite_Difference(Grid entry) : Algorithm(entry) {}

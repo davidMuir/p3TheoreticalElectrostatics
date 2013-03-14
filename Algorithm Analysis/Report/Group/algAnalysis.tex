@@ -8,6 +8,7 @@
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{bbm}
 \usepackage{newfloat}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
 
 \DeclareFloatingEnvironment[
     fileext=loa,
@@ -15,15 +16,14 @@
     name=ALGORITHM,
     placement=tbhp,
 ]{algorithm}
-\newcommand*\Let[2]{\State #1 $\gets$ #2}
 
 \begin{document}
 \section{Algorithm Cost}
 \subsection{Theoretical Analysis}
 
-To calculate worst-case performance we can go through the algorithm and count operations, using a recurrence relation to obtain the total number of operations that will be perfrmed over the lifetime of the object.
+To calculate worst-case performance the number of operations performed over the lifetime of the object is recorded in a recurrence relation, allowing a reasonable approximation of relative performance between the algorithms to be discovered.
 
-While we aren't guaranteed great degrees of accuracy from this approach, we can at least know at which rate the time taken will increase by reducing the recurrence relation to 'big O' notation.
+The recurrence relations are also reduced to Big O notation to classify complexity in a standard format.
 
 \subsubsection{Finite Difference}
 \begin{algorithm}
@@ -66,13 +66,13 @@ While we aren't guaranteed great degrees of accuracy from this approach, we can 
     \end{algorithmic}
 \end{algorithm}
 
-There are 4 constant operations, 9 operations dependant on the number of iterations set (MAX) and 11 operations dependant on the size of the grid and the number of iterations set. This gives us \[L(11N+9)+4\] With L being the number of iterations set and N being the grid size.
+There are 4 constant operations, 9 operations dependant on the number of iterations set, and 11 operations dependant on the size of the grid and the number of iterations set. This produces the following recurrence relation \[L(11n+9)+4\] With L being the number of iterations set and N being the grid size.
 
-We can reduce this to big O notation as O(n), giving us linear complexity.
+This can be reduced to Big O notation as O(n), showing a linear dependance on input.
 
 \subsubsection{Fast Finite Difference}
 
-The Fast Finite Difference method is an attempt to optimise the Finite Difference method. It is functionally the same, and arrives at the same approximation as the Finite Difference method will, however it takes much less time to do so.
+The Fast Finite Difference method is an optimisation of the Finite Difference method. It is functionally the same, and arrives at the same approximation as the Finite Difference method, however it takes much less time to do so.
 
 \begin{algorithm}
     \caption{Fast Finite Difference}
@@ -105,145 +105,60 @@ The Fast Finite Difference method is an attempt to optimise the Finite Differenc
     \end{algorithmic}
 \end{algorithm}
 
-There are 7 constant operations, 6 operations dependant on the maximum number of iterations set (MAX) and 6 operations dependant on the number of grid elements and the maximum number of iterations. This gives us a complexity of \[L(6n + 6) + 7\], where L is the number of iterations and n is the grid size. We can reduce this to Big O notation as O(n), giving us an algorithm with linear complexity.
+There are 7 constant operations, 6 operations dependant on the maximum number of iterations set (MAX) and 6 operations dependant on the number of grid elements and the maximum number of iterations. This produces the following recurrence relation \[L(6n + 6) + 7\]
+
+This can be reduced to O(n), again showing linear dependance on input.
 
 \subsubsection{Asymmetric Finite Volume}
 
-\begin{algorithm}
-    \caption{Asymmetric Finite Volume}
-    \label{alg:afv}
-    \begin{algorithmic}
-        \Function{iteration}{old}
-        \Let{m}{old.it}
-        \Let{no}{height(m)}
-        \Let{mo}{width(m)}
-        \Let{change}{0}
-        \State cells
-        \State dv
-        \State old\_value
-        \State DV
-        \State coefficient
-        \State total\_difference
-        \State count
-        \For{$x \gets 1 \textrm{ to } no-1$}
-            \For{$y \gets 1 \textrm{ to } mo-1$}
-                \Let{old\_value}{$m_{x,y}$}
-                \If{$m_{x-1,y}$ is accessible}
-                    \Let{cells}{$m_{x-1,y}$}
-                    \Let{dv}{$m_{x,y} - m_{x-1,y}$}
-                \EndIf
-                \If{$m_{x+1,y}$ is accessible}
-                    \Let{cells}{$m_{x+1,y}$}
-                    \Let{dv}{$m_{x,y} - m_{x+1,y}$}
-                \EndIf
-                \If{$m_{x,y-1}$ is accessible}
-                    \Let{cells}{$m_{x-1,y}$}
-                    \Let{dv}{$m_{x,y} - m_{x,y-1}$}
-                \EndIf
-                \If{$m_{x,y+1}$ is accessible}
-                    \Let{cells}{$m_{x,y+1}$}
-                    \Let{dv}{$m_{x,y} - m_{x,y+1}$}
-                \EndIf
-                \Let{cells}{$m_{x,y}$}
-                \Let{average}{average(cells)}
-                \If{$m_{x,y}$ not boundary}
-                    \Let{$m_{x,y}$}{average}
-                    \Let{DV}{average-old\_value}
-                    \If{$|DV| > \textrm{ change }$}
-                        \Let{change}{$|DV|$}
-                    \EndIf
-                    \Let{total\_Difference}{total\_value(dv)}
-                    \If{total difference = 0 or DV = 0}
-                        \If{$m_{x-1,y} and m_{x+1,y} \textrm{ are accessible }$}
-                            \Let{xnew}{[$m_{x-1,y}+m_{x+1,y}]/2$}
-                            \If{$m_{x-1,y} \textrm{ not boundary }$}
-                                \Let{$m_{x-1,y}$}{xnew}
-                            \EndIf
-                            \If{$m_{x+1,y} \textrm{ not boundary }$}
-                                \Let{$m_{x+1,y}$}{xnew}
-                            \EndIf
-                        \EndIf
-                        \If{$m_{x,y-1} and m_{x,y+1} \textrm{ are accessible }$}
-                            \Let{ynew}{[$m_{x,y-1}+m_{x,y+1}]/2$}
-                            \If{$m_{x,y-1} \textrm{ not boundary }$}
-                                \Let{$m_{x,y-1}$}{ynew}
-                            \EndIf
-                            \If{$m_{x,y+1} \textrm{ not boundary }$}
-                                \Let{$m_{x,y+1}$}{ynew}
-                            \EndIf
-                        \EndIf
-                    \EndIf
-                    \Else
-                        \Let{coefficient}{$-DV/total_difference$}
-                        \Let{count}{0}
-                        \If{$m_{x-1,y} \textrm{ is accessible}$}
-                            \If{$m_{x-1,y} \textrm{ not boundary }$}
-                                \Let{$m_{x-1,y}$}{$m_{x-1,y} = m_{x-1,y} + \textrm{ coefficient } * dv_{count}$}
-                                \Let{count}{count + 1}
-                            \EndIf
-                        \EndIf
-                        \If{$m_{x+1,y} \textrm{ is accessible}$}
-                            \If{$m_{x+1,y} \textrm{ not boundary }$}
-                                \Let{$m_{x+1,y}$}{$m_{x+1,y} = m_{x+1,y} + \textrm{ coefficient } * dv_{count}$}
-                                \Let{count}{count + 1}
-                            \EndIf
-                        \EndIf
-                        \If{$m_{x,y-1} \textrm{ is accessible}$}
-                            \If{$m_{x,y-1} \textrm{ not boundary }$}
-                                \Let{$m_{x-1,y}$}{$m_{x,y-1} = m_{x,y-1} + \textrm{ coefficient } * dv_{count}$}
-                                \Let{count}{count + 1}
-                            \EndIf
-                        \EndIf
-                        \If{$m_{x,y+1} \textrm{ is accessible}$}
-                            \If{$m_{x,y+1} \textrm{ not boundary }$}
-                                \Let{$m_{x,y+1}$}{$m_{x,y+1} = m_{x,y+1} + \textrm{ coefficient } * dv_{count}$}
-                                \Let{count}{count + 1}
-                            \EndIf
-                        \EndIf
-                    \State clear cells
-                    \State clear dv
-                \EndIf
-            \EndFor
-        \EndFor
-        \EndFunction
-    \end{algorithmic}
-\end{algorithm}
+\footnote{Due to the scale of this method, pseudocode has been omitted. The current implementation is available in a public repository should the reader require it.}
 
-There are 11 constant operations, 19 operations dependant on the maximum number of iterations set (MAX) and 34 operations dependant on the number of grid elements and the maximum number of iterations. This gives us a complexity of \[L(34N+19)+11\], where L is the number of iterations and N is the grid size. We can reduce this to Big O notation as O(n), giving us an algorithm with linear complexity.
+There are 11 constant operations, 19 operations dependant on the maximum number of iterations set (MAX) and 34 operations dependant on the number of grid elements and the maximum number of iterations. This produces the following recurrence relation \[L(34N+19)+11\]
+
+This can be reduced to O(n), showing linear dependance on input.
+
+\subsubsection{Aside on Theoretical Treatment of Algorithm Analysis}
+
+The chosen method for analysing algorithm complexity is a standard practise. However, due to differing costs for individual classes of operations only an approximation of complexity may be achieved.
+
+Therefore the previous relations should not be taken as an absolute measure of time taken, but rather as an estimate.
 
 \subsection{Experimental Analysis}
 \subsubsection{Worst Case}
 
-To obtain an idea of the worst-case performance of each algorithm at a certain grid size we can run all of the algorithms for a set number of iterations so that we can obtain a relation between the grid size and the upper bound on run time.
+To obtain the worst-case performance for the algorithms they were each run iteratively on increasing grid sizes of a constant number of iterations of $10^4$. The run times were recorded using standard library timing methods and a comparison plot (figure \ref{fig:wcalgcomp}) was created.
 
 The experimental set up for this involved creating three identical Grids, with a flow of -50 to 50; a circular conductor set at the mid point of the grid with a radius of a tenth of the height of the grid.
 
-We then run each of the algorithms on their respective grids recording the time taken for the run, and increasing the grid size for each run.
-
 \begin{figure}
+    \caption{A comparison of worst case performances of the three algorithms. There are two scales used due to the vastly differing performances of the finite difference methods and the finite volume method.}
+    \label{fig:wcalgcomp}
     \begin{center}
         \includegraphics*[angle=-90,width = \columnwidth ]{comparison_wc.ps}
     \end{center}
 \end{figure}
 
-We get a gradient of $5.11*10^{-3}$ for afv, $2.11*10^{-4}$ for fd, and $3.66*10{-5}$ for ffd.
-
-Using this we can calculate how long each algorithm would take to run a certain grid size, for example for a grid size of 1000 by 1000 the Fast Finite Difference method would take 36.6 seconds; Finite Difference would take 211 seconds; and Asymmetric Finite Volume would take 5110 seconds on the experimenters system.
+A gradient of $5.11 \times 10^{-3}$ is observed for asymmetric finite volume; $2.11 \times 10^{-4}$ for Finite Difference; and $3.66 \times 10^{-5}$ for Fast Finite Difference.
 
 \subsubsection{Average Case}
 
-To obtain the average case performance of the algorithms, we shall run each of the algorithms as previously, but setting the precision to some non-zero value. This will allow the algorithms to finish after they have reached this precision and will give us an idea of the average case performance of the algorithms.
+To obtain the average-case performance for the algorithms they were each run iteratively on increasing grid sizes of with a requested precision of $1 \times 10^{-4}$. The run times were recorded using standard library timing methods and a comparison plot (figure \ref{fig:acalgcomp}) was created.
 
 \begin{figure}
+    \caption{A comparison of average case performances of the three algorithms. There are two scales used due to the vastly differing performances of the finite difference methods and the finite volume method}
+    \label{fig:acalgcomp}
     \begin{center}
         \includegraphics*[angle=-90,width=\columnwidth]{comparison_ac.ps}
     \end{center}
 \end{figure}
 
-After running this we can see that the gradient of the afv method is $5.16*10^{-3}$, fd is $2.21*10^{-4}$ and ffd is $3.30*10^{-5}$
+After running this we can see that the gradient of the Asymmetric Finite Volume method is $5.16*10^{-3}$, Finite Difference is $2.21*10^{-4}$ and Fast Finite Difference is $3.30*10^{-5}$
+
+A gradient of $5.11 \times 10^{-3}$ is observed for asymmetric finite volume; $2.11 \times 10^{-4}$ for Finite Difference; and $3.66 \times 10^{-5}$
 
 \subsection{Comparison of the methods}
-%TODO Write a comparison of the algorithms and in particular talk about the changes in the ffd which allows to be so much quicker than fd
+
+There is a clear trend between the number of operations performed per iteration and the relative performances of the algorithms. With the fastest algorithm, Fast Finite Difference having 6 operations per iteration; Fast Finite Difference having 11 operations per iteration and having a worst case runtime of 5.77 times that of Fast Finite Difference; and Asymmetric Finite Volume having 34 operations per iteration and a runtime of 139.62 of that of Fast Finite Difference.
 
 \end{document}
 

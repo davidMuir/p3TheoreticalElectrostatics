@@ -1,0 +1,327 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 57.82     48.13    48.13     9999     0.00     0.00  Finite_Difference::iteration(Iteration)
+ 41.25     82.46    34.33        1    34.33    34.33  Fast_Finite_Difference::solve()
+  0.37     82.77     0.31 10010000     0.00     0.00  std::vector<Value, std::allocator<Value> >::operator=(std::vector<Value, std::allocator<Value> > const&)
+  0.28     83.00     0.23    20004     0.00     0.00  std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&)
+  0.25     83.21     0.21        1     0.21    48.87  Finite_Difference::solve()
+  0.02     83.23     0.02                             Grid::set_flow(double, double)
+  0.01     83.24     0.01        2     0.01     0.01  Grid::set_boundary_shape(int, int, int, int, double, Shape, int, int, int, int, int, int)
+  0.01     83.25     0.01                             Finite_Difference::Finite_Difference(Grid)
+  0.01     83.25     0.01        3     0.00     0.00  std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::operator=(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > > const&)
+  0.00     83.25     0.00       50     0.00     0.00  void std::vector<Coordinate, std::allocator<Coordinate> >::_M_emplace_back_aux<Coordinate const&>(Coordinate const&)
+  0.00     83.25     0.00       50     0.00     0.00  void std::vector<Grad, std::allocator<Grad> >::_M_emplace_back_aux<Grad const&>(Grad const&)
+  0.00     83.25     0.00       50     0.00     0.00  void std::vector<Value, std::allocator<Value> >::_M_emplace_back_aux<Value const&>(Value const&)
+  0.00     83.25     0.00       50     0.00     0.00  void std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::_M_emplace_back_aux<std::vector<Coordinate, std::allocator<Coordinate> > const&>(std::vector<Coordinate, std::allocator<Coordinate> > const&)
+  0.00     83.25     0.00       50     0.00     0.00  void std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::_M_emplace_back_aux<std::vector<Grad, std::allocator<Grad> > const&>(std::vector<Grad, std::allocator<Grad> > const&)
+  0.00     83.25     0.00       50     0.00     0.00  void std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::_M_emplace_back_aux<std::vector<Value, std::allocator<Value> > const&>(std::vector<Value, std::allocator<Value> > const&)
+  0.00     83.25     0.00        9     0.00     0.00  Grid::get_coordinates()
+  0.00     83.25     0.00        4     0.00     0.00  Grid::Grid(unsigned int, unsigned int)
+  0.00     83.25     0.00        4     0.00     0.00  Grid::Grid()
+  0.00     83.25     0.00        4     0.00     0.00  Grid::~Grid()
+  0.00     83.25     0.00        3     0.00     0.00  std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::operator=(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > > const&)
+  0.00     83.25     0.00        2     0.00     0.00  Grid::get_values()
+  0.00     83.25     0.00        2     0.00     0.00  Grid::set_values(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >)
+  0.00     83.25     0.00        2     0.00     0.00  Grid::set_conductor(int, int, int, int, Shape, int, int, int, int, int, int)
+  0.00     83.25     0.00        2     0.00     0.00  Grid::set_boundary_shape(int, int, int, int, Shape, int, int, int, int, int, int)
+  0.00     83.25     0.00        2     0.00     0.00  Algorithm::Algorithm(Grid)
+  0.00     83.25     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8find_err4GridS_
+  0.00     83.25     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN17Finite_DifferenceC2E4Grid
+  0.00     83.25     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN22Fast_Finite_DifferenceC2E4Grid
+  0.00     83.25     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN4Grid9round_ownEd
+  0.00     83.25     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN9AlgorithmC2E4Grid
+  0.00     83.25     0.00        1     0.00     0.00  Grid::get_gradients()
+  0.00     83.25     0.00        1     0.00     0.00  Grid::set_gradients(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >)
+  0.00     83.25     0.00        1     0.00     0.00  Grid::set_coordinates(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.01% of 83.25 seconds
+
+index % time    self  children    called     name
+                0.21   48.66       1/1           Finite_Difference::get_solution() [2]
+[1]     58.7    0.21   48.66       1         Finite_Difference::solve() [1]
+               48.13    0.27    9999/9999        Finite_Difference::iteration(Iteration) [3]
+                0.12    0.15   10001/20004       std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&) [6]
+                0.00    0.00       1/3           std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::operator=(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > > const&) [12]
+                0.00    0.00       1/2           Grid::get_values() [35]
+                0.00    0.00       1/2           Grid::set_values(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >) [36]
+                0.00    0.00       1/9           Grid::get_coordinates() [30]
+                0.00    0.00       1/1           Grid::set_coordinates(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >) [46]
+                0.00    0.00       1/1           Grid::get_gradients() [44]
+                0.00    0.00       1/3           std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::operator=(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > > const&) [34]
+                0.00    0.00       1/1           Grid::set_gradients(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >) [45]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     58.7    0.00   48.87                 Finite_Difference::get_solution() [2]
+                0.21   48.66       1/1           Finite_Difference::solve() [1]
+-----------------------------------------------
+               48.13    0.27    9999/9999        Finite_Difference::solve() [1]
+[3]     58.1   48.13    0.27    9999         Finite_Difference::iteration(Iteration) [3]
+                0.11    0.15    9999/20004       std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&) [6]
+-----------------------------------------------
+               34.33    0.00       1/1           Fast_Finite_Difference::get_solution() [5]
+[4]     41.2   34.33    0.00       1         Fast_Finite_Difference::solve() [4]
+                0.00    0.00       2/20004       std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&) [6]
+                0.00    0.00       1/2           Grid::get_values() [35]
+                0.00    0.00       1/2           Grid::set_values(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >) [36]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]     41.2    0.00   34.33                 Fast_Finite_Difference::get_solution() [5]
+               34.33    0.00       1/1           Fast_Finite_Difference::solve() [4]
+-----------------------------------------------
+                0.00    0.00       2/20004       Fast_Finite_Difference::solve() [4]
+                0.00    0.00       2/20004       Algorithm::Algorithm(Grid) [13]
+                0.11    0.15    9999/20004       Finite_Difference::iteration(Iteration) [3]
+                0.12    0.15   10001/20004       Finite_Difference::solve() [1]
+[6]      0.6    0.23    0.31   20004         std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&) [6]
+                0.31    0.00 10010000/10010000     std::vector<Value, std::allocator<Value> >::operator=(std::vector<Value, std::allocator<Value> > const&) [7]
+-----------------------------------------------
+                0.31    0.00 10010000/10010000     std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&) [6]
+[7]      0.4    0.31    0.00 10010000         std::vector<Value, std::allocator<Value> >::operator=(std::vector<Value, std::allocator<Value> > const&) [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      0.0    0.02    0.00                 Grid::set_flow(double, double) [8]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      0.0    0.01    0.00                 Finite_Difference::Finite_Difference(Grid) [9]
+                0.00    0.00       1/2           Algorithm::Algorithm(Grid) [13]
+                0.00    0.00       1/4           Grid::~Grid() [33]
+-----------------------------------------------
+                0.01    0.00       2/2           Grid::set_conductor(int, int, int, int, Shape) [11]
+[10]     0.0    0.01    0.00       2         Grid::set_boundary_shape(int, int, int, int, double, Shape, int, int, int, int, int, int) [10]
+-----------------------------------------------
+                                                 <spontaneous>
+[11]     0.0    0.00    0.01                 Grid::set_conductor(int, int, int, int, Shape) [11]
+                0.01    0.00       2/2           Grid::set_boundary_shape(int, int, int, int, double, Shape, int, int, int, int, int, int) [10]
+                0.00    0.00       2/2           Grid::set_conductor(int, int, int, int, Shape, int, int, int, int, int, int) [37]
+-----------------------------------------------
+                0.00    0.00       1/3           Finite_Difference::solve() [1]
+                0.00    0.00       2/3           Algorithm::Algorithm(Grid) [13]
+[12]     0.0    0.01    0.00       3         std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::operator=(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > > const&) [12]
+-----------------------------------------------
+                0.00    0.00       1/2           Finite_Difference::Finite_Difference(Grid) [9]
+                0.00    0.00       1/2           Fast_Finite_Difference::Fast_Finite_Difference(Grid) [14]
+[13]     0.0    0.00    0.00       2         Algorithm::Algorithm(Grid) [13]
+                0.00    0.00       2/3           std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::operator=(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > > const&) [12]
+                0.00    0.00       2/20004       std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&) [6]
+                0.00    0.00       8/9           Grid::get_coordinates() [30]
+                0.00    0.00       4/4           Grid::Grid(unsigned int, unsigned int) [31]
+                0.00    0.00       4/4           Grid::Grid() [32]
+                0.00    0.00       2/3           std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::operator=(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > > const&) [34]
+-----------------------------------------------
+                                                 <spontaneous>
+[14]     0.0    0.00    0.00                 Fast_Finite_Difference::Fast_Finite_Difference(Grid) [14]
+                0.00    0.00       1/2           Algorithm::Algorithm(Grid) [13]
+                0.00    0.00       1/4           Grid::~Grid() [33]
+-----------------------------------------------
+                0.00    0.00      50/50          Grid::Grid(unsigned int, unsigned int) [31]
+[24]     0.0    0.00    0.00      50         void std::vector<Coordinate, std::allocator<Coordinate> >::_M_emplace_back_aux<Coordinate const&>(Coordinate const&) [24]
+-----------------------------------------------
+                0.00    0.00      50/50          Grid::Grid(unsigned int, unsigned int) [31]
+[25]     0.0    0.00    0.00      50         void std::vector<Grad, std::allocator<Grad> >::_M_emplace_back_aux<Grad const&>(Grad const&) [25]
+-----------------------------------------------
+                0.00    0.00      50/50          Grid::Grid(unsigned int, unsigned int) [31]
+[26]     0.0    0.00    0.00      50         void std::vector<Value, std::allocator<Value> >::_M_emplace_back_aux<Value const&>(Value const&) [26]
+-----------------------------------------------
+                0.00    0.00      50/50          Grid::Grid(unsigned int, unsigned int) [31]
+[27]     0.0    0.00    0.00      50         void std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::_M_emplace_back_aux<std::vector<Coordinate, std::allocator<Coordinate> > const&>(std::vector<Coordinate, std::allocator<Coordinate> > const&) [27]
+-----------------------------------------------
+                0.00    0.00      50/50          Grid::Grid(unsigned int, unsigned int) [31]
+[28]     0.0    0.00    0.00      50         void std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::_M_emplace_back_aux<std::vector<Grad, std::allocator<Grad> > const&>(std::vector<Grad, std::allocator<Grad> > const&) [28]
+-----------------------------------------------
+                0.00    0.00      50/50          Grid::Grid(unsigned int, unsigned int) [31]
+[29]     0.0    0.00    0.00      50         void std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::_M_emplace_back_aux<std::vector<Value, std::allocator<Value> > const&>(std::vector<Value, std::allocator<Value> > const&) [29]
+-----------------------------------------------
+                0.00    0.00       1/9           Finite_Difference::solve() [1]
+                0.00    0.00       8/9           Algorithm::Algorithm(Grid) [13]
+[30]     0.0    0.00    0.00       9         Grid::get_coordinates() [30]
+-----------------------------------------------
+                0.00    0.00       4/4           Algorithm::Algorithm(Grid) [13]
+[31]     0.0    0.00    0.00       4         Grid::Grid(unsigned int, unsigned int) [31]
+                0.00    0.00      50/50          void std::vector<Value, std::allocator<Value> >::_M_emplace_back_aux<Value const&>(Value const&) [26]
+                0.00    0.00      50/50          void std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::_M_emplace_back_aux<std::vector<Value, std::allocator<Value> > const&>(std::vector<Value, std::allocator<Value> > const&) [29]
+                0.00    0.00      50/50          void std::vector<Coordinate, std::allocator<Coordinate> >::_M_emplace_back_aux<Coordinate const&>(Coordinate const&) [24]
+                0.00    0.00      50/50          void std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::_M_emplace_back_aux<std::vector<Coordinate, std::allocator<Coordinate> > const&>(std::vector<Coordinate, std::allocator<Coordinate> > const&) [27]
+                0.00    0.00      50/50          void std::vector<Grad, std::allocator<Grad> >::_M_emplace_back_aux<Grad const&>(Grad const&) [25]
+                0.00    0.00      50/50          void std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::_M_emplace_back_aux<std::vector<Grad, std::allocator<Grad> > const&>(std::vector<Grad, std::allocator<Grad> > const&) [28]
+-----------------------------------------------
+                0.00    0.00       4/4           Algorithm::Algorithm(Grid) [13]
+[32]     0.0    0.00    0.00       4         Grid::Grid() [32]
+-----------------------------------------------
+                0.00    0.00       1/4           Finite_Difference::Finite_Difference(Grid) [9]
+                0.00    0.00       1/4           Fast_Finite_Difference::Fast_Finite_Difference(Grid) [14]
+                0.00    0.00       2/4           Algorithm::~Algorithm() [88]
+[33]     0.0    0.00    0.00       4         Grid::~Grid() [33]
+-----------------------------------------------
+                0.00    0.00       1/3           Finite_Difference::solve() [1]
+                0.00    0.00       2/3           Algorithm::Algorithm(Grid) [13]
+[34]     0.0    0.00    0.00       3         std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::operator=(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > > const&) [34]
+-----------------------------------------------
+                0.00    0.00       1/2           Finite_Difference::solve() [1]
+                0.00    0.00       1/2           Fast_Finite_Difference::solve() [4]
+[35]     0.0    0.00    0.00       2         Grid::get_values() [35]
+-----------------------------------------------
+                0.00    0.00       1/2           Finite_Difference::solve() [1]
+                0.00    0.00       1/2           Fast_Finite_Difference::solve() [4]
+[36]     0.0    0.00    0.00       2         Grid::set_values(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >) [36]
+-----------------------------------------------
+                0.00    0.00       2/2           Grid::set_conductor(int, int, int, int, Shape) [11]
+[37]     0.0    0.00    0.00       2         Grid::set_conductor(int, int, int, int, Shape, int, int, int, int, int, int) [37]
+                0.00    0.00       2/2           Grid::set_boundary_shape(int, int, int, int, Shape, int, int, int, int, int, int) [38]
+-----------------------------------------------
+                0.00    0.00       2/2           Grid::set_conductor(int, int, int, int, Shape, int, int, int, int, int, int) [37]
+[38]     0.0    0.00    0.00       2         Grid::set_boundary_shape(int, int, int, int, Shape, int, int, int, int, int, int) [38]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [105]
+[39]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8find_err4GridS_ [39]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [105]
+[40]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN17Finite_DifferenceC2E4Grid [40]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [105]
+[41]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN22Fast_Finite_DifferenceC2E4Grid [41]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [105]
+[42]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN4Grid9round_ownEd [42]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [105]
+[43]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN9AlgorithmC2E4Grid [43]
+-----------------------------------------------
+                0.00    0.00       1/1           Finite_Difference::solve() [1]
+[44]     0.0    0.00    0.00       1         Grid::get_gradients() [44]
+-----------------------------------------------
+                0.00    0.00       1/1           Finite_Difference::solve() [1]
+[45]     0.0    0.00    0.00       1         Grid::set_gradients(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >) [45]
+-----------------------------------------------
+                0.00    0.00       1/1           Finite_Difference::solve() [1]
+[46]     0.0    0.00    0.00       1         Grid::set_coordinates(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >) [46]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Index by function name
+
+  [39] _GLOBAL__sub_I__Z8find_err4GridS_ [44] Grid::get_gradients() [13] Algorithm::Algorithm(Grid)
+  [40] _GLOBAL__sub_I__ZN17Finite_DifferenceC2E4Grid [37] Grid::set_conductor(int, int, int, int, Shape, int, int, int, int, int, int) [24] void std::vector<Coordinate, std::allocator<Coordinate> >::_M_emplace_back_aux<Coordinate const&>(Coordinate const&)
+  [41] _GLOBAL__sub_I__ZN22Fast_Finite_DifferenceC2E4Grid [45] Grid::set_gradients(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >) [25] void std::vector<Grad, std::allocator<Grad> >::_M_emplace_back_aux<Grad const&>(Grad const&)
+  [42] _GLOBAL__sub_I__ZN4Grid9round_ownEd [30] Grid::get_coordinates() [26] void std::vector<Value, std::allocator<Value> >::_M_emplace_back_aux<Value const&>(Value const&)
+  [43] _GLOBAL__sub_I__ZN9AlgorithmC2E4Grid [46] Grid::set_coordinates(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >) [7] std::vector<Value, std::allocator<Value> >::operator=(std::vector<Value, std::allocator<Value> > const&)
+   [1] Finite_Difference::solve() [38] Grid::set_boundary_shape(int, int, int, int, Shape, int, int, int, int, int, int) [27] void std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::_M_emplace_back_aux<std::vector<Coordinate, std::allocator<Coordinate> > const&>(std::vector<Coordinate, std::allocator<Coordinate> > const&)
+   [3] Finite_Difference::iteration(Iteration) [10] Grid::set_boundary_shape(int, int, int, int, double, Shape, int, int, int, int, int, int) [12] std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > >::operator=(std::vector<std::vector<Coordinate, std::allocator<Coordinate> >, std::allocator<std::vector<Coordinate, std::allocator<Coordinate> > > > const&)
+   [9] Finite_Difference::Finite_Difference(Grid) [8] Grid::set_flow(double, double) [28] void std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::_M_emplace_back_aux<std::vector<Grad, std::allocator<Grad> > const&>(std::vector<Grad, std::allocator<Grad> > const&)
+   [4] Fast_Finite_Difference::solve() [31] Grid::Grid(unsigned int, unsigned int) [34] std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > >::operator=(std::vector<std::vector<Grad, std::allocator<Grad> >, std::allocator<std::vector<Grad, std::allocator<Grad> > > > const&)
+  [35] Grid::get_values()     [32] Grid::Grid()           [29] void std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::_M_emplace_back_aux<std::vector<Value, std::allocator<Value> > const&>(std::vector<Value, std::allocator<Value> > const&)
+  [36] Grid::set_values(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >) [33] Grid::~Grid() [6] std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > >::operator=(std::vector<std::vector<Value, std::allocator<Value> >, std::allocator<std::vector<Value, std::allocator<Value> > > > const&)

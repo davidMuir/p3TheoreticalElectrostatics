@@ -1,10 +1,3 @@
-/*
- * BmpReader.cpp
- *
- *  Created on: 21 Feb 2013
- *      Author: david
- */
-
 #include "BmpReader.h"
 
 Bmp_Reader::Bmp_Reader(std::string filename) {
@@ -82,7 +75,7 @@ Grid Bmp_Reader::get_grid(Boundary b,double l,double r, double vals) {
     }
     //int check = 0;
 	if (b==conductor) {
-        double avvalue = grid.get_average_value_safe(g);
+        double avvalue = grid.get_average_value(g);
         //std::cout << avvalue << std::endl;
         for (int x = 1; x < g.size()-1; x++) {
             for (int y = 1; y < g[0].size()-1; y++) {

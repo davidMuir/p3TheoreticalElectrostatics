@@ -1,6 +1,6 @@
 code = ../code/
 libname = $(code)theoretical.a
-CC = g++ -std=c++11 -Ofast
+CC = g++ -std=c++11 -Ofast -pg
 main = main.cc
 program = foo
 export CC

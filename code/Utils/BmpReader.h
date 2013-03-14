@@ -1,11 +1,3 @@
-/*
- * BmpReader.h
- *
- *  Created on: 21 Feb 2013
- *      Author: david
- *
- */
-
 #ifndef BMPREADER_H_
 #define BMPREADER_H_
 

@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: ./comparison_ac.ps
 %%Creator: gnuplot 4.6 patchlevel 0
-%%CreationDate: Tue Mar 12 16:20:32 2013
+%%CreationDate: Thu Mar 14 23:27:12 2013
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -434,7 +434,7 @@ SDict begin [
   /Author (david)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Tue Mar 12 16:20:32 2013)
+  /CreationDate (Thu Mar 14 23:27:12 2013)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -667,13 +667,12 @@ Z stroke
 LC0 setrgbcolor
 112 2533 M
 currentpoint gsave translate -270 rotate 0 0 M
-(Runtime \(seconds\) -- Finite Volume Method) Cshow
+(Runtime \(seconds\)) Cshow
 grestore
 LTb
-LC1 setrgbcolor
-6876 2533 M
+0.00 0.00 1.00 C 6876 2533 M
 currentpoint gsave translate -270 rotate 0 0 M
-(Runtime \(seconds\) -- Finite Difference methods) Cshow
+(Runtime \(seconds\)) Cshow
 grestore
 LTb
 LCb setrgbcolor
@@ -736,11 +735,13 @@ LT0
 % End plot #1
 % Begin plot #2
 1.000 UL
-LT1
+LT0
+LC2 setrgbcolor
 LCb setrgbcolor
 5736 4486 M
 (fd) Rshow
-LT1
+LT0
+LC2 setrgbcolor
 5820 4486 M
 399 0 V
 886 448 M
@@ -844,6 +845,8 @@ LT1
 % End plot #2
 % Begin plot #3
 1.000 UP
+stroke
+LT1
 773 448 Crs
 781 448 Crs
 795 448 Crs
@@ -891,11 +894,13 @@ LT1
 % End plot #3
 % Begin plot #4
 1.000 UL
-LT2
+LT1
+LC2 setrgbcolor
 LCb setrgbcolor
 5736 4346 M
 (ffd) Rshow
-LT2
+LT1
+LC2 setrgbcolor
 5820 4346 M
 399 0 V
 924 448 M
@@ -1000,59 +1005,61 @@ LT2
 % Begin plot #5
 1.000 UP
 stroke
-LT1
-773 448 Crs
-781 456 Crs
-795 465 Crs
-815 481 Crs
-840 502 Crs
-871 527 Crs
-908 561 Crs
-950 594 Crs
-997 632 Crs
-1051 673 Crs
-1110 727 Crs
-1174 773 Crs
-1245 832 Crs
-1320 919 Crs
-1402 961 Crs
-1489 1032 Crs
-1582 1140 Crs
-1680 1195 Crs
-1784 1253 Crs
-1893 1374 Crs
-2009 1487 Crs
-2129 1537 Crs
-2256 1549 Crs
-2388 1628 Crs
-2525 1737 Crs
-2669 1858 Crs
-2817 1937 Crs
-2972 2075 Crs
-3132 2187 Crs
-3298 2400 Crs
-3469 2550 Crs
-3646 2596 Crs
-3828 2750 Crs
-4017 2921 Crs
-4210 3163 Crs
-4410 3326 Crs
-4615 3439 Crs
-4825 3493 Crs
-5042 3664 Crs
-5264 4073 Crs
-5491 4260 Crs
-5724 4118 Crs
-5963 4440 Crs
-6207 4569 Crs
+LT2
+773 448 Star
+781 456 Star
+795 465 Star
+815 481 Star
+840 502 Star
+871 527 Star
+908 561 Star
+950 594 Star
+997 632 Star
+1051 673 Star
+1110 727 Star
+1174 773 Star
+1245 832 Star
+1320 919 Star
+1402 961 Star
+1489 1032 Star
+1582 1140 Star
+1680 1195 Star
+1784 1253 Star
+1893 1374 Star
+2009 1487 Star
+2129 1537 Star
+2256 1549 Star
+2388 1628 Star
+2525 1737 Star
+2669 1858 Star
+2817 1937 Star
+2972 2075 Star
+3132 2187 Star
+3298 2400 Star
+3469 2550 Star
+3646 2596 Star
+3828 2750 Star
+4017 2921 Star
+4210 3163 Star
+4410 3326 Star
+4615 3439 Star
+4825 3493 Star
+5042 3664 Star
+5264 4073 Star
+5491 4260 Star
+5724 4118 Star
+5963 4440 Star
+6207 4569 Star
 % End plot #5
 % Begin plot #6
 1.000 UL
 LT0
+LC0 setrgbcolor
 LCb setrgbcolor
 5736 4206 M
 (afv) Rshow
 LT0
+LC0 setrgbcolor
 5820 4206 M
 399 0 V
 770 458 M

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.3.10)  13 MAR 2013 14:07
-=======
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.3.10)  11 MAR 2013 18:33
->>>>>>> 69c07bc55d7839c56601ca061c8f92843e5b0883
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.3.14)  14 MAR 2013 22:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -20,7 +16,6 @@ speranto, coptic, welsh, irish, interlingua, serbian, serbianc, slovenian, friu
 lan, romansh, estonian, romanian, armenian, uppersorbian, turkish, afrikaans, i
 celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, th
 ai, loaded.
-<<<<<<< HEAD
 (/usr/share/texlive/texmf-dist/tex/latex/revtex/revtex4-1.cls
 Document Class: revtex4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revt
 ex4/ for documentation)
@@ -140,70 +135,13 @@ le
 ) (./algpseudocode.sty
 Package: algpseudocode 
 
-=======
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
-)
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
-\abovecaptionskip=\skip41
-\belowcaptionskip=\skip42
-\bibindent=\dimen102
-)
-(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
-nment
-
-(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count87
-\float@exts=\toks14
-\float@box=\box26
-\@float@everytoks=\toks15
-\@floatcapt=\box27
-)
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
-)
-\@float@every@algorithm=\toks16
-\c@algorithm=\count88
-) (./algpseudocode.sty
-Package: algpseudocode 
-(./algorithmicx.sty
-Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
-
-Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count89
-\c@ALG@rem=\count90
-\c@ALG@nested=\count91
-\ALG@tlm=\skip43
-\ALG@thistlm=\skip44
-\c@ALG@Lnr=\count92
-\c@ALG@blocknr=\count93
-\c@ALG@storecount=\count94
-\c@ALG@tmpcounter=\count95
-\ALG@tmplength=\skip45
-)
->>>>>>> 69c07bc55d7839c56601ca061c8f92843e5b0883
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-<<<<<<< HEAD
 \KV@toks@=\toks16
-=======
-\KV@toks@=\toks17
->>>>>>> 69c07bc55d7839c56601ca061c8f92843e5b0883
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
@@ -219,7 +157,6 @@ Package graphics Info: Driver file: dvips.def on input line 91.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
 File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
-<<<<<<< HEAD
 \Gin@req@height=\dimen102
 \Gin@req@width=\dimen103
 )
@@ -318,10 +255,10 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 Package: newfloat 2011/11/16 v1.0a Defining new floating environments (AR)
 )
 Package newfloat Info: New float `algorithm' with options ` fileext=loa, listna
-me=List of Algorithms, name=ALGORITHM, placement=tbhp, ' on input line 17.
+me=List of Algorithms, name=ALGORITHM, placement=tbhp, ' on input line 18.
 \c@algorithm=\count114
 \newfloat@ftype=\count115
-Package newfloat Info: float type `algorithm'=8 on input line 17.
+Package newfloat Info: float type `algorithm'=8 on input line 18.
 Class revtex4-1 Info: Patching LaTeX tabular. on input line 20.
 Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 20.
 
@@ -377,59 +314,12 @@ File: ../../comparison_ac.ps Graphic file (type eps)
 No file algAnalysis.bbl.
 [2] (./algAnalysis.aux) ) 
 Here is how much of TeX's memory you used:
- 4322 strings out of 493486
- 55612 string characters out of 3143549
+ 4334 strings out of 493486
+ 55739 string characters out of 3143549
  133373 words of memory out of 3000000
- 7598 multiletter control sequences out of 15000+200000
- 9694 words of font info for 38 fonts, out of 3000000 for 9000
+ 7607 multiletter control sequences out of 15000+200000
+ 10938 words of font info for 43 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,5n,24p,490b,331s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,24p,491b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on algAnalysis.dvi (2 pages, 10516 bytes).
-=======
-\Gin@req@height=\dimen103
-\Gin@req@width=\dimen104
-)
-(./algAnalysis.aux)
-\openout1 = `algAnalysis.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 22.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 22.
-
-Overfull \hbox (89.65253pt too wide) in paragraph at lines 79--80
-[] $\OML/cmm/m/it/10 alternate[]$ $\OMS/cmsy/m/n/10  $ $\OT1/cmr/m/n/10 [[]]\OM
-L/cmm/m/it/10 =\OT1/cmr/m/n/10 2$ 
- []
-
-[1
-
-] [2]
-File: ../../fd_ffd_comparison.ps Graphic file (type eps)
- <../../fd_ffd_comparison.ps>
-File: ../../afv.ps Graphic file (type eps)
- <../../afv.ps> [3] [4] (./algAnalysis.aux) ) 
-Here is how much of TeX's memory you used:
- 1172 strings out of 493486
- 15319 string characters out of 3143549
- 73351 words of memory out of 3000000
- 4521 multiletter control sequences out of 15000+200000
- 5758 words of font info for 21 fonts, out of 3000000 for 9000
- 957 hyphenation exceptions out of 8191
- 27i,4n,21p,417b,303s stack positions out of 5000i,500n,10000p,200000b,50000s
-
-Output written on algAnalysis.dvi (4 pages, 7496 bytes).
->>>>>>> 69c07bc55d7839c56601ca061c8f92843e5b0883
+Output written on algAnalysis.dvi (2 pages, 11272 bytes).

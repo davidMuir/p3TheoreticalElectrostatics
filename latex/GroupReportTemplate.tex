@@ -513,10 +513,11 @@ At each grid element \(r\) and \(\theta\) can be found using the coordinates of 
 The finite difference method uses the Taylor series about the point \(x+h\) and \(x-h\) to find an approximation for the second order derivative and in doing so terms of the series beyond the \(h^2\) term are discarded. This introduces a truncation error to any numerical solution. To quantify this error, only the first truncated term is considered. 
 
 \[f(x+h)-f(x-h) = 2f(x) + h^2f^{(2)}(x) + \frac{1}{12}h^4f^{(4)}(x) + \dots \]
-Since to find \(f^{(2)}(x) \), the equation is divided by \(h^2\), the truncation error should vary with \(h^2\) where \(h\) is the size of the increment between grid points. This relationship can be written more formally as
+Since to find \(f^{(2)}(x) \), the equation is divided by \(h^2\), the local truncation error should vary with \(h^2\) where \(h\) is the size of the increment between grid points. This relationship can be written more formally as
 \[\epsilon_{t} \leq C_th^2 \]
-Where \(\epsilon_{t}\) is the truncation error \(C_t\) is a constant.
+Where \(\epsilon_{t}\) is the local truncation error \(C_t\) is a constant.
 
+When considering the overall effect of the truncation error it is important to consider the accumulation of these errors. Since each grid element depends on the value of the neighbouring elements the truncation error of it's own value is affected by the truncation error at all the other points too and so there is a cumulative effect. For this reason the global truncation error for the finite difference should be of the order h.
 
 
 \subsubsection{Finite Volume Method}
@@ -526,8 +527,7 @@ The finite volume method relies upon equating the total electric flux into any g
 So as in the finite difference method there will be a truncation error although the relationship with h will be linear.
 \[\epsilon_t \leq C_th \]
 Where \(C_t\) is a constant
-
-
+Since the approximation of the derivative is not used directly to determine the potential but only in an intermediate step the global truncation should be of the same order as the local error.
 
 \subsection{Round-Off Errors}
 
@@ -576,7 +576,7 @@ prediction made in (\ref{dipole}).
 \end{figure}
 
 To investigate the the convergence and the relationship between the error and h the finite difference method was carried out on a range of grids of different sizes. The leftmost and rightmost potential was kept constant at 50 and -50 respectively. The boundary conditions were set for a circular conductor in the centre of the grid with a radius 10\% the size of the grid. The analytic solution was found each time for the same conditions and the average of the absolute value of the difference between the analytical and finite difference solution was found at every 100 iterations of the finite difference algorithm. The error was plotted against the number of iterations in figure \ref{fig:fd}. From this plot it is clear that the error in the solution does converge with repeated iterations and that the number of iterations required for this to converge increases as the number of points in the grid increases. 
-The value of the absolute error at convergence was plotted against h, which was set as \(\frac{1}{n}\) where each grid was nxn in size, in figure \ref{fig:fd}. This shows that the relationship is linear.\footnote{This suggests that the round-off error rounds up and down in equal proportions. However in this case the round-off error is caused by the last digits being truncated. A possible reason for the linear relationship is that negative numbers are as prevalent in the calculations as positive numbers, and so the last digits being truncated results in rounding up as often as rounding down. Since only the magnitude of the errors and not the sign was considered when calculating the average, a linear result would be expected in these circumstances.}
+The value of the absolute error at convergence was plotted against h, which was set as \(\frac{1}{n}\) where each grid was nxn in size, in figure \ref{fig:fd}. This shows that the relationship is linear.
 
 \subsubsection{Finite Volume}
 
@@ -588,13 +588,7 @@ The value of the absolute error at convergence was plotted against h, which was 
 
 The finite volume method was investigated too in the same way as described above, with the same boundary values and conductor shape as for the finite difference method for a variety of grid sizes. Figure \ref{fig:fv} shows that the error in the finite volume method converges to a constant value after a number of iterations.
 
-Figure \ref{fig:fv_opt} shows the relationship between the error and the stepsize h. There is a value of h for which the error is minimised which corresponds to h=0.01, or a $100 \times 100$ grid. For h larger than this the truncation error becomes larger increasing the error, and for lower h the round-off error becomes large and dominates. It is also clear that the relationship between h and \(\epsilon_r\) is linear.\footnotemark[\value{footnote}]
-%Will look into how to automatically label this footnote and label it in 2 places for tomorrow, left it like this for now.
-
-%Karl update: now does what I think you tried to achieve without needing to be manually set to the correct number... Only problem is if we need to have a second footnote in between the two referrals to that footnote, in which case we need to change
-%\footnotemark[\value{footnote}]
-%to
-%\footnotemark[\value{footnote} - 1]
+Figure \ref{fig:fv_opt} shows the relationship between the error and the stepsize h. There is a value of h for which the error is minimised which corresponds to h=0.01, or a $100 \times 100$ grid. For h larger than this the truncation error becomes larger increasing the error, and for lower h the round-off error becomes large and dominates. It is also clear that the relationship between h and \(\epsilon_r\) is linear.
 %etc...
 \begin{figure}
 \includegraphics[height=\breite \columnwidth,angle=-90]{fv_h.eps}

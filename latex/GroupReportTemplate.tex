@@ -184,7 +184,7 @@ Hence, the solution to the problem is given by the Laplace Equation.
 
 \subsection{On dimensions}
 
-For this report the main focus will be on the two dimensional case as opposed to three dimensions. The three dimensional case has been looked at briefly however since we are required to present results on paper in two dimensions, the three dimensinal results are very difficult to visualise, and the time taken for the solution to converge is much greater which becomes impractical when performing the large number of iterations required for error analysis. Since the principles behind the numerical techniques is the same for both the two and three dimensional cases, the two dimensional case was hence considered a more practical choice.
+For this report the main focus will be on the two dimensional case as opposed to three dimensions. The three dimensional case has been looked at briefly however since we are required to present results on paper in two dimensions, the three dimensional results are very difficult to visualise, and the time taken for the solution to converge is much greater which becomes impractical when performing the large number of iterations required for error analysis. Since the principles behind the numerical techniques is the same for both the two and three dimensional cases, the two dimensional case was hence considered a more practical choice.
 
 
 %THEORY AND ALGORITHMS
@@ -308,7 +308,7 @@ first, averaging them all, and then adding all the conductors into the averaged 
 
 \subsubsection{Background Information}
 
-\par\hspace{4mm} In mathematics, there are a number numerical procedures for estimating the solutions to differential equations using finite difference equations to approximate derivatives. These are knowns as finite difference methods. A finite difference is a mathematical expression of the form \(f(x + b) - f(x + a)\). If a finite difference is divided by \((b - a)\), one gets a difference quotient. The estimation of derivatives by finite differences plays a central role in finite difference methods for the numerical solution of differential equations, especially boundary value problems.
+\par\hspace{4mm} In mathematics, there are a number numerical procedures for estimating the solutions to differential equations using finite difference equations to approximate derivatives. These are known as finite difference methods. A finite difference is a mathematical expression of the form \(f(x + b) - f(x + a)\). If a finite difference is divided by \((b - a)\), one gets a difference quotient. The estimation of derivatives by finite differences plays a central role in finite difference methods for the numerical solution of differential equations, especially boundary value problems.
 \vspace{5mm} \par \indent An essential application of finite differences is in numerical analysis, especially in numerical differential equations, which aim at the numerical solution of ordinary and partial differential equations. The idea is to replace the derivatives appearing in the differential equation by finite differences that approximate them. The resulting methods are called finite difference methods \cite{compmethods}. Other common applications of the finite difference method are in computational science and engineering disciplines, such as thermal engineering and fluid mechanics. Also interestingly recurrence relations can be written as difference equations by replacing iteration notation with finite differences.\footnote{This is perhaps not surprising, as recurrence relations have strong similarities to differential equations. For a formalised approach to this area, see time-scale calculus, which unifies finite difference calculus and differential calculus to form a theory that can deal with 
 systems with both 
 continuous and discrete variables.}
@@ -406,7 +406,7 @@ The finite difference method as described above leads to a system of equations w
 
 
 \subsection{Asymmetric Finite Volume}
-Finite difference methods are limited by the fact they are approximations to differential equations rather than simulations of the physical problem. Finite volume methods instead attempt to solve problems by using conservation laws and for example a simulation of pseudofluid flow. Our finite volume method relies on conservation of flux, so we simulate flow from elements with more potential to elements with less, making sure to conserve the total potential inside the grid except at boundary points. The general idea is to loop over the entire grid and let potential flow from higher to lower, allowing the algorithm to change the values of both the element itself and its neighbours. This means the algorithm is asymmetric and the order of the loop matters. The reason we can find very accurate solutions with this method is that we're not approximating a distribution, we are simulating the underlying laws which create the distribution. The reason the asymmetry ultimately isn't a problem and we find the 
+Finite difference methods are limited by the fact they are approximations to differential equations rather than simulations of the physical problem. Finite volume methods instead attempt to solve problems by using conservation laws and for example a simulation of pseudo-fluid flow. Our finite volume method relies on conservation of flux, so we simulate flow from elements with more potential to elements with less, making sure to conserve the total potential inside the grid except at boundary points. The general idea is to loop over the entire grid and let potential flow from higher to lower, allowing the algorithm to change the values of both the element itself and its neighbours. This means the algorithm is asymmetric and the order of the loop matters. The reason we can find very accurate solutions with this method is that we're not approximating a distribution, we are simulating the underlying laws which create the distribution. The reason the asymmetry ultimately isn't a problem and we find the 
 same equilibrium solution regardless of order of the loop is the underlying symmetry of the laws of the flow: if one iteration creates an unphysical situation because of the order of the loop, the next ones will always reduce it, so over a great number of iterations we will always end up with convergence to the same final physical solution. A problem with our finite volume method however is that it assumes a complete conservation of flux except at boundaries, which is impossible to simulate numerically due to the inexact representation of floating points - there is bound to be some loss or gain of flux in almost every calculation, which turns out to be quite problematic as we increase grid size.
 
 For completeness, the conservation law for the surface $A$ around an element $\Phi_{i,j}$ can be stated as:
@@ -418,7 +418,7 @@ Which is just the integral form of Gauss' law.
 
 \subsubsection{Explicit algorithm}
 
-In words, our finite volume method for a single point $\Phi_{i,j}^{old}$ works as follows: first create a vector containing the difference to the four neighbours, $\vec{dv}$. Calculate the average of the four neighbours and the point itself, $A$. Then set $\Phi_{i,j}^{new} = A$, and let $\delta V = \Phi_{i,j}^{new} - \Phi_{i,j}^{old}$. Then distribute $\delta V$ among the neightbours according to their values in $\vec{dv}$, 'taking' potential from those with more and 'giving' potential to those with less.
+In words, our finite volume method for a single point $\Phi_{i,j}^{old}$ works as follows: first create a vector containing the difference to the four neighbours, $\vec{dv}$. Calculate the average of the four neighbours and the point itself, $A$. Then set $\Phi_{i,j}^{new} = A$, and let $\delta V = \Phi_{i,j}^{new} - \Phi_{i,j}^{old}$. Then distribute $\delta V$ among the neighbours according to their values in $\vec{dv}$, 'taking' potential from those with more and 'giving' potential to those with less.
 
 
 \section{Data presentation}
@@ -504,7 +504,7 @@ The analytic solution for the case of a circular conductor is continuous and so 
 E_0 = \frac{-\Phi(x,\pi)-V_0}{\frac{R^2}{x} - x}
 \end{gather*}
 where x is the x coordinate of the circle's centre.
-At each grid element \(r\) and \(\theta\) can be found using the coordinates of the element and Pythagorus' theorem and basic trigonometry and so the value of the potential can be calculated. It is important to note that this solution is still an approximation as round-off errors will affect the calculations however it is still a very useful tool in quantifying the errors in numerical solutions.
+At each grid element \(r\) and \(\theta\) can be found using the coordinates of the element and Pythagoras' theorem and basic trigonometry and so the value of the potential can be calculated. It is important to note that this solution is still an approximation as round-off errors will affect the calculations however it is still a very useful tool in quantifying the errors in numerical solutions.
 
 
 
@@ -524,7 +524,7 @@ When considering the overall effect of the truncation error it is important to c
 
 \subsubsection{Finite Volume Method}
 
-The finite volume method relies upon equating the total electric flux into any grid cell to 0, and so the gradient of the potential is calculated between a grid point and the four surrounding points. This requires approximating the first order derivative using the taylor series.
+The finite volume method relies upon equating the total electric flux into any grid cell to 0, and so the gradient of the potential is calculated between a grid point and the four surrounding points. This requires approximating the first order derivative using the Taylor series.
 \[f^{(1)}(x) = \frac{f(x+h) - f(x)}{h} + \frac{h}{2}f^{(2)}(x) + \dots\]
 So as in the finite difference method there will be a truncation error although the relationship with h will be linear.
 \[\epsilon_t \leq C_th \]
@@ -556,7 +556,7 @@ prediction made in (\ref{dipole}).
 
 \begin{figure}
 \includegraphics[height=\breite \columnwidth,angle=-90]{position.eps}
-\caption{Relationship between the shortest distance from the conductor to the boundary on the x axis, $d$, and the average error in the grid. The error is linearly depedent on $d$ as expected from our theoretical estimation (\ref{dipole}).}
+\caption{Relationship between the shortest distance from the conductor to the boundary on the x axis, $d$, and the average error in the grid. The error is linearly dependent on $d$ as expected from our theoretical estimation (\ref{dipole}).}
 \label{fig:fd_distance}
 \end{figure}
 
@@ -573,12 +573,12 @@ prediction made in (\ref{dipole}).
 \begin{figure}
 \includegraphics[height=\breite \columnwidth,angle=-90]{fd_h.eps}
 
-\caption{Relationship between the average error in the solution and the step-size h using the finite difference method. The error is linearly depedent on h.}
+\caption{Relationship between the average error in the solution and the step-size h using the finite difference method. The error is linearly dependent on h.}
 \label{fig:fd_lin}
 \end{figure}
 
 To investigate the the convergence and the relationship between the error and h the finite difference method was carried out on a range of grids of different sizes. The leftmost and rightmost potential was kept constant at 50 and -50 respectively. The boundary conditions were set for a circular conductor in the centre of the grid with a radius 10\% the size of the grid. The analytic solution was found each time for the same conditions and the average of the absolute value of the difference between the analytical and finite difference solution was found at every 100 iterations of the finite difference algorithm. The error was plotted against the number of iterations in figure \ref{fig:fd}. From this plot it is clear that the error in the solution does converge with repeated iterations and that the number of iterations required for this to converge increases as the number of points in the grid increases. 
-The value of the absolute error at convergence was plotted against h, which was set as \(\frac{1}{n}\) where each grid was nxn in size, in figure \ref{fig:fd}. This shows that the relationship is linear.
+The value of the absolute error at convergence was plotted against h, which was set as \(\frac{1}{n}\) where each grid was n$times$n in size, in figure \ref{fig:fd}. This shows that the relationship is linear.
 
 \subsubsection{Finite Volume}
 
@@ -602,7 +602,7 @@ Figure \ref{fig:fv_opt} shows the relationship between the error and the stepsiz
 \subsection{Minimising the Error}
 
 From the results it is clear that the finite volume method is a more accurate method. The average absolute error in the solution is smaller for all values of h than for the finite difference method. There is also the advantage that the optimal grid size for the finite volume method is a $100 \times 100$ grid which is relatively small.
-In to order the minimise the errors it is also vital to ensure that the boundary conditions are as accurate as possible and so the condunctor should be set in the centre of the grid and be small compared to the grid. This will be easy to achieve for the majority of conductors although may be more difficult when there are multiple conductors in the field.
+In to order the minimise the errors it is also vital to ensure that the boundary conditions are as accurate as possible and so the conductor should be set in the centre of the grid and be small compared to the grid. This will be easy to achieve for the majority of conductors although may be more difficult when there are multiple conductors in the field.
 
 \section{Algorithm Cost}
 \subsection{Theoretical Analysis}
@@ -734,9 +734,8 @@ To obtain the average-case performance for the algorithms they were each run ite
     \includegraphics*[angle=-90,width=\columnwidth]{comparison_ac.ps}
 \end{figure}
 
-After running this we can see that the gradient of the Asymmetric Finite Volume method is $5.16*10^{-3}$, Finite Difference is $2.21*10^{-4}$ and Fast Finite Difference is $3.30*10^{-5}$
 
-A gradient of $5.11 \times 10^{-3}$ is observed for asymmetric finite volume; $2.11 \times 10^{-4}$ for Finite Difference; and $3.66 \times 10^{-5}$
+A gradient of $4.94 \times 10^{-3}$ is observed for asymmetric finite volume; $2.22 \times 10^{-4}$ for Finite Difference; and $2.93 \times 10^{-5}$
 
 \subsection{Comparison of the methods}
 

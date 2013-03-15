@@ -13,10 +13,28 @@
 \usepackage{float}
 \usepackage{array}
 \usepackage{esint}
-\usepackage[margin=0.5in]{geometry}
+\usepackage[margin=0.60in]{geometry}
+\usepackage{subfig}
+\usepackage{subcaption}
+\usepackage{chemfig}
+\newcommand{\vertfig}[2][]{%
+  \begin{minipage}{\breite \columnwidth}\subfloat[#1]{#2}\end{minipage}}
+
 
 \interfootnotelinepenalty=10000
 \raggedbottom
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
 
 \renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
 
@@ -93,7 +111,7 @@
 
 \author{Julia Kettle}
 
-\author{Jevgeny Klochan}
+\author{Jevgenijs Klochan}
 
 \author{John Maccorquodale}
 
@@ -166,7 +184,7 @@ Hence, the solution to the problem is given by the Laplace Equation.
 
 \subsection{On dimensions}
 
-For this report the main focus will be on the two dimensional case as opposed to three dimensions. The three dimensional case has been looked at briefly however since we are required to present results on paper in two dimensions, the three dimensinal results are very difficult to visualise and the time taken for the solution to converge is much greater which becomes impractical when performing the large number of iterations required for error analysis. There is also added difficulty in performing the error analysis in three dimensions as the analytical solution for a sphere is more complex than for a circle in two dimensions. Since the principles behind the numerical techniques is the same for both the two and three dimensional cases, the two dimensional case was hence considered a more practical choice.
+For this report the main focus will be on the two dimensional case as opposed to three dimensions. The three dimensional case has been looked at briefly however since we are required to present results on paper in two dimensions, the three dimensinal results are very difficult to visualise, and the time taken for the solution to converge is much greater which becomes impractical when performing the large number of iterations required for error analysis. Since the principles behind the numerical techniques is the same for both the two and three dimensional cases, the two dimensional case was hence considered a more practical choice.
 
 
 %THEORY AND ALGORITHMS
@@ -190,7 +208,7 @@ Solve the two differential equations separately, assuming at first that $\lambda
 \begin{gather*}
  R' = \gamma \alpha r^{\alpha - 1} \Rightarrow \\
  \frac{r(r\gamma \alpha r^{\alpha - 1})'}{\gamma r^\alpha} = \lambda^2 \Leftrightarrow \\
- \alpha^2 \frac{\gamma r r^{\alpha - 1}}{\gamma r^\alpha} = \lambda^2 \Leftrightarrow \\
+ \alpha^2 \frac{\gamma r r^{\alpha - 1}}{\gamma r^\alpha} = \lambda^2 5\Leftrightarrow \\
  \alpha^2 = \lambda^2 \Rightarrow \alpha = \pm \lambda 
 \end{gather*}
 For (B), we have $\Theta'' + \lambda^2 \Theta = 0$, so the general form of the solution is:
@@ -260,47 +278,26 @@ V(\vec{r}) = V(r_+) + V(r_-) \\
  \label{dipole}
 \end{gather}
 
+
+
 Here $r$ is the distance from the midpoint between the two charges to $\vec{r}$. Note that this potential is proportional to $1/r^2$ unlike the electric potential from a point charge, which limits its effective range considerably.
 
-Gauge theory is a powerful tool for analysing fields where the observable quantities are invariant under certain transformations of the field itself \cite{gaugetheory1}. By Noether's two theorems, these symmetries all have corresponding conservation laws: the conserved Noether currents.\footnote{Note that there are two Noether theorems to deal with global and local symmetries separately. Global symmetries always lead to conserved currents, while local symmetries do so under certain conditions. See for example \cite{gaugetheory2}.} The symmetry group of electromagnetism is $U(1)$, and for local gauge invariance requires that its gauge boson is massless and hence gives the force infinite range. Local gauge invariance is here the symmetry that results in conservation of charge. The same symmetry is of course required for the weak force as well, which is why the Higgs mechanism was invented to introduce a way to consistently give mass to the 
+Gauge theory is a powerful tool for analysing fields where the observable quantities are invariant under certain transformations of the field itself \cite{gaugetheory1}. By Noether's two theorems, these symmetries all have corresponding conservation laws: the conserved Noether currents.\footnote{Note that there are two Noether theorems to deal with global and local symmetries separately. Global symmetries can be thought of as transformations where the entire field is transformed according to a constant, whereas local symmetries are transformations according to a function of space. Global symmetries always lead to conserved currents, while local symmetries can do so, for example if we know the electromagnetic field equations must be satisfied. See for example \cite{gaugetheory2}.} The symmetry group of electromagnetism is $U(1)$, and for local gauge invariance requires that its gauge boson is massless and hence gives the force infinite range. Gauge invariance is here the symmetry that results in conservation of charge.\footnote{Both global and local gauge invariance in electromagnetism can be used to derive this conservation, please see for example \cite{gaugetheory4}.} The same symmetry is of course required for the weak force as well, which is why the Higgs mechanism was invented to introduce a way to consistently give mass to the 
 $Z$ and $W^{\pm}$ bosons and hence limit the range of the weak force according to experimental observations without breaking gauge invariance \cite{gaugetheory3}. In our case we are interested in gauge theory because it allows us to predict that meaningfully limiting the range of the electromagnetic force by using a finite grid size with the assumption that the conductor won't change the field at the 
 boundaries will break conservation of charge. 'Meaningfully' here refers to the fact that the potential from the conductor will tend to 0 quickly as we move further away from it due to the inverse square law, so we can estimate the field to be effectively zero at some finite distance away. This allows us to justify the use of the finite grid sizes we require to make sensible numerical simulations, and gives us a good variable to use for determining how small we can make the grid in comparison to the conductor without creating unphysical solutions: conservation of charge.\footnote{Of course many problems with enough symmetry will obey conservation of charge even though the range is effectively limited. This has to be taken into consideration when using charge conservation to measure the required size of the grid.} The dipole potential calculation (\ref{dipole}) also tells us that the required size of the grid varies roughly linearly with the length $l$ of the conductor in the direction of the field, whereas 
 the size in the 
 orthogonal direction to the field is less important.
 
 \subsection{Multiple conductors}
-The problem of adding multiple conductors to the same field is that in order to obey charge conservation, they must all take the fields generated by the others into account when deciding their equilibrium potential. Since we haven't implemented a path integral along the surface of the conductor to allow for time-like evolution of the potential of the conductors themselves using Stokes' theorem, we are 'stuck' with the field as the conductor sees it when it is first entered for deciding its potential. In other words, adding one and solving before adding a new one and keeping the old one constant will give an unphysical result, as the first one will affect the second one but we don't have a mechanism for allowing the second one to affect the first one. Figure \ref{fig:difference} shows the difference between a physically correct solution and a solution obtained by the adding the conductors one at a time. The simplest correct way of dealing with this problem is to find solutions for each individual conductor 
+The problem of adding multiple conductors to the same field is that in order to obey charge conservation, they must all take the fields generated by the others into account when deciding their equilibrium potential. Since we haven't implemented a path integral along the surface of the conductor to allow for time-like evolution of the potential of the conductors themselves using Stokes' theorem, we are 'stuck' with the field as the conductor sees it when it is first entered for deciding its potential. In other words, adding one and solving before adding a new one and keeping the old one constant will give an unphysical result (so will adding both conductors at the same time), as the first one will affect the second one but we don't have a mechanism for allowing the second one to affect the first one. Figure \ref{fig:difference} shows the difference between a physically correct solution and a solution obtained by the adding the conductors both at once. The simplest correct way of dealing with this problem is 
+to find solutions for each individual conductor 
 first, averaging them all, and then adding all the conductors into the averaged field at once before solving a last time. This ensures that charge conservation is obeyed and gives the correct physical solution. An alternative solution would be to implement a Stokes integration along the surface of the conductor as outlined above.
 
 \begin{figure}
 \includegraphics*[height=\breite \columnwidth,angle=270]{difference.ps} 
-\caption{Difference between solutions when two circular conductors are added one at a time and solved simultaneously. A negative value means the solution where conductors are added one at a time is lower than the simultaneous solution. The original uniform field runs from 50 on the left to -50 on the right. An integration over the fields gives a mean charge of about -0.16 in the one at a time solution and effectively 0 in the simultaneous one: a clear indication that charge conservation is violated when adding conductors one at at time.}
+\caption{Difference between solutions when two circular conductors are both added at the same time and when they are first solved simultaneously before being added on top of each other and solved again. A negative value means the solution where conductors are added both at once is lower than the simultaneous solution. The original uniform field runs from 50 on the left to -50 on the right. An integration over the fields gives a mean charge of about 0 in both: charge conservation is not violated when adding both conductors at a time but they won't influence each other, which creates an unphysical solution. If we would add one conductor at a time and solving before adding a new one, charge conservation would not be obeyed.}
 \label{fig:difference}
 \end{figure}
-
-\clearpage
-
-\section{Results}
-
-\begin{figure}[h]
-\includegraphics*[height=\breite \columnwidth,angle=270]{semicircle.ps} 
-\caption{Solution for a semicircle facing north. Solved using a finite difference method.}
-\end{figure}
-\begin{figure}[h]
-\includegraphics*[height=\breite \columnwidth,angle=270]{triangle.ps} 
-\caption{Solution for an equilateral triangle facing north. Solved using a finite difference method.}
-\end{figure}
-\newpage
-\begin{figure}[h]
-\includegraphics*[height=\breite \columnwidth,angle=270]{ellipse.ps} 
-\caption{Solution for an ellipse with its long side in the direction of the field. Solved using a finite difference method. Notice that it distorts the field more than the circle in figure \ref{fig:fig1} even though it has roughly the same area. This is because it is longer in the direction of the field, as predicted by (\ref{dipole}).}
-\end{figure}
-\begin{figure}[h]
-\includegraphics*[height=\breite \columnwidth,angle=270]{feynman.ps} 
-\caption{Solution for a conductor shaped like a QED Feynman diagram. This conductor was first drawn in MS Paint and then parsed into our program. Solved using a finite difference method. Notice the value of the conductor is not zero, as it isn't symmetric. The value of the conductor is found by integrating over its area and taking the average value.}
-\end{figure}
-
- \clearpage
 
 %METHODS- I think algorithms should go here rather than code. Any chunks of code that are necessary for the 
 %report should go into the appendix
@@ -318,7 +315,7 @@ continuous and discrete variables.}
 
 \subsubsection{Accuracy of the method}
 
-\par\hspace{4mm} In this paper we define the error as the difference between the approximation and the exact analytical solution, hence we will use simple problems with a lot of symmetry to check the accuracy of our methods. To approximate the solution to a problem when using the finite difference method the domain we want to solve over must first be discretised.\footnote{In short we want to deal with small individual elements rather than a continuous space.} Dividing the domain into a uniform grid is the usual manner of doing this. From this the finite difference method will present various discrete numerical estimations to the derivative. We will only be working with first order approximations, so from this point on we will refer to the first order approximation whenever we talk about the finite difference method.
+\par\hspace{4mm} In this paper we define the error as the difference between the approximation and the exact analytical solution, hence we will use simple problems with a lot of symmetry to check the accuracy of our methods. To approximate the solution to a problem when using the finite difference method the domain we want to solve over must first be discretised.\footnote{In short we want to deal with small individual elements rather than a continuous space.} Dividing the domain into a uniform grid is the usual manner of doing this. From this the finite difference method will present various discrete numerical estimations to the derivative. We will only be working with first order approximations, meaning the only terms included when approximating derivatives are \(f(x)\) terms. So from this point on we will refer to the first order approximation whenever we talk about the finite difference method.
 
 \subsubsection{Approximation of second order derivative}
 The derivation that follows is taken from \cite{compmethods}. Consider the arbitrary function \(f(x)\). The Taylor series of this function centered at the value \(x=a\) is:
@@ -417,7 +414,12 @@ For completeness, the conservation law for the surface $A$ around an element $\P
   \oiint_{A} \vec{E}.\hat{n} \hspace{1mm} dA = \Delta \Phi_{i,j}
   \label{conservationvol}
 \end{gather}
-Which really is just the integral form of Gauss' law.
+Which is just the integral form of Gauss' law.
+
+\subsubsection{Explicit algorithm}
+
+In words, our finite volume method for a single point $\Phi_{i,j}^{old}$ works as follows: first create a vector containing the difference to the four neighbours, $\vec{dv}$. Calculate the average of the four neighbours and the point itself, $A$. Then set $\Phi_{i,j}^{new} = A$, and let $\delta V = \Phi_{i,j}^{new} - \Phi_{i,j}^{old}$. Then distribute $\delta V$ among the neightbours according to their values in $\vec{dv}$, 'taking' potential from those with more and 'giving' potential to those with less.
+
 
 \section{Data presentation}
 \subsection{Equipotential lines}
@@ -428,20 +430,21 @@ starting point has coordinates \begin{math}(x,0)\end{math}, where \begin{math} x
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[height=\breite \columnwidth,angle=-90]{pure_eqlines.eps}
+\includegraphics[width=0.25\textwidth,angle=-90]{pure_eqlines.eps}
+\caption{Example of a plot with only equipotential lines, and a filled figure using the figure outline code.}
 \label{pureeq}
 \end{center}
 \end{figure}
 
 \subsection{Figure outline}
-The same "snake" approach was used to draw the figure outline (see \ref{eqheat}). It is essential to print the points on the figure surface in the correct order otherwise GNUPLOT will link them across the figure body. We start at some boundary point of the figure and then we go around the surface points of the figure until we reach our starting point. 
+The same "snake" approach was used to draw the figure outline (see \ref{pureeq}). It is essential to print the points on the figure surface in the correct order otherwise GNUPLOT will link them across the figure body. We start at some boundary point of the figure and then we go around the surface points of the figure until we reach our starting point. 
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\breite \columnwidth,angle=-90]{eqlines_heatmap.eps}
-\label{eqheat}
-\end{center}
-\end{figure}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[height=\breite \columnwidth,angle=-90]{eqlines_heatmap.eps}
+%\label{eqheat}
+%\end{center}
+%\end{figure}
 
 
 
@@ -450,7 +453,8 @@ One of the properties of equipotential surfaces is that they are always perpendi
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[height=\breite \columnwidth,angle=-90]{efield_lines.eps}
+\includegraphics[height=\breite \columnwidth,angle=-90]{efield_plus_eqlines2.ps}
+\caption{Example of electric field plot with equipotential lines and heatmap in the background. The lines are connected to show the motion of a charged test particle in the field. This also illustrates that the electric field always is perpendicular to the equipotential lines.}
 \label{efieldlines}
 \end{center}
 \end{figure}
@@ -460,11 +464,33 @@ Analogous calculations are made for \begin{math} \delta y \end{math} and \begin{
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[height=\breite \columnwidth,angle=-90]{efield.eps}
+\includegraphics[height=\breite \columnwidth,angle=-90]{efield.ps}
+\caption{Example of electric field with heatmap in background. Here the length of the individual vectors represent the field strength at that point.}
 \label{efield}
 \end{center}
 \end{figure}
 
+\clearpage
+
+\begin{figure}[h!]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\vertfig[Solution for a semicircle facing north. Solved using a finite difference method. \vspace{1cm}]{\includegraphics*[height=\breite \columnwidth,angle=270]{semicircle.ps}}
+%\caption{Solution for a semicircle facing north. Solved using a finite difference method.}
+\qquad
+\vertfig[Solution for an equilateral triangle facing north. Solved using a finite difference method.]{\includegraphics*[height=\breite \columnwidth,angle=270]{triangle.ps}}
+%\caption{Solution for an equilateral triangle facing north. Solved using a finite difference method.}
+\end{figure}
+
+\begin{figure}[h!]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\vertfig[Solution for an ellipse with its long side in the direction of the field. Solved using a finite difference method. Notice that it distorts the field more than the circle in figure \ref{fig:fig1} even though it has roughly the same area. This is because it is longer in the direction of the field, as predicted by (\ref{dipole}).]{\includegraphics*[height=\breite \columnwidth,angle=270]{ellipse.ps}}
+%\caption{Solution for an ellipse with its long side in the direction of the field. Solved using a finite difference method. Notice that it distorts the field more than the circle in figure \ref{fig:fig1} even though it has roughly the same area. This is because it is longer in the direction of the field, as predicted by (\ref{dipole}).}
+\qquad
+\vertfig[Solution for a conductor shaped like a QED Feynman diagram. This conductor was first drawn in MS Paint and then parsed into our program. Solved using a finite difference method. Notice the value of the conductor is not zero, as it isn't symmetric. The value of the conductor is found by integrating over its area and taking the average value. Also notice the strength of the field near the sharp points of the shape.]{\includegraphics*[height=\breite \columnwidth,angle=270]{shape.ps} }
+%\caption{Solution for a conductor shaped like a QED Feynman diagram. This conductor was first drawn in MS Paint and then parsed into our program. Solved using a finite difference method. Notice the value of the conductor is not zero, as it isn't symmetric. The value of the conductor is found by integrating over its area and taking the average value.}
+\end{figure}
 
 \section{Error Analysis \label{sec:unc}}
 
@@ -489,10 +515,11 @@ At each grid element \(r\) and \(\theta\) can be found using the coordinates of 
 The finite difference method uses the Taylor series about the point \(x+h\) and \(x-h\) to find an approximation for the second order derivative and in doing so terms of the series beyond the \(h^2\) term are discarded. This introduces a truncation error to any numerical solution. To quantify this error, only the first truncated term is considered. 
 
 \[f(x+h)-f(x-h) = 2f(x) + h^2f^{(2)}(x) + \frac{1}{12}h^4f^{(4)}(x) + \dots \]
-Since to find \(f^{(2)}(x) \), the equation is divided by \(h^2\), the truncation error should vary with \(h^2\) where \(h\) is the size of the increment between grid points. This relationship can be written more formally as
+Since to find \(f^{(2)}(x) \), the equation is divided by \(h^2\), the local truncation error should vary with \(h^2\) where \(h\) is the size of the increment between grid points. This relationship can be written more formally as
 \[\epsilon_{t} \leq C_th^2 \]
-Where \(\epsilon_{t}\) is the truncation error \(C_t\) is a constant.
+Where \(\epsilon_{t}\) is the local truncation error \(C_t\) is a constant.
 
+When considering the overall effect of the truncation error it is important to consider the accumulation of these errors. Since each grid element depends on the value of the neighbouring elements the truncation error of it's own value is affected by the truncation error at all the other points too and so there is a cumulative effect. For this reason the global truncation error for the finite difference should be of the order h.
 
 
 \subsubsection{Finite Volume Method}
@@ -502,8 +529,7 @@ The finite volume method relies upon equating the total electric flux into any g
 So as in the finite difference method there will be a truncation error although the relationship with h will be linear.
 \[\epsilon_t \leq C_th \]
 Where \(C_t\) is a constant
-
-
+Since the approximation of the derivative is not used directly to determine the potential but only in an intermediate step the global truncation should be of the same order as the local error.
 
 \subsection{Round-Off Errors}
 
@@ -513,7 +539,8 @@ Where \(C_r\) is a constant and \(1 \leq k \leq 2\).
 
 In the finite difference method the number of calculations performed at each grid point is relatively small and therefore it can be expected that the round-off error will have quite a small impact on the solution. 
 
-For the finite volume method there is a significantly greater number of calculations at each grid point per iteration and the calculations involve the subtraction of numbers, in order to find the gradients, which will be almost equal for many of the later iterations. The finite volume method relies upon the conservation of flux. At each point the electric flux is calculated then distributed amongst neighbouring elements until an equilibrium is reached in which there are no sources or sinks of flux apart from at the grid edge. Due to the round-off error a small part of the flux is lost at each calculation point and therefore flux is not conserved and some of it is lost. This means the solution found is not the true solution and instead an alternative equilibrium is found.\footnote{This is similar to a balloon being filled by air under pressure. If the balloon has no leakage, it will find an equilibrium position where the internal pressure in the balloon is equivalent to the pressure of the air entering it. If there is leakage however, it will find an alternative equilibrium position where the leakage is subtracted from the pressure of the air entering the balloon, hence not inflating as much.}  For these reasons the \(\epsilon_r\) has a significantly greater impact in the finite volume method than the finite difference method.
+For the finite volume method there is a significantly greater number of calculations at each grid point per iteration and the calculations involve the subtraction of numbers, in order to find the gradients, which will be almost equal for many of the later iterations. The finite volume method relies upon the conservation of flux. At each point the electric flux is calculated then distributed amongst neighbouring elements until an equilibrium is reached in which there are no sources or sinks of flux apart from at the grid edge. Due to the round-off error a small part of the flux is lost at each calculation point and therefore flux is not conserved and some of it is lost. This means the solution found is not the true solution and instead an alternative equilibrium is found.\footnote{This is similar to a balloon being filled by air under pressure. If the balloon has no leakage, it will find an equilibrium position where the internal pressure in the balloon is equivalent to the pressure of the air entering it. If 
+there is leakage however, it will find an alternative equilibrium position where the leakage is subtracted from the pressure of the air entering the balloon, hence not inflating as much.}  For these reasons the \(\epsilon_r\) has a significantly greater impact in the finite volume method than the finite difference method.
 
 
 \subsection{Convergence}
@@ -551,7 +578,7 @@ prediction made in (\ref{dipole}).
 \end{figure}
 
 To investigate the the convergence and the relationship between the error and h the finite difference method was carried out on a range of grids of different sizes. The leftmost and rightmost potential was kept constant at 50 and -50 respectively. The boundary conditions were set for a circular conductor in the centre of the grid with a radius 10\% the size of the grid. The analytic solution was found each time for the same conditions and the average of the absolute value of the difference between the analytical and finite difference solution was found at every 100 iterations of the finite difference algorithm. The error was plotted against the number of iterations in figure \ref{fig:fd}. From this plot it is clear that the error in the solution does converge with repeated iterations and that the number of iterations required for this to converge increases as the number of points in the grid increases. 
-The value of the absolute error at convergence was plotted against h, which was set as \(\frac{1}{n}\) where each grid was nxn in size, in figure \ref{fig:fd}. This shows that the relationship is linear.\footnote{This suggests that the round-off error rounds up and down in equal proportions. However in this case the round-off error is caused by the last digits being truncated. A possible reason for the linear relationship is that negative numbers are as prevalent in the calculations as positive numbers, and so the last digits being truncated results in rounding up as often as rounding down. Since only the magnitude of the errors and not the sign was considered when calculating the average, a linear result would be expected in these circumstances.}
+The value of the absolute error at convergence was plotted against h, which was set as \(\frac{1}{n}\) where each grid was nxn in size, in figure \ref{fig:fd}. This shows that the relationship is linear.
 
 \subsubsection{Finite Volume}
 
@@ -563,13 +590,7 @@ The value of the absolute error at convergence was plotted against h, which was 
 
 The finite volume method was investigated too in the same way as described above, with the same boundary values and conductor shape as for the finite difference method for a variety of grid sizes. Figure \ref{fig:fv} shows that the error in the finite volume method converges to a constant value after a number of iterations.
 
-Figure \ref{fig:fv_opt} shows the relationship between the error and the stepsize h. There is a value of h for which the error is minimised which corresponds to h=0.01, or a $100 \times 100$ grid. For h larger than this the truncation error becomes larger increasing the error, and for lower h the round-off error becomes large and dominates. It is also clear that the relationship between h and \(\epsilon_r\) is linear.\footnotemark[\value{footnote}]
-%Will look into how to automatically label this footnote and label it in 2 places for tomorrow, left it like this for now.
-
-%Karl update: now does what I think you tried to achieve without needing to be manually set to the correct number... Only problem is if we need to have a second footnote in between the two referrals to that footnote, in which case we need to change
-%\footnotemark[\value{footnote}]
-%to
-%\footnotemark[\value{footnote} - 1]
+Figure \ref{fig:fv_opt} shows the relationship between the error and the stepsize h. There is a value of h for which the error is minimised which corresponds to h=0.01, or a $100 \times 100$ grid. For h larger than this the truncation error becomes larger increasing the error, and for lower h the round-off error becomes large and dominates. It is also clear that the relationship between h and \(\epsilon_r\) is linear.
 %etc...
 \begin{figure}
 \includegraphics[height=\breite \columnwidth,angle=-90]{fv_h.eps}
@@ -631,7 +652,7 @@ While we aren't guaranteed great degrees of accuracy from this approach, we can 
     \end{algorithmic}
 \end{algorithm}
 
-There are 4 constant operations, 9 operations dependant on the number of iterations set (MAX) and 11 operations dependant on the size of the grid and the number of iterations set. This gives us: \[L(11N+9)+4\] With L being the number of iterations set and N being the grid size.
+There are 4 constant operations, 9 operations dependant on the number of iterations set (MAX) and 11 operations dependant on the size of the grid and the number of iterations set. This gives us \[L(11N+9)+4\] With L being the number of iterations set and N being the grid size.
 
 We can reduce this to big O notation as O(n), giving us linear complexity.
 
@@ -639,6 +660,9 @@ We can reduce this to big O notation as O(n), giving us linear complexity.
 
 The Fast Finite Difference method is an attempt to optimise the Finite Difference method. It is functionally the same, and arrives at the same approximation as the Finite Difference method will, however it takes much less time to do so.
 
+We get \[L(11N+9)+4\] by counting operations and can reduce this to O(n) in big O notation.
+
+\subsubsection{Fast Finite Difference}
 \begin{algorithm}
     \caption{Fast Finite Difference}
     \label{alg:ffd}
@@ -670,63 +694,113 @@ The Fast Finite Difference method is an attempt to optimise the Finite Differenc
     \end{algorithmic}
 \end{algorithm}
 
-There are 7 constant operations, 6 operations dependant on the maximum number of iterations set (MAX) and 6 operations dependant on the number of grid elements and the maximum number of iterations. This gives us a complexity of: \[L(6N + 6) + 7\] Where L is the number of iterations and N is the grid size. We can reduce this to Big O notation as O(n), giving us an algorithm with linear complexity.
+There are 7 constant operations, 6 operations dependant on the maximum number of iterations set (MAX) and 6 operations dependant on the number of grid elements and the maximum number of iterations. This gives us a complexity of \[L(6n + 6) + 7\] where L is the number of iterations and n is the grid size. We can reduce this to Big O notation as O(n), giving us an algorithm with linear complexity.
 
 \subsubsection{Asymmetric Finite Volume}
 
-\begin{algorithm}
-    \caption{Asymmetric Finite Volume}
-    \label{alg:afv}
-    \begin{algorithmic}
-        \Function{iteration}{old}
-        \Let{m}{old.it}
-        \Let{no}{height(m)}
-        \Let{mo}{width(m)}
-        \Let{change}{0}
-        \State cells
-        \State dv
-        \State old\_value
-        \State DV
-        \State coefficient
-        \State total\_difference
-        \State count
-        \For{$x \gets 1 \textrm{ to } no-1$}
-            \For{$y \gets 1 \textrm{ to } mo-1$}
-                \Let{old\_value}{$m_{x,y}$}
-                \If{$m_{x-1,y}$ is accessible}
-                    \Let{cells}{$m_{x-1,y}$}
-                    \Let{dv}{$m_{x,y} - m_{x-1,y}$}
-                \EndIf
-                \If{$m_{x+1,y}$ is accessible}
-                    \Let{cells}{$m_{x+1,y}$}
-                    \Let{dv}{$m_{x,y} - m_{x+1,y}$}
-                \EndIf
-                \If{$m_{x,y-1}$ is accessible}
-                    \Let{cells}{$m_{x-1,y}$}
-                    \Let{dv}{$m_{x,y} - m_{x,y-1}$}
-                \EndIf
-                \If{$m_{x,y+1}$ is accessible}
-                    \Let{cells}{$m_{x,y+1}$}
-                    \Let{dv}{$m_{x,y} - m_{x,y+1}$}
-                \EndIf
-                \Let{cells}{$m_{x,y}$}
-                \Let{average}{average(cells)}
-                \If{$m_{x,y}$ not boundary}
-                    \Let{$m_{x,y}$}{average}
-                    \Let{DV}{average-old\_value}
-                    \If{$|DV| > \textrm{ change }$}
-                        \Let{change}{$|DV|$}
-                    \EndIf
-                    \Let{total\_Difference}{total\_value(dv)}
-                    %TODO Finish this algorithm
-                \EndIf
-            \EndFor
-        \EndFor
-        \EndFunction
-    \end{algorithmic}
-\end{algorithm}
+%\begin{algorithm}
+%   \caption{Asymmetric Finite Volume}
+%  \label{alg:afv}
+%  \begin{algorithmic}
+%     \Function{iteration}{old}
+%     \Let{m}{old.it}
+%      \Let{no}{height(m)}
+%     \Let{mo}{width(m)}
+%      \Let{change}{0}
+%      \State cells
+%      \State dv
+%      \State old\_value
+%      \State DV
+%      \State coefficient
+%      \State total\_difference
+%      \State count
+%      \For{$x \gets 1 \textrm{ to } no-1$}
+%          \For{$y \gets 1 \textrm{ to } mo-1$}
+%              \Let{old\_value}{$m_{x,y}$}
+%              \If{$m_{x-1,y}$ is accessible}
+%                  \Let{cells}{$m_{x-1,y}$}
+%                  \Let{dv}{$m_{x,y} - m_{x-1,y}$}
+%               \EndIf
+%               \If{$m_{x+1,y}$ is accessible}
+%                   \Let{cells}{$m_{x+1,y}$}
+%                   \Let{dv}{$m_{x,y} - m_{x+1,y}$}
+%               \EndIf
+%               \If{$m_{x,y-1}$ is accessible}
+%                   \Let{cells}{$m_{x-1,y}$}
+%                   \Let{dv}{$m_{x,y} - m_{x,y-1}$}
+%               \EndIf
+%               \If{$m_{x,y+1}$ is accessible}
+%                   \Let{cells}{$m_{x,y+1}$}
+%                   \Let{dv}{$m_{x,y} - m_{x,y+1}$}
+%               \EndIf
+%               \Let{cells}{$m_{x,y}$}
+%               \Let{average}{average(cells)}
+%               \If{$m_{x,y}$ not boundary}
+%                   \Let{$m_{x,y}$}{average}
+%                   \Let{DV}{average-old\_value}
+%                   \If{$|DV| > \textrm{ change }$}
+%                       \Let{change}{$|DV|$}
+%                   \EndIf
+%                   \Let{total\_Difference}{total\_value(dv)}
+%                   \If{total difference = 0 or DV = 0}
+%                       \If{$m_{x-1,y} and m_{x+1,y} \textrm{ are accessible }$}
+%                           \Let{xnew}{[$m_{x-1,y}+m_{x+1,y}]/2$}
+%                           \If{$m_{x-1,y} \textrm{ not boundary }$}
+%                               \Let{$m_{x-1,y}$}{xnew}
+%                           \EndIf
+%                           \If{$m_{x+1,y} \textrm{ not boundary }$}
+%                               \Let{$m_{x+1,y}$}{xnew}
+%                           \EndIf
+%                       \EndIf
+%                       \If{$m_{x,y-1} and m_{x,y+1} \textrm{ are accessible }$}
+%                           \Let{ynew}{[$m_{x,y-1}+m_{x,y+1}]/2$}
+%                           \If{$m_{x,y-1} \textrm{ not boundary }$}
+%                               \Let{$m_{x,y-1}$}{ynew}
+%                           \EndIf
+%                           \If{$m_{x,y+1} \textrm{ not boundary }$}
+%                               \Let{$m_{x,y+1}$}{ynew}
+%                           \EndIf
+%                       \EndIf
+%                   \EndIf
+%                   \Else
+%                       \Let{coefficient}{$-DV/total_difference$}
+%                       \Let{count}{0}
+%                       \If{$m_{x-1,y} \textrm{ is accessible}$}
+%                           \If{$m_{x-1,y} \textrm{ not boundary }$}
+%                               \Let{$m_{x-1,y}$}{$m_{x-1,y} = m_{x-1,y} + \textrm{ coefficient } * dv_{count}$}
+%                               \Let{count}{count + 1}
+%                           \EndIf
+%                       \EndIf
+%                       \If{$m_{x+1,y} \textrm{ is accessible}$}
+%                           \If{$m_{x+1,y} \textrm{ not boundary }$}
+%                               \Let{$m_{x+1,y}$}{$m_{x+1,y} = m_{x+1,y} + \textrm{ coefficient } * dv_{count}$}
+%                               \Let{count}{count + 1}
+%                           \EndIf
+%                       \EndIf
+%                       \If{$m_{x,y-1} \textrm{ is accessible}$}
+%                           \If{$m_{x,y-1} \textrm{ not boundary }$}
+%                               \Let{$m_{x-1,y}$}{$m_{x,y-1} = m_{x,y-1} + \textrm{ coefficient } * dv_{count}$}
+%                               \Let{count}{count + 1}
+%                           \EndIf
+%                       \EndIf
+%                       \If{$m_{x,y+1} \textrm{ is accessible}$}
+%                           \If{$m_{x,y+1} \textrm{ not boundary }$}
+%                               \Let{$m_{x,y+1}$}{$m_{x,y+1} = m_{x,y+1} + \textrm{ coefficient } * dv_{count}$}
+%                               \Let{count}{count + 1}
+%                           \EndIf
+%                       \EndIf
+%                   \State clear cells
+%                   \State clear dv
+%               \EndIf
+%           \EndFor
+%       \EndFor
+%       \EndFunction
+%   \end{algorithmic}
+%\end{algorithm}
 
-There are 11 constant operations, 19 operations dependant on the maximum number of iterations set (MAX) and 34 operations dependant on the number of grid elements and the maximum number of iterations. This gives us a complexity of: \[L(34N+19)+11\] Where L is the number of iterations and N is the grid size. We can reduce this to Big O notation as O(n), giving us an algorithm with linear complexity.
+Due to the scale of this method the pseudocode has not been included. 
+
+There are 11 constant operations, 19 operations dependant on the maximum number of iterations set (MAX) and 34 operations dependant on the number of grid elements and the maximum number of iterations. This gives us a complexity of \[L(34N+19)+11\] where L is the number of iterations and N is the grid size. We can reduce this to Big O notation as O(n), giving us an algorithm with linear complexity.
 
 \subsection{Experimental Analysis}
 \subsubsection{Worst Case}
@@ -739,13 +813,13 @@ We then run each of the algorithms on their respective grids recording the time 
 
 \begin{figure}
     \begin{center}
-        %\includegraphics*[angle=-90,width = \columnwidth ]{comparison_wc.ps}
+        \includegraphics*[angle=-90,width = \columnwidth ]{comparison_wc.ps}
     \end{center}
 \end{figure}
 
 We get a gradient of $5.11*10^{-3}$ for afv, $2.11*10^{-4}$ for fd, and $3.66*10{-5}$ for ffd.
 
-Using this we can calculate how long each algorithm would take to run a certain grid size, for example for a grid size of 1000 by 1000 the Fast Finite Difference method would take 36.6 seconds; Finite Difference would take 211 seconds; and Asymmetric Finite Volume would take 5110 seconds on the experimenters system.
+Using this we can calculate how long each algorithm would take to run a certain grid size, for example for a grid size of $1000 \times 1000$ the Fast Finite Difference method would take 36.6 seconds; Finite Difference would take 211 seconds; and Asymmetric Finite Volume would take 5110 seconds on the experimenters system.
 
 \subsubsection{Average Case}
 
@@ -753,14 +827,18 @@ To obtain the average case performance of the algorithms, we shall run each of t
 
 \begin{figure}
     \begin{center}
-        %\includegraphics*[angle=-90,width=\columnwidth]{comparison_ac.ps}
+        \includegraphics*[angle=-90,width=\columnwidth]{comparison_ac.ps}
     \end{center}
 \end{figure}
 
-After running this we can see that the gradient of the afv method is $5.16*10^{-3}$, fd is $2.21*10^{-4}$ and ffd is $3.30*10^{-5}$.
+After running this we can see that the gradient of the afv method is $5.16*10^{-3}$, fd is $2.21*10^{-4}$ and ffd is $3.30*10^{-5}$
 
 \subsection{Comparison of the methods}
 %TODO Write a comparison of the algorithms and in particular talk about the changes in the ffd which allows to be so much quicker than fd
+
+There is a clear trend between the number of operations performed per iteration and the relative performances of the algorithms. With the fastest algorithm, Fast Finite Difference having 6 operations per iteration; Fast Finite Difference having 11 operations per iteration and having a worst case performance of 5.77 times that of Fast Finite Difference; and Asymmetric Finite Volume having 34 operations per iteration and a relative performance of 139.62 compared to Fast
+Finite Difference.
+
 \section{Note about Scale}
 For all the grids used and error analysis carried out there have been no units. The reason for this is that the solution of the Laplace equation will be the same for all scales provided the boundary potential values are identical and the ratios of the grid size and the conductor size stays the same. Even for the analytical solution the scale does not matter as whilst \(\Phi\) appears to depend \((\frac{R^2}{r}-r)\) between the centre and the grid element, since the value obtained for \(E_0\) depends inversely on \((\frac{R^2}{x}-x)\), absolute distances don't matter, only relative distances. 
 
@@ -768,7 +846,8 @@ For all the grids used and error analysis carried out there have been no units. 
 
 %SUMMARY AND CONCLUSIONS
 \section{Summary \label{sec:sum}}
-We have analysed two different numerical methods used for solving problems in electrostatics. The finite difference method was found to be relatively fast and scales well to larger grids, whereas the finite volume method is very accurate but doesn't scale well to larger grids. The complexity of our algorithms has also been formally analysed, and we've shown how the same method can be written in two different ways, with different algorithmic complexity. This suggests further research could be made into reducing the overall complexity of both methods in order to increase efficiency. We have qualitatively and quantitatively considered various quirks and pitfalls that have to be taken into account when using numerical methods for solving field equations, and also shown that both of our methods do indeed approximate the correct solution as long as we do so. We have considered various ways of presenting fields in two dimensions, and given a formal definition of numerically viable representations of equipotential surfaces and vectors that can be extended to three or more dimensions.
+We have analysed two different numerical methods used for solving problems in electrostatics. The finite difference method was found to be relatively fast and scales well to larger grids, whereas the finite volume method is very accurate but doesn't scale well to larger grids. The complexity of our algorithms has also been formally analysed, and we've shown how the same method can be written in two different ways, with different algorithmic complexity. This suggests further research could be made into reducing the overall complexity of both methods in order to increase efficiency. We have qualitatively and quantitatively considered various quirks and pitfalls that have to be taken into account when using numerical methods for solving field equations, and also shown that both of our methods do indeed approximate the correct solution as long as we do so. We have considered various ways of presenting fields in two dimensions, and given a formal definition of numerically viable representations of equipotential 
+surfaces and vectors that can be extended to three or more dimensions.
 
 %Mostly for Adrian 
 \begin{acknowledgments}
@@ -782,6 +861,8 @@ We would like to thank our group supervisors, Dr Adrian Buzatu and Dr Aidan Robs
 \bibitem{gaugetheory3} Bednyakov, V.A., Giokaris, N.D., Bednyakov, A.V., 2007, \emph{On Higgs mass generation mechanism in the Standard Model}, 	arXiv:hep-ph/0703280.
 
 \bibitem{gaugetheory2} Brading, K., Brown, H., 2000, \emph{Noether's Theorems and Gauge Symmetries}, arXiv:hep-th/0009058.
+
+\bibitem{gaugetheory4} Brading, K., 2002, \emph{Which Symmetry? Noether, Weyl, and Conservation of Electric Charge}, Studies in History and Philosophy of Science Part B 33 (1):3-22.
 
 \bibitem{num_math_comp} Cheney, Kincaid, 1985, \emph{Numerical Mathematics and Computing}, Brooks/Cole Publishing Company, Monterey, ISBN 0-534-04356-9
 

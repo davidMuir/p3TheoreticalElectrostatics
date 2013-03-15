@@ -520,7 +520,7 @@ Since to find \(f^{(2)}(x) \), the equation is divided by \(h^2\), the local tru
 \[\epsilon_{t} \leq C_th^2 \]
 Where \(\epsilon_{t}\) is the local truncation error \(C_t\) is a constant.
 
-When considering the overall effect of the truncation error it is important to consider the accumulation of these errors. Since each grid element depends on the value of the neighbouring elements the truncation error of it's own value is affected by the truncation error at all the other points too and so there is a cumulative effect. For this reason the global truncation error for the finite difference should be of the order h.
+When considering the overall effect of the truncation error it is important to consider the accumulation of these errors. Since each grid element depends on the value of the neighbouring elements the truncation error of it's own value is affected by the truncation error at all the other points too and so there is a cumulative effect. For this reason the global truncation error for the finite difference should be of the order h\cite{parabol_fd}.
 
 
 \subsubsection{Finite Volume Method}
@@ -718,9 +718,9 @@ To obtain the worst-case performance for the algorithms they were each run itera
 The experimental set up for this involved creating three identical Grids, with a flow of -50 to 50; a circular conductor set at the mid point of the grid with a radius of a tenth of the height of the grid.
 
 \begin{figure}
+    \caption{A comparison of worst case performances of the three algorithms. There are two scales used due to the vastly differing performances of the finite difference methods and the finite volume method.}
     \label{fig:wcalgcomp}
     \includegraphics*[angle=-90,width = \columnwidth ]{comparison_wc.ps}
-    \caption{A comparison of worst case performances of the three algorithms. There are two scales used due to the vastly differing performances of the finite difference methods and the finite volume method.}
 \end{figure}
 
 A gradient of $5.11 \times 10^{-3}$ is observed for asymmetric finite volume; $2.11 \times 10^{-4}$ for Finite Difference; and $3.66 \times 10^{-5}$ for Fast Finite Difference.
@@ -736,11 +736,11 @@ To obtain the average-case performance for the algorithms they were each run ite
 \end{figure}
 
 
-A gradient of $4.94 \times 10^{-3}$ is observed for asymmetric finite volume; $2.22 \times 10^{-4}$ for Finite Difference; and $2.93 \times 10^{-5}$
+A gradient of $4.94 \times 10^{-3}$ is observed for asymmetric finite volume; $2.22 \times 10^{-4}$ for Finite Difference; and $2.93 \times 10^{-5}$ for Fast Finite Difference.
 
 \subsection{Comparison of the methods}
 
-There is a clear trend between the number of operations performed per iteration and the relative performances of the algorithms. With the fastest algorithm, Fast Finite Difference having 6 operations per iteration; Fast Finite Difference having 11 operations per iteration and having a worst case runtime of 5.77 times that of Fast Finite Difference; and Asymmetric Finite Volume having 34 operations per iteration and a runtime of 139.62 of that of Fast Finite Difference.
+There is a clear trend between the number of operations performed per iteration and the relative performances of the algorithms. With the fastest algorithm, Fast Finite Difference having 6 operations per iteration; Finite Difference having 11 operations per iteration and having a worst case runtime of 5.77 times that of Fast Finite Difference; and Asymmetric Finite Volume having 34 operations per iteration and a runtime of 139.62 of that of Fast Finite Difference.
 
 \section{Note about Scale}
 For all the grids used and error analysis carried out there have been no units. The reason for this is that the solution of the Laplace equation will be the same for all scales provided the boundary potential values are identical and the ratios of the grid size and the conductor size stays the same. Even for the analytical solution the scale does not matter as whilst \(\Phi\) appears to depend \((\frac{R^2}{r}-r)\) between the centre and the grid element, since the value obtained for \(E_0\) depends inversely on \((\frac{R^2}{x}-x)\), absolute distances don't matter, only relative distances. 
@@ -785,6 +785,9 @@ We would like to thank our group supervisors, Dr Adrian Buzatu and Dr Aidan Robs
 \bibitem{qft} Ryder, L. H., 1985 \emph{Quantum Field Theory}, Cambridge University Press. Cambridge, ISBN 978-0-521-47814-4
 
 \bibitem{alg} Sedgewick, R., 1997 \emph{Algorithms in C}, Addison-Wesley Publishing Company, ISBN 978-0201314526.
+
+\bibitem{parabol_fd} Debrabent, Lang, 2009, \emph{On Global Error Estimation and Control of Finite Difference Solutions for Parabolic Equations} arXiv:0911.2656 [Math.NA])
+
 \end{thebibliography}
 
 

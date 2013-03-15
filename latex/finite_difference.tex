@@ -1,13 +1,23 @@
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper,11pt]{article}
 \usepackage[margin=3cm]{geometry}
+
 
 \begin{document}
 \section{Finite Difference Method}
 
+\subsection{Background Information}
+
+\par\hspace{4mm} In mathmatics, There are numerical procedures for estimating the solutions to differential equations using finite difference equations to approximate derivatives. These are knowns as finite-difference methods. A finite difference is a mathematical expression of the form \(f(x + b) - f(x + a)\). If a finite difference is divided by \((b - a)\), one gets a difference quotient. The estimation of derivatives by finite differences plays a central role in finite difference methods for the numerical solution of differential equations, especially boundary value problems.
+\vspace{5mm} \par \indent An essential application of finite differences is in numerical analysis, especially in numerical differential equations, which aim at the numerical solution of ordinary and partial differential equations respectively. The idea is to replace the derivatives appearing in the differential equation by finite differences that approximate them. The resulting methods are called finite difference methods. Other common applications of the finite difference method are in computational science and engineering disciplines, such as thermal engineering, fluid mechanics. Also interestingly recurrence relations can be written as difference equations by replacing iteration notation with finite differences.
+
+\subsection{Accuracy of the method}
+
+\par\hspace{4mm} The differece between the approximation and the exact analytical solution is defined as the error in the methods solution. To approximating the solution to a problem when using the finite difference method the problems domain must first be quantified. By dividing the domain onto a uniform grid is the usual manner of completing this. From this the finite difference method will present numerous arrays of discrete numerical estimations to the derivative.
+
 \subsection{Approximation of second order derivative}
 Consider the arbitrary function \(f(x)\). The taylor series of this function about the value \(x=a\) is;
 
-\[f(x) = f(a) +(x-a)f^{(1)}(x)+\frac{(x-a)^{2}f^{(2)}(x)}{2!}+\frac{(x-a)^{3}f^{(3)}(x)}{3!}+...\]
+\[f(x) = f(a) +(x-a)f^{(1)}(x)+\frac{(x-a)^{2}f^{(2)}(x)}{2!}+\frac{(x-a)^{3}f^{(3)}(x)}{3!}+...\]\vspace*{5mm}
 
 Let \(x=x_i + h\) \(a=x_i\) then;
 
@@ -18,7 +28,7 @@ Similarly;
 \[f(x_i-h)=f(x_i)-hf^{(1)}(x_i)+\frac{h^2f^{(2)}(x_i)}{2!}-\frac{h^3f^{(3)}(x_i)}{3!}+...\]
 Therefore;
 
-\[f(x_i+h)+f(x_i-h) = 2f(x_i) + h^2f^{(2)}(x_i) + \frac{h^4}{12}f^{(4)}(x_i)+...\]
+\[f(x_i+h)+f(x_i-h) = 2f(x_i) + h^2f^{(2)}(x_i) +\frac{h^4}{12}f^{(4)}(x_i)+...\]
 
 If h is very small then only the first two terms are significant and the later terms can be ignored to yield a good approximation.
 
@@ -46,18 +56,16 @@ Let \(x=x_i\) and \(y=y_j\) where \(x_i\) and \(x_j\) are arbitrary. Then;
 
 Using the results from the previous section this can be written;
 
-\[\frac{\phi(x_i+h,y_j)-2f(x_i,y_j)+\phi(x_i-h,y_j)}{h^2} +  \frac{\phi(x_i,y_j+h)-2f(x_i,y_j)+\phi(x_i,y_j-h)}{h^2}=0\]
+\[\frac{\phi(x_i+h,y_j)-2f(x_i,y_j)+\phi(x_i-h,y_j)}{h^2} +\frac{\phi(x_i,y_j+h)-2f(x_i,y_j)+\phi(x_i,y_j-h)}{h^2}=0\]
 
-Rearranging this gives;
-
+\vspace{2mm}Rearranging this gives;
 \[\phi(x_i,y_j)=\frac{1}{4}\Bigg(\phi(x_i+h,y_j)+\phi(x_i-h,y_j)+\phi(x_i,y_j+h)+\phi(x_i,y_j-h)\Bigg)\]
 
 Suppose the x,y plane was divided int a grid with lines separated by h in both the x and y direction. et the value of \(\phi\) at an arbitrary point of the grid be denoted by \(\phi_{i,j}\), then the adjacent points in the x and y directions will be denotre \(\phi_{i\pm1,j}\) and \(\phi_{i,j\pm1}\) respectively.\\Therefore;
 
 \[\phi(x_i,y_j)=\frac{1}{4}(\phi(x_{i+1},y_j)+\phi(x_{i-1},y_j)+\phi(x_i,y_{j+1})+\phi(x_i,y_{j-1}))\]
 
-The approximate solution to Laplace's equation at a point, provided the separation of the points is uniform and very small, is the average of the four adjacent points and so it is uite straight forward to numerically solve Laplac'e equation provided there are known boundary conditions.
+The approximate solution to Laplace's equation at a point, provided the separation of the points is uniform and very small, is the average of the four adjacent points and so it is quite straight forward to numerically solve Laplac'e equation provided there are known boundary conditions.
 
 
 \end{document}
-

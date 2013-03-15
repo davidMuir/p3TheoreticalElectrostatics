@@ -1,0 +1,831 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.3.5)  14 MAR 2013 15:34
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**GroupReportTemplate.tex
+(./GroupReportTemplate.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, et
+hiopic, farsi, arabic, pinyin, croatian, bulgarian, ukrainian, russian, slovak,
+ czech, danish, dutch, usenglishmax, ukenglish, finnish, french, basque, ngerma
+n, german, swissgerman, ngerman-x-2012-05-30, german-x-2012-05-30, monogreek, g
+reek, ibycus, ancientgreek, hungarian, bengali, tamil, hindi, telugu, gujarati,
+ sanskrit, malayalam, kannada, assamese, marathi, oriya, panjabi, italian, lati
+n, latvian, lithuanian, mongolian, mongolianlmc, nynorsk, bokmal, indonesian, e
+speranto, coptic, welsh, irish, interlingua, serbian, serbianc, slovenian, friu
+lan, romansh, estonian, romanian, armenian, uppersorbian, turkish, afrikaans, i
+celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, th
+ai, loaded.
+(./revtex4-1.cls
+Document Class: revtex4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revt
+ex4/ for documentation)
+ Copyright (c) 2009 The American Physical Society.
+ mailto:revtex@aps.org
+ Licensed under the LPPL:
+http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt
+ Arthur Ogawa <arthur_ogawa at sbcglobal dot net>
+ Based on work by David Carlisle <david at dcarlisle.demon.co.uk>.
+ltxutil[2010/07/25/20:33:00 4.1r utilities package (portions licensed from W. E
+. Baxter web at superscript.com)]
+LaTeX Info: Redefining \@centercr on input line 308.
+Class revtex4-1 Info: Repairing broken LaTeX eqnarray on input line 358.
+\eqncolsep=\skip41
+Class revtex4-1 Info: Repairing hyperref-unfriendly LaTeX definition of \mpfoot
+note on input line 433.
+Class revtex4-1 Info: Repairing broken LateX \@sect on input line 755.
+\intertabularlinepenalty=\count79
+\@tbpen=\count80
+\@arstrutbox@hline=\box26
+Class revtex4-1 Info: Repairing broken LaTeX \@xbitor on input line 1786.
+Class revtex4-1 Info: Making \typeout \long on input line 2046.
+ltxfront[2010/07/25/20:33:00 4.1r frontmatter package (AO,DPC)]
+\c@affil=\count81
+\c@collab=\count82
+\absbox=\box27
+ltxgrid[2010/07/25/20:33:00 4.1r page grid package (portions licensed from W. E
+. Baxter web at superscript.com)]
+\c@linecount=\count83
+\output@latex=\toks14
+\box@size@1=\box28
+\box@size@2=\box29
+\@protection@box=\box30
+\@topmark@saved=\toks15
+\footins@saved=\box31
+\footins@recovered=\box32
+\column@recovered=\box33
+\pagesofar=\box34
+\footsofar=\box35
+\pagegrid@col=\count84
+Class revtex4-1 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and
+ \\  on input line 5578.
+\c@part=\count85
+\c@section=\count86
+\c@subsection=\count87
+\c@subsubsection=\count88
+\c@paragraph=\count89
+\c@subparagraph=\count90
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count91
+\fbox@1=\box36
+\c@table=\count92
+\fbox@2=\box37
+\c@video=\count93
+\fbox@4=\box38
+\@bibdataout=\write3
+\widetext@top=\box39
+\widetext@bot=\box40
+Class revtex4-1 Info: Selecting society aps on input line 7542.
+(./aps4-1.rtx
+File: aps4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ for docu
+mentation)
+Class revtex4-1 Info: RevTeX society APS selected on input line 31.
+)
+Class revtex4-1 Info: Selecting journal pre on input line 7544.
+Class revtex4-1 Info: APS journal PRE selected on input line 7545.
+ (./aps10pt4-1.rtx
+File: aps10pt4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ for 
+documentation)
+Class revtex4-1 Info: RevTeX pointsize 10pt selected on input line 30.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip44
+\bibsep=\skip45
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count94
+)
+Class revtex4-1 Info: Repairing natbib's \BibitemShut on input line 7549.
+ (./revsymb4-1.sty
+Package: revsymb4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ f
+or documentation)
+LaTeX Info: Redefining \REV@mathfrak on input line 119.
+)) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algcompatible.sty
+Package: algcompatible 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count95
+\c@ALG@rem=\count96
+\c@ALG@nested=\count97
+\ALG@tlm=\skip46
+\ALG@thistlm=\skip47
+\c@ALG@Lnr=\count98
+\c@ALG@blocknr=\count99
+\c@ALG@storecount=\count100
+\c@ALG@tmpcounter=\count101
+\ALG@tmplength=\skip48
+)
+Document Style - algorithmic compatible environments for the `algorithmicx' sty
+le
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen102
+\Gin@req@width=\dimen103
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks17
+\ex@=\dimen104
+)
+LaTeX Info: Redefining \text on input line 53.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen105
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count102
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count103
+\leftroot@=\count104
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count105
+\DOTSCASE@=\count106
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box41
+\strutbox@=\box42
+\big@size=\dimen106
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count107
+\c@MaxMatrixCols=\count108
+\dotsspace@=\muskip11
+\c@parentequation=\count109
+\dspbrk@lvl=\count110
+\tag@help=\toks18
+\row@=\count111
+\column@=\count112
+\maxfields@=\count113
+\andhelp@=\toks19
+\eqnshift@=\dimen107
+\alignsep@=\dimen108
+\tagshift@=\dimen109
+\tagwidth@=\dimen110
+\totwidth@=\dimen111
+\lineht@=\dimen112
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+LaTeX Info: Redefining \frak on input line 99.
+LaTeX Info: Redefining \Bbb on input line 101.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2009/07/02 v2.20.1
+\thm@style=\toks22
+\thm@bodyfont=\toks23
+\thm@headfont=\toks24
+\thm@notefont=\toks25
+\thm@headpunct=\toks26
+\thm@preskip=\skip52
+\thm@postskip=\skip53
+\thm@headsep=\skip54
+\dth@everypar=\toks27
+)
+(/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/bbm.sty
+Package: bbm 1999/03/15 V 1.2 provides fonts for set symbols - TH
+LaTeX Font Info:    Overwriting math alphabet `\mathbbm' in version `bold'
+(Font)                  U/bbm/m/n --> U/bbm/bx/n on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
+(Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/newfloat.sty
+Package: newfloat 2011/11/16 v1.0a Defining new floating environments (AR)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count114
+\float@exts=\toks28
+\float@box=\box43
+\@float@everytoks=\toks29
+\@floatcapt=\box44
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen113
+\extrarowheight=\dimen114
+\NC@list=\toks30
+\extratabsurround=\skip55
+\backup@length=\skip56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/esint/esint.sty
+Package: esint 
+\symlargesymbolsA=\mathgroup6
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count115
+\Gm@cntv=\count116
+\c@Gm@tempcnt=\count117
+\Gm@bindingoffset=\dimen115
+\Gm@wd@mp=\dimen116
+\Gm@odd@mp=\dimen117
+\Gm@even@mp=\dimen118
+\Gm@layoutwidth=\dimen119
+\Gm@layoutheight=\dimen120
+\Gm@layouthoffset=\dimen121
+\Gm@layoutvoffset=\dimen122
+\Gm@dimlist=\toks31
+)
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2012/02/19 v3.2f Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2012/01/12 v1.4b caption3 kernel (AR)
+\captionmargin=\dimen123
+\captionmargin@=\dimen124
+\captionwidth=\dimen125
+\caption@indent=\dimen126
+\caption@parindent=\dimen127
+\caption@hangindent=\dimen128
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\par \vskip \abovecapti
+onskip \begingroup \small \rmfamily \sbox \@tempboxa {\let \\\heading@cr \@make
+@capt@title {#1}{#2}}\@ifdim {\wd \@tempboxa >\hsize }{\begingroup \samepage \f
+lushing \let \footnote \@footnotemark@gobble \@make@capt@title {#1}{#2}\par \en
+dgroup }{\global \@minipagefalse \hb@xt@ \hsize {\hfil \unhbox \@tempboxa \hfil
+ }}\endgroup \vskip \belowcaptionskip .
+\c@ContinuedFloat=\count118
+Package caption Info: float package is loaded.
+)
+\c@KVtest=\count119
+\sf@farskip=\skip57
+\sf@captopadj=\dimen129
+\sf@capskip=\skip58
+\sf@nearskip=\skip59
+\c@subfigure=\count120
+\c@subfigure@save=\count121
+\c@lofdepth=\count122
+\c@subtable=\count123
+\c@subtable@save=\count124
+\c@lotdepth=\count125
+\sf@top=\skip60
+\sf@bottom=\skip61
+) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2012/01/12 v1.1d Sub-captions (AR)
+
+
+! Package subcaption Error: This package can't be used in cooperation
+(subcaption)                with the subfig package.
+
+See the subcaption package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47   \endinput}
+                 
+? 
+) (/usr/share/texlive/texmf-dist/tex/generic/chemfig/chemfig.sty
+(/usr/share/texmf/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks32
+)
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box45
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texmf/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks33
+\pgfkeys@temptoks=\toks34
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks35
+))
+\pgf@x=\dimen130
+\pgf@y=\dimen131
+\pgf@xa=\dimen132
+\pgf@ya=\dimen133
+\pgf@xb=\dimen134
+\pgf@yb=\dimen135
+\pgf@xc=\dimen136
+\pgf@yc=\dimen137
+\w@pgf@writea=\write4
+\r@pgf@reada=\read1
+\c@pgf@counta=\count126
+\c@pgf@countb=\count127
+\c@pgf@countc=\count128
+\c@pgf@countd=\count129
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-dvips.def on input line 900.
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-dvips.def
+File: pgfsys-dvips.def 2008/04/03  (rcs-revision 1.20)
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-common-postscript.def
+File: pgfsys-common-postscript.def 2008/10/01  (rcs-revision 1.22)
+\pgf@objectcount=\count130
+)))
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count131
+\pgfsyssoftpath@bigbuffer@items=\count132
+)
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: dvips.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+
+(/usr/share/texmf/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen138
+\pgfmath@count=\count133
+\pgfmath@box=\box46
+\pgfmath@toks=\toks36
+\pgfmath@stack@operand=\toks37
+\pgfmath@stack@operation=\toks38
+)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count134
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen139
+\pgf@picmaxx=\dimen140
+\pgf@picminy=\dimen141
+\pgf@picmaxy=\dimen142
+\pgf@pathminx=\dimen143
+\pgf@pathmaxx=\dimen144
+\pgf@pathminy=\dimen145
+\pgf@pathmaxy=\dimen146
+\pgf@xx=\dimen147
+\pgf@xy=\dimen148
+\pgf@yx=\dimen149
+\pgf@yy=\dimen150
+\pgf@zx=\dimen151
+\pgf@zy=\dimen152
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen153
+\pgf@path@lasty=\dimen154
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen155
+\pgf@shorten@start@additional=\dimen156
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box47
+\pgf@hbox=\box48
+\pgf@layerbox@main=\box49
+\pgf@picture@serial@count=\count135
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen157
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen158
+\pgf@pt@y=\dimen159
+\pgf@pt@temp=\dimen160
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen161
+\pgf@sys@shading@range@num=\count136
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box50
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box51
+)
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen162
+\pgf@nodesepend=\dimen163
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texmf/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen164
+\pgffor@skip=\dimen165
+\pgffor@stack=\toks39
+\pgffor@toks=\toks40
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count137
+\pgfplotmarksize=\dimen166
+)
+\tikz@lastx=\dimen167
+\tikz@lasty=\dimen168
+\tikz@lastxsaved=\dimen169
+\tikz@lastysaved=\dimen170
+\tikzleveldistance=\dimen171
+\tikzsiblingdistance=\dimen172
+\tikz@figbox=\box52
+\tikz@tempbox=\box53
+\tikztreelevel=\count138
+\tikznumberofchildren=\count139
+\tikznumberofcurrentchild=\count140
+\tikz@fig@count=\count141
+
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count142
+\pgfmatrixcurrentcolumn=\count143
+\pgf@matrix@numberofcolumns=\count144
+)
+\tikz@expandcount=\count145
+
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopat
+hs.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+))) (/usr/share/texlive/texmf-dist/tex/generic/chemfig/chemfig.tex
+\CF@cnt@atomingroup=\count146
+\CF@cnt@groupnumber=\count147
+\CF@cnt@atomnumber=\count148
+\CF@cnt@cycle=\count149
+\CF@dim=\dimen173
+\CF@lewis@box=\box54
+\CF@box@boxa=\box55
+\CF@box@boxb=\box56
+\CF@stuff@box=\box57
+\CF@unused=\write5
+\CF@compound@cnt=\count150
+\CF@arrow@size=\dimen174
+)
+Package: chemfig 2012/02/24 v1.0f Draw molecule with an easy syntax
+)
+Package newfloat Info: New float `algorithm' with options ` fileext=loa, listna
+me=List of Algorithms, name=ALGORITHM, placement=tbhp, ' on input line 46.
+\c@algorithm=\count151
+Package newfloat Info: float type `algorithm'=4 on input line 46.
+\c@loadepth=\count152
+Class revtex4-1 Info: Patching array package. on input line 49.
+
+Class revtex4-1 Warning: Repair the float package.
+
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 49.
+
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 49.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 49.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 49.
+(./GroupReportTemplate.aux)
+\openout1 = `GroupReportTemplate.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 49.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: dvips
+*geometry* verbose mode - [ preamble ] result:
+* driver: dvips
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(43.36243pt, 527.57014pt, 43.36243pt)
+* v-part:(T,H,B)=(43.36243pt, 708.24513pt, 43.36243pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=527.57014pt
+* \textheight=708.24513pt
+* \oddsidemargin=-28.90756pt
+* \evensidemargin=-28.90756pt
+* \topmargin=-69.90756pt
+* \headheight=25.0pt
+* \headsep=16.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=30.0pt
+* \marginparsep=6.0pt
+* \columnsep=18.0pt
+* \skip\footins=39.0pt plus 4.0pt minus 12.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+ABD: EveryShipout initializing macros
+\openout3 = `GroupReportTemplateNotes.bib'.
+
+\c@prop=\count153
+\c@cor=\count154
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 138.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 143.
+
+Underfull \hbox (badness 1874) in paragraph at lines 145--148
+[]\OT1/ptm/m/n/10 Computational Physics is an im-por-tant part of mod-ern
+ []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 149.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 149.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+esint on input line 149.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/esint/uesint.fd
+File: uesint.fd 
+)
+File: ../plots/first_plot.ps Graphic file (type eps)
+
+<../plots/first_plot.ps> [1]
+Underfull \hbox (badness 1152) in paragraph at lines 195--197
+\OT1/ptm/m/n/10 Assuming we can sep-a-rate vari-ables such that $\OT1/cmr/m/n/1
+0 ^^H(\OML/cmm/m/it/10 r; ^^R\OT1/cmr/m/n/10 ) =
+ []
+
+[2]
+File: ../plots/difference.ps Graphic file (type eps)
+ <../plots/difference.ps> [3]
+Overfull \hbox (10.99234pt too wide) in paragraph at lines 330--330
+[] 
+ []
+
+
+Overfull \hbox (15.07834pt too wide) in paragraph at lines 336--336
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 356--357
+
+ []
+
+[4] [5]
+File: ../plots/pure_eqlines.eps Graphic file (type eps)
+ <../plots/pure_eqlines.eps>
+File: ../plots/efield_plus_eqlines2.ps Graphic file (type eps)
+ <../plots/efield_plus_eqlines2.ps>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: ../plots/efield.ps Graphic file (type eps)
+<../plots/efield.ps> [6]
+File: ../plots/semicircle.ps Graphic file (type eps)
+ <../plots/semicircle.ps>
+File: ../plots/triangle.ps Graphic file (type eps)
+ <../plots/triangle.ps>
+File: ../plots/ellipse.ps Graphic file (type eps)
+
+<../plots/ellipse.ps>
+File: ../plots/shape.ps Graphic file (type eps)
+ <../plots/shape.ps>
+Overfull \hbox (2.25pt too wide) in paragraph at lines 489--489
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[7] [8]
+File: ../plots/position.eps Graphic file (type eps)
+ <../plots/position.eps>
+File: ../plots/fd_it.eps Graphic file (type eps)
+ <../plots/fd_it.eps>
+File: ../plots/fd_h.eps Graphic file (type eps)
+ <../plots/fd_h.eps>
+File: ../plots/fv_it.eps Graphic file (type eps)
+
+<../plots/fv_it.eps>
+File: ../plots/fv_h.eps Graphic file (type eps)
+ <../plots/fv_h.eps> [9]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 604.
+
+
+Overfull \hbox (43.23865pt too wide) in paragraph at lines 626--627
+ [] $\OML/cmm/m/it/9 newm[]$ $\OMS/cmsy/m/n/9  $ $\OT1/cmr/m/n/9 [[]]\OML/cmm/m
+/it/9 =\OT1/cmr/m/n/9 2$ 
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 683--684
+ [] $\OML/cmm/m/it/9 alternate[]$ $\OMS/cmsy/m/n/9  $
+ []
+
+
+Overfull \hbox (15.81602pt too wide) in paragraph at lines 683--684
+ \OT1/cmr/m/n/9 [[]]\OML/cmm/m/it/9 =\OT1/cmr/m/n/9 2$ 
+ []
+
+File: ../plots/comparison_wc.ps Graphic file (type eps)
+<../plots/comparison_wc.ps>
+File: ../plots/comparison_ac.ps Graphic file (type eps)
+ <../plots/comparison_ac.ps> [11]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 839.
+
+
+Underfull \hbox (badness 3088) in paragraph at lines 859--860
+ []\OT1/ptm/m/n/9 Bednyakov, V.A., Giokaris, N.D., Bed-nyakov, A.V., 2007,
+ []
+
+No file GroupReportTemplate.bbl.
+[12] (./GroupReportTemplate.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
+
+
+ ) 
+Here is how much of TeX's memory you used:
+ 14920 strings out of 493486
+ 257784 string characters out of 3143550
+ 343763 words of memory out of 3000000
+ 17932 multiletter control sequences out of 15000+200000
+ 16167 words of font info for 57 fonts, out of 3000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 63i,12n,57p,1067b,460s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on GroupReportTemplate.dvi (12 pages, 85808 bytes).

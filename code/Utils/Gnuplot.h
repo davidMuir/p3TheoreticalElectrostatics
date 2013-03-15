@@ -1,10 +1,3 @@
-/*
- * Gnuplot.h
- *
- *  Created on: 17 Feb 2013
- *      Author: david
- */
-
 #ifndef GNUPLOT_H_
 #define GNUPLOT_H_
 

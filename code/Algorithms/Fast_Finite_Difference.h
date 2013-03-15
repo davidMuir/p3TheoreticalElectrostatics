@@ -1,10 +1,3 @@
-/*
- * FiniteDifference.h
- *
- *  Created on: 19 Feb 2013
- *      Author: david
- */
-
 #ifndef FAST_FINITE_DIFFERENCE_H_
 #define FAST_FINITE_DIFFERENCE_H_
 

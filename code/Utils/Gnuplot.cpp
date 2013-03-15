@@ -1,10 +1,3 @@
-/*
- * Gnuplot.cpp
- *
- *  Created on: 17 Feb 2013
- *      Author: david
- */
-
 #include "Gnuplot.h"
 
 Gnuplot::Gnuplot(Grid entry) {

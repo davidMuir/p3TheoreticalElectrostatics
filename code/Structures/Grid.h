@@ -1,10 +1,3 @@
-/*
- * Grid.h
- *
- *  Created on: 2 Feb 2013
- *      Author: david
- */
-
 #ifndef GRID_H_
 #define GRID_H_
 
@@ -19,7 +12,9 @@
 #include "Coordinate.h"
 
 enum Shape {circle, semicircle_north, semicircle_south, semicircle_east,
-	semicircle_west, rectangle, triangle, ellipse, star, random_shape};
+	semicircle_west, rectangle, triangle, ellipse, star, random_shape,bmp};
+
+enum Boundary {boundary,accessible,conductor};
 
 //Data structures to be used for grid
 struct Value {
@@ -57,15 +52,26 @@ public:
 	void set_values(matrix vals);
 	void set_gradients(grad_matrix grads);
 	void equip_values(int n, int xmax, int ymax, double Emax, int line_width, int menu);
+	void get_efield(int n, int xmax, int ymax, double Emax);
+	void set_flags_to_zero();
+	void get_surface_points_of_figure();
 	coordinate_matrix get_coordinates();
 	matrix get_values();
 	grad_matrix get_gradients();
+	void recalculate_matrices(int x, int y);
+	double get_value(unsigned x, unsigned y);
+	int get_xmax();
+	int get_ymax();
 	//Printing
 	void print_values();
 	void print_points();
 	void print_gnuplot_values();
 	void print_all_to(std::string filename);
+	void print_contours_to(std::string filename, int n);
+	void print_efield_to(std::string filename, int n);
+	void print_figure_to(std::string filename, int number_of_figures);
 	void print_matrix_to(std::string filename);
+	void print_points_to(std::string filename);
 	void set_circle_noflow(int x, int y, unsigned int r, double val);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape);
 	void set_boundary_shape(int x, int y, int r, int z, Shape shape,
@@ -79,6 +85,7 @@ public:
 			Shape shape, int x2, int x3, int x4, int y2, int y3, int y4);
 	//Solving
 	void efield();
+	double get_average_value(matrix &grid);
 private:
 	//private members
 	coordinate_matrix points;
@@ -86,9 +93,8 @@ private:
 	matrix values;
 	//private functions
 	int round_own(double a);
-	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2);
+	void check_and_mark_cells (int &xa, int &ya, int deltax, int deltay, Value &prev_prev2, Value &prev2, Value &current2, int flag_numb2);
 	bool compare(Value nn, Value mm);
-	double get_average_value(matrix &grid);
 
 };
 

@@ -1,10 +1,3 @@
-/*
- * Coordinate.h
- *
- *  Created on: 2 Feb 2013
- *      Author: david
- */
-
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
